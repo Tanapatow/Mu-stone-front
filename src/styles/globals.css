@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -49,6 +49,24 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-gold: #c9a227;
+  --color-gold-light: #e8c96a;
+  --color-gold-dark: #7a5c0a;
+  --color-navy: #0b0e2a;
+  --color-navy-mid: #131742;
+  --color-teal: #0fcfcf;
+  --color-mustone-purple: #4a1a6e;
+  --color-cream: #f5f0e8;
+
+  --font-cinzel: "Cinzel", serif;
+  --font-cinzel-d: "Cinzel Decorative", cursive;
+  --font-sarabun: "Sarabun", sans-serif;
+
+  --animate-nebula-pulse: nebulaPulse 8s ease-in-out infinite alternate;
+  --animate-spiral-spin: spiralSpin 20s linear infinite;
+  --animate-cards-float: cardsFloat 5s ease-in-out infinite alternate;
+  --animate-fade-slide-in: fadeSlideIn 0.8s ease forwards;
 }
 
 :root {
@@ -84,6 +102,15 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --gold: #c9a227;
+  --gold-light: #e8c96a;
+  --gold-dark: #7a5c0a;
+  --navy: #0b0e2a;
+  --navy-mid: #131742;
+  --teal: #0fcfcf;
+  --purple: #4a1a6e;
+  --cream: #f5f0e8;
 }
 
 .dark {
@@ -129,5 +156,134 @@
   }
   html {
     @apply font-sans;
+  }
+  img {
+    height: auto;
+  }
+}
+
+@keyframes nebulaPulse {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: var(--min-op, 0.2);
+  }
+  to {
+    opacity: var(--max-op, 1);
+  }
+}
+
+@keyframes spiralSpin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes glyphFloat {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateY(-12px) rotate(10deg);
+    opacity: 0.25;
+  }
+}
+
+@keyframes cardsFloat {
+  from {
+    transform: translateY(-52%);
+  }
+  to {
+    transform: translateY(-48%);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ต่อท้าย globals.css เดิม — ห้ามเพิ่ม @import */
+
+:root {
+  --gold: #c9a227;
+  --gold-light: #e8c96a;
+  --gold-dark: #7a5c0a;
+  --navy: #0b0e2a;
+  --teal: #0fcfcf;
+  --purple: #4a1a6e;
+  --cream: #f5f0e8;
+}
+
+@keyframes nebulaPulse {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+@keyframes twinkle {
+  from {
+    opacity: var(--min-op, 0.2);
+  }
+  to {
+    opacity: var(--max-op, 1);
+  }
+}
+@keyframes spiralSpin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+@keyframes glyphFloat {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  to {
+    transform: translateY(-12px) rotate(10deg);
+    opacity: 0.25;
+  }
+}
+@keyframes cardsFloat {
+  from {
+    transform: translateY(-52%);
+  }
+  to {
+    transform: translateY(-48%);
+  }
+}
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

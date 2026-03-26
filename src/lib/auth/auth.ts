@@ -1,6 +1,6 @@
-import { authService } from '@/lib/api/auth/auth.service';
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { authService } from "../api/auth/auth.service";
 
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   providers: [
@@ -29,7 +29,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         return null;
       }
 
-      if (trigger === 'update' && session) {
+      if (trigger === "update" && session) {
         token.avatarUrl = session.user.avatarUrl;
       }
 
