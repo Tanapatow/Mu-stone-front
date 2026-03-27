@@ -58,19 +58,26 @@ export default function PickTarotCard() {
           const isSelected = selected.includes(card.id);
           const isDisabled = selected.length >= 3 && !isSelected;
 
-          const radius = 200; // ขนาดวง
-          const angle = (index / deck.length) * 2 * Math.PI;
-          const offset = isSelected ? 30 : 0;
-
-          let x = (radius + offset) * Math.cos(angle);
-          let y = (radius + offset) * Math.sin(angle);
+          let x = 0;
+          let y = 0;
+          let rotation = 0;
 
           if (isSelected) {
+            // 👉 การ์ดที่ถูกเลือก → เรียงตรงกลาง
             const selectedIndex = selected.indexOf(card.id);
-            const spread = 60;
+            const spread = 120;
 
             x = (selectedIndex - 1) * spread;
             y = 0;
+            rotation = 0; // ไม่หมุน
+          } else {
+            // 👉 การ์ดยังไม่เลือก → อยู่เป็นวง
+            const radius = 200;
+            const angle = (index / deck.length) * 2 * Math.PI;
+
+            x = radius * Math.cos(angle);
+            y = radius * Math.sin(angle);
+            rotation = angle + Math.PI / 2;
           }
 
           return (
@@ -78,21 +85,21 @@ export default function PickTarotCard() {
               key={card.id}
               onClick={() => handleSelect(card.id)}
               className={`
-          absolute w-20 h-30 rounded-lg cursor-pointer
-          border border-gray-600
-          transition-all duration-300 overflow-hidden
+            absolute w-20 h-30 rounded-lg cursor-pointer
+            border border-gray-600
+            transition-all duration-500 ease-out overflow-hidden
 
-          ${isSelected ? '-translate-y-6 scale-110 border-purple-400 shadow-xl' : ''}
-          ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
-        `}
+            ${isSelected ? 'scale-125 z-50 border-purple-400 shadow-xl' : 'z-10'}
+            ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
+          `}
               style={{
                 left: '50%',
                 top: '50%',
                 transform: `
-                  translate(-50%, -50%)
-                  translate(${x}px, ${y}px)
-                  rotate(${angle + Math.PI / 2}rad)
-                `,
+              translate(-50%, -50%)
+              translate(${x}px, ${y}px)
+              rotate(${rotation}rad)
+            `,
               }}
             >
               <div className="relative w-full h-full">
