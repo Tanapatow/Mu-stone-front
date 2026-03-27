@@ -1,5 +1,7 @@
-"use client";
+'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   ArrowLeft,
   History,
@@ -7,16 +9,38 @@ import {
   LogOut,
   MessageSquareText,
   Package,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { logout } from "@/lib/actions/auth.action";
+  Package2,
+  ShoppingCart,
+  UserPen,
+  WalletCards,
+} from 'lucide-react';
 
 const menuItems = [
-  { label: "แดชบอร์ด", href: "/admin/dashboard", icon: LayoutDashboard },
-  { label: "ประวัติ", href: "/admin/history", icon: History },
-  { label: "สินค้า", href: "/admin/product", icon: Package },
-  { label: "แชต", href: "/admin/chat", icon: MessageSquareText },
+  {
+    label: 'แดชบอร์ด',
+    href: '/admin/dashboard',
+    icon: LayoutDashboard,
+  },
+  {
+    label: 'แก้ไขโปรไฟล์',
+    href: '/admin/editprofile',
+    icon: UserPen,
+  },
+  {
+    label: 'ประวัติ',
+    href: '/admin/history',
+    icon: History,
+  },
+  {
+    label: 'สินค้า',
+    href: '/admin/products',
+    icon: Package,
+  },
+  {
+    label: 'การจัดการสินค้า',
+    href: '/admin/manage-user',
+    icon: Package2,
+  },
 ];
 
 export default function AdminSidebar() {
@@ -27,8 +51,8 @@ export default function AdminSidebar() {
       className="fixed h-screen w-67.5 shrink-0 flex flex-col px-4 py-6 z-10"
       style={{
         background:
-          "linear-gradient(180deg, rgba(11,8,42,0.98) 0%, rgba(6,4,26,0.99) 100%)",
-        borderRight: "1px solid rgba(201,162,39,0.1)",
+          'linear-gradient(180deg, rgba(11,8,42,0.98) 0%, rgba(6,4,26,0.99) 100%)',
+        borderRight: '1px solid rgba(201,162,39,0.1)',
       }}
     >
       {/* Logo */}
@@ -46,8 +70,8 @@ export default function AdminSidebar() {
       <div
         className="px-3 py-2 rounded-xl mb-6 text-center"
         style={{
-          background: "rgba(201,162,39,0.08)",
-          border: "1px solid rgba(201,162,39,0.2)",
+          background: 'rgba(201,162,39,0.08)',
+          border: '1px solid rgba(201,162,39,0.2)',
         }}
       >
         <p className="text-xs text-gold font-['Sarabun'] font-semibold">
@@ -65,11 +89,11 @@ export default function AdminSidebar() {
               href={href}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-['Sarabun'] transition-all duration-200"
               style={{
-                background: isActive ? "rgba(201,162,39,0.1)" : "transparent",
-                color: isActive ? "#c9a227" : "rgba(245,240,232,0.45)",
+                background: isActive ? 'rgba(201,162,39,0.1)' : 'transparent',
+                color: isActive ? '#c9a227' : 'rgba(245,240,232,0.45)',
                 borderLeft: isActive
-                  ? "2px solid #c9a227"
-                  : "2px solid transparent",
+                  ? '2px solid #c9a227'
+                  : '2px solid transparent',
               }}
             >
               <Icon size={15} />
