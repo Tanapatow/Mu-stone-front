@@ -20,6 +20,8 @@ function shuffle<T>(array: T[]): T[] {
   return arr;
 }
 
+// const simLoading = () => {};
+
 export default function PickTarotCard() {
   const router = useRouter();
   // ✅ สุ่ม “ครั้งเดียวตอน mount”
@@ -43,37 +45,43 @@ export default function PickTarotCard() {
     setSelected(newSelected);
   };
 
-  const handlePredict = () => {
-    // ถ้าครบ 3 ใบ → ไปหน้า result
-    if (newSelected.length === 3) {
-      setTimeout(() => {
-        router.push(`/fortune/predict`);
-      }, 800);
-    }
+  const handlePredictBtn = () => {
+    setTimeout(() => {
+      router.push(`/fortune/predict`);
+    }, 800);
   };
   return (
-    <div className="flex items-center justify-between max-w-6xl mx-auto px-10">
-      <div className="relative w-125 h-125 mx-auto mt-10">
+    <div className="flex items-center justify-between max-w-6xl mx-auto w-full">
+      <div className="relative w-125 h-125">
         {deck.map((card, index) => {
           const isSelected = selected.includes(card.id);
           const isDisabled = selected.length >= 3 && !isSelected;
 
-          const radius = 180; // ขนาดวง
+          const radius = 200; // ขนาดวง
           const angle = (index / deck.length) * 2 * Math.PI;
+          const offset = isSelected ? 30 : 0;
 
-          const x = radius * Math.cos(angle);
-          const y = radius * Math.sin(angle);
+          let x = (radius + offset) * Math.cos(angle);
+          let y = (radius + offset) * Math.sin(angle);
+
+          if (isSelected) {
+            const selectedIndex = selected.indexOf(card.id);
+            const spread = 60;
+
+            x = (selectedIndex - 1) * spread;
+            y = 0;
+          }
 
           return (
             <div
               key={card.id}
               onClick={() => handleSelect(card.id)}
               className={`
-          absolute w-16 h-24 rounded-lg cursor-pointer
+          absolute w-20 h-30 rounded-lg cursor-pointer
           border border-gray-600
           transition-all duration-300 overflow-hidden
 
-          ${isSelected ? '-translate-y-6 scale-110 border-purple-400 shadow-xl z-50' : ''}
+          ${isSelected ? '-translate-y-6 scale-110 border-purple-400 shadow-xl' : ''}
           ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
         `}
               style={{
@@ -82,8 +90,7 @@ export default function PickTarotCard() {
                 transform: `
                   translate(-50%, -50%)
                   translate(${x}px, ${y}px)
-                  rotate(${angle}rad)
-                  rotate(-${angle}rad)
+                  rotate(${angle + Math.PI / 2}rad)
                 `,
               }}
             >
@@ -99,8 +106,7 @@ export default function PickTarotCard() {
           );
         })}
       </div>
-
-      <div className="bg-black/60 backdrop-blur-md p-6 rounded-xl w-75 flex flex-col gap-2">
+      <div className="bg-black/60 backdrop-blur-md p-6 rounded-xl w-100 flex flex-col gap-2 ml-auto">
         <h2 className="text-xl font-semibold mb-2 text-white font-saraban">
           ไกด์
         </h2>
@@ -115,22 +121,24 @@ export default function PickTarotCard() {
 
         <button
           className="
-            relative
-            px-6 py-3
-            rounded-2xl
-            font-semibold
-            text-yellow-300
-            bg-linear-to-r from-purple-950 to-indigo-950
-            shadow-lg
-            hover:scale-105
-            hover:shadow-purple-500/30
-            transition-all duration-300
-            disabled:opacity-50
-            disabled:cursor-not-allowed
-            disabled:hover:scale-100
-            disabled:hover:shadow-none
+          relative
+          px-6 py-3
+          rounded-2xl
+          font-semibold
+          text-yellow-300
+          bg-linear-to-r from-purple-950 to-indigo-950
+          shadow-lg
+          hover:scale-105
+          hover:shadow-purple-500/30
+          hover:cursor-pointer
+          transition-all duration-300
+          disabled:opacity-50
+          disabled:cursor-not-allowed
+          disabled:hover:scale-100
+          disabled:hover:shadow-none
           "
           disabled={selected.length < 3}
+          onClick={handlePredictBtn}
         >
           <span className="flex items-center justify-center gap-2 font-saraban">
             ทำนายผลเลย ✨
