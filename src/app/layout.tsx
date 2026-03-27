@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import { aclonica, roboto, saraban } from "@/styles/font";
 import { Cinzel, Cinzel_Decorative, Sarabun } from "next/font/google";
+import Navbar from "@/components/layouts/home/navbar";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
