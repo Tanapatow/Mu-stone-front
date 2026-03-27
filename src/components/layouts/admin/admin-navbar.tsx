@@ -22,12 +22,12 @@ const menuItems = [
   },
   {
     label: 'แก้ไขโปรไฟล์',
-    href: '/admin/edit-profile',
+    href: '/admin/editprofile',
     icon: UserPen,
   },
   {
     label: 'จัดการออเดอร์',
-    href: '/admin/manage-order',
+    href: '/admin/manageorder',
     icon: ShoppingCart,
   },
   {
@@ -37,7 +37,7 @@ const menuItems = [
   },
   {
     label: 'สินค้า',
-    href: '/admin/products',
+    href: '/admin/product',
     icon: Package,
   },
   {
