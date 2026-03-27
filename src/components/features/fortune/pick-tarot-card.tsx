@@ -41,68 +41,102 @@ export default function PickTarotCard() {
     // ✅ เพิ่มเข้าไป
     const newSelected = [...selected, id];
     setSelected(newSelected);
+  };
 
+  const handlePredict = () => {
     // ถ้าครบ 3 ใบ → ไปหน้า result
     if (newSelected.length === 3) {
       setTimeout(() => {
-        // router.push(`/tarot/result?cards=${newSelected.join(',')}`);
+        router.push(`/fortune/predict`);
       }, 800);
     }
   };
   return (
-    <div className="min-h-screen bg-purple-950 text-white p-6">
-      <h1 className="text-center text-2xl mb-6">เลือกไพ่ 3 ใบ</h1>
+    <div className="flex items-center justify-between max-w-6xl mx-auto px-10">
+      <div className="relative w-125 h-125 mx-auto mt-10">
+        {deck.map((card, index) => {
+          const isSelected = selected.includes(card.id);
+          const isDisabled = selected.length >= 3 && !isSelected;
 
-      <div className="relative w-full max-w-5xl mx-auto h-105 mt-10">
-        {[0, 1, 2, 3].map((row) => {
-          const rowCards = deck.slice(row * 20, row * 20 + 20);
+          const radius = 180; // ขนาดวง
+          const angle = (index / deck.length) * 2 * Math.PI;
+
+          const x = radius * Math.cos(angle);
+          const y = radius * Math.sin(angle);
 
           return (
             <div
-              key={row}
-              className="absolute left-1/2 -translate-x-1/2 flex"
+              key={card.id}
+              onClick={() => handleSelect(card.id)}
+              className={`
+          absolute w-16 h-24 rounded-lg cursor-pointer
+          border border-gray-600
+          transition-all duration-300 overflow-hidden
+
+          ${isSelected ? '-translate-y-6 scale-110 border-purple-400 shadow-xl z-50' : ''}
+          ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
+        `}
               style={{
-                top: `${row * 70}px`, // ระยะห่างแต่ละแถว
-                zIndex: row, // แถวล่างสุดอยู่บนสุด
+                left: '50%',
+                top: '50%',
+                transform: `
+                  translate(-50%, -50%)
+                  translate(${x}px, ${y}px)
+                  rotate(${angle}rad)
+                  rotate(-${angle}rad)
+                `,
               }}
             >
-              {rowCards.map((card, index) => {
-                const isSelected = selected.includes(card.id);
-                const isDisabled = selected.length >= 3 && !isSelected;
-
-                return (
-                  <div
-                    key={card.id}
-                    onClick={() => handleSelect(card.id)}
-                    className={`
-                          w-24 h-36 rounded-lg cursor-pointer
-                          border border-gray-600
-                          transition-all duration-300 overflow-hidden
-  
-                          ${isSelected ? '-translate-y-6 scale-110 border-purple-400 shadow-xl' : ''}
-                          ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
-                      `}
-                    style={{
-                      marginLeft: index === 0 ? 0 : -40,
-                    }}
-                  >
-                    <div className="relative w-full h-full">
-                      <Image
-                        src="/tarot-card.png"
-                        alt="tarot-card"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+              <div className="relative w-full h-full">
+                <Image
+                  src="/tarot-card.png"
+                  alt="card"
+                  fill
+                  className="object-cover rounded-lg"
+                />
+              </div>
             </div>
           );
         })}
       </div>
 
-      <div className="text-center mt-6">เลือกแล้ว {selected.length} / 3 ใบ</div>
+      <div className="bg-black/60 backdrop-blur-md p-6 rounded-xl w-75 flex flex-col gap-2">
+        <h2 className="text-xl font-semibold mb-2 text-white font-saraban">
+          ไกด์
+        </h2>
+        <p className="text-sm text-gray-300 opacity-80 font-saraban">
+          ขณะนี้คุณกำลังใช้ผังไพ่แบบ Celtic Crossจงเลือกไพ่ 3 ใบ
+          เพื่อเริ่มต้นการหยั่งรู้สายใยแห่งจักรวาล
+        </p>
+
+        <div className="mt-4 text-white font-roboto">
+          {selected.length} / 3 Selected
+        </div>
+
+        <button
+          className="
+            relative
+            px-6 py-3
+            rounded-2xl
+            font-semibold
+            text-yellow-300
+            bg-linear-to-r from-purple-950 to-indigo-950
+            shadow-lg
+            hover:scale-105
+            hover:shadow-purple-500/30
+            transition-all duration-300
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+            disabled:hover:scale-100
+            disabled:hover:shadow-none
+          "
+          disabled={selected.length < 3}
+        >
+          <span className="flex items-center justify-center gap-2 font-saraban">
+            ทำนายผลเลย ✨
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

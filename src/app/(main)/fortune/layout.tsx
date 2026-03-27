@@ -1,3 +1,5 @@
+import Navbar from '@/components/layouts/home/navbar';
+
 export default function FortuneLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,10 @@ export default function FortuneLayout({
 }>) {
   return (
     <>
-      <main>{children}</main>
+      <main>
+        <Navbar />
+        {children}
+      </main>
     </>
   );
 }
