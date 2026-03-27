@@ -1,6 +1,10 @@
 import Product, {
   type ProductItem,
+<<<<<<< HEAD
 } from '@/components/features/admin/product-card';
+=======
+} from '@/components/features/admin/productcard';
+>>>>>>> a0039df (feat(admin): add admin product page ui and admin productcard components)
 
 const products: ProductItem[] = [
   {

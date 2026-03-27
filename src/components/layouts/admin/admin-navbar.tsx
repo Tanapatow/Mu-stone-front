@@ -27,13 +27,21 @@ const menuItems = [
     icon: UserPen,
   },
   {
+<<<<<<< HEAD
+=======
+    label: 'จัดการออเดอร์',
+    href: '/admin/manageorder',
+    icon: ShoppingCart,
+  },
+  {
+>>>>>>> a0039df (feat(admin): add admin product page ui and admin productcard components)
     label: 'ประวัติ',
     href: '/admin/history',
     icon: History,
   },
   {
     label: 'สินค้า',
-    href: '/admin/products',
+    href: '/admin/product',
     icon: Package,
   },
   {
