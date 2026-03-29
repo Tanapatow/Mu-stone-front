@@ -1,5 +1,12 @@
-import PickTarotCard from '@/components/features/fortune/pick-tarot-card';
+'use client';
+
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+const PickTarotCard = dynamic(
+  () => import('@/components/features/fortune/pick-tarot-card'),
+  { ssr: false },
+);
 
 export default function CardPage() {
   return (

@@ -11,20 +11,9 @@ const cards = Array.from({ length: 78 }, (_, i) => ({
   image: '/tarot-cards.png',
 }));
 
-// Fisher-Yates shuffle
-// function shuffle<T>(array: T[]): T[] {
-//   const arr = [...array];
-
-//   for (let i = arr.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [arr[i], arr[j]] = [arr[j], arr[i]];
-//   }
-
-//   return arr;
-// }
-
 export default function PickTarotCard() {
   const router = useRouter();
+
   // ✅ สุ่ม “ครั้งเดียวตอน mount”
   const [deck] = useState(() => cards);
 
@@ -107,6 +96,7 @@ export default function PickTarotCard() {
                   src="/tarot-card.png"
                   alt="card"
                   fill
+                  sizes="80px"
                   className="object-cover rounded-lg"
                 />
               </div>
