@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import {
   ArrowLeft,
   History,
@@ -12,8 +10,9 @@ import {
   Package2,
   ShoppingCart,
   UserPen,
-  WalletCards,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const menuItems = [
   {
@@ -27,14 +26,6 @@ const menuItems = [
     icon: UserPen,
   },
   {
-<<<<<<< HEAD
-=======
-    label: 'จัดการออเดอร์',
-    href: '/admin/manageorder',
-    icon: ShoppingCart,
-  },
-  {
->>>>>>> a0039df (feat(admin): add admin product page ui and admin productcard components)
     label: 'ประวัติ',
     href: '/admin/history',
     icon: History,
