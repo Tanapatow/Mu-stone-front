@@ -6,9 +6,15 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
-        const { user, accessToken, expiresIn } =
-          await authService.login(credentials);
-        return { ...user, accessToken, expiresIn };
+        const result = await authService.login(credentials);
+        console.log("authorize result:", result);
+        return result
+          ? {
+              ...result.user,
+              accessToken: result.accessToken,
+              expiresIn: result.expiresIn,
+            }
+          : null;
       },
     }),
   ],
@@ -18,8 +24,9 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         token.firstName = user.firstName;
         token.lastName = user.lastName;
         token.accessToken = user.accessToken;
-        token.accessTokenExpiresAt =
-          Date.now() + ((user.expiresIn ?? 0) - 3) * 1000;
+        token.accessTokenExpiresAt = user.expiresIn
+          ? Date.now() + (user.expiresIn - 3) * 1000
+          : Date.now() + 3600 * 1000; // default 1 ชั่วโมง
       }
 
       if (

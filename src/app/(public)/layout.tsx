@@ -1,8 +1,9 @@
 import { auth } from "@/lib/auth/auth";
+import Navbar from "@/components/layouts/home/navbar";
 import UserNavbar from "@/components/layouts/user/user-navbar";
 import { cartService } from "@/lib/api/cart/cart.service";
 
-export default async function UserLayout({
+export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -16,18 +17,13 @@ export default async function UserLayout({
   }
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundImage: "url('/shop_bg.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      <UserNavbar session={session} cartCount={cartCount} />
-      <main>{children}</main>
-    </div>
+    <>
+      {session ? (
+        <UserNavbar session={session} cartCount={cartCount} />
+      ) : (
+        <Navbar session={session} />
+      )}
+      {children}
+    </>
   );
 }

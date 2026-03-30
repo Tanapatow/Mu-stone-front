@@ -1,9 +1,10 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { LoginInput } from "../schemas/auth.schema";
+import { authService } from "../api/auth/auth.service";
+import { signIn, signOut } from "../auth/auth";
+import { LoginInput, RegisterInput } from "../schemas/auth.schema";
 import { ActionResult } from "./action.type";
-import { signIn } from "../auth/auth";
 
 export const login = async (input: LoginInput): Promise<ActionResult> => {
   try {
@@ -12,4 +13,23 @@ export const login = async (input: LoginInput): Promise<ActionResult> => {
     return { success: false, code: "INVALID_CREDENTIALS" };
   }
   redirect("/");
+};
+
+export const register = async (input: RegisterInput): Promise<ActionResult> => {
+  try {
+    console.log("input from action", input);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, ...payload } = input;
+    console.log("payload from action", payload);
+    await authService.register(payload);
+  } catch (error) {
+    console.error("register error", error);
+    return { success: false, code: "REGISTER_FAILED" };
+  }
+  redirect("/");
+};
+
+export const logout = async () => {
+  "use server"; // มีอยู่แล้วที่ top ของไฟล์ ไม่ต้องเพิ่ม
+  await signOut({ redirectTo: "/" });
 };
