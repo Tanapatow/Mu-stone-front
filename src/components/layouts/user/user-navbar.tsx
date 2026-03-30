@@ -1,24 +1,27 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { logout } from "@/lib/actions/auth.action";
+import type { Session } from "next-auth";
 
-const NAV_LINKS = [
-  { label: "Order", href: "/order" },
-  { label: "Cart", href: "/cart" },
-  { label: "Account", href: "/account" },
-  { label: "Logout", href: "/logout" },
+const NAV_ICONS = [
+  { icon: "/navicons/chat-icon.png", href: "/chat", label: "Chat" },
+  { icon: "/navicons/cart-icon.png", href: "/cart", label: "Cart" },
+  { icon: "/navicons/shop-icon.png", href: "/shop", label: "Shop" },
+  { icon: "/navicons/account-icon.png", href: "/account", label: "Account" },
 ];
 
-const DROPDOWN_ITEMS = [
-  { label: "บัญชีของฉัน", href: "/account" },
-  { label: "การซื้อของฉัน", href: "/order" },
-  { label: "รายการที่ชอบ", href: "/wishlist" },
-  { label: "การตั้งค่า", href: "/settings" },
-];
-
-export default function UserNavbar() {
+type UserNavbarProps = {
+  session: Session | null;
+  cartCount?: number;
+};
+export default function UserNavbar({
+  session,
+  cartCount = 0,
+}: UserNavbarProps) {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -62,8 +65,7 @@ export default function UserNavbar() {
             bg-[rgba(255,255,255,0.07)] text-[var(--cream)]
             border border-[rgba(255,255,255,0.1)]
             outline-none placeholder:text-white/30
-            font-['Sarabun']
-            transition-all duration-200
+            font-['Sarabun'] transition-all duration-200
             focus:border-[rgba(201,162,39,0.4)]
             focus:bg-[rgba(255,255,255,0.1)]
           "
@@ -74,69 +76,70 @@ export default function UserNavbar() {
         />
       </div>
 
-      {/* Nav links */}
-      <div className="hidden md:flex items-center gap-1 ml-auto">
-        {NAV_LINKS.map(({ label, href }) => (
-          <Link
-            key={label}
-            href={href}
-            className="
-              px-3 py-2 rounded-lg text-sm font-['Sarabun']
-              text-white/60 no-underline
-              transition-all duration-200
-              hover:text-white/90 hover:bg-white/5
-            "
-          >
-            {label}
-          </Link>
-        ))}
-      </div>
-
-      {/* Hamburger + Dropdown */}
-      <div className="relative ml-2">
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="
-            w-9 h-9 flex items-center justify-center rounded-lg
-            text-[var(--gold)] hover:bg-white/5
-            transition-all duration-200
-          "
-        >
-          {menuOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
-
-        {menuOpen && (
-          <>
-            <div
-              className="fixed inset-0 z-40"
-              onClick={() => setMenuOpen(false)}
-            />
-            <div
-              className="absolute right-0 top-12 z-50 w-52 rounded-2xl overflow-hidden py-2"
-              style={{
-                background: "rgba(245,240,232,0.97)",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-                border: "1px solid rgba(201,162,39,0.15)",
-              }}
-            >
-              {DROPDOWN_ITEMS.map(({ label, href }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  onClick={() => setMenuOpen(false)}
-                  className="
-                    block px-5 py-3.5 text-sm font-['Sarabun']
-                    text-[#1a1a2e] no-underline
-                    transition-colors duration-150
-                    hover:bg-[rgba(201,162,39,0.1)] hover:text-[#7a5c0a]
-                  "
-                >
-                  {label}
-                </Link>
-              ))}
-            </div>
-          </>
+      <div className="flex items-center gap-3 ml-auto">
+        {session?.user?.firstName && (
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5">
+            <span className="text-xs font-['Sarabun'] text-[#f5f0e8]/70">
+              {session.user.firstName}
+            </span>
+          </div>
         )}
+
+        <form action={logout}>
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg text-sm font-['Sarabun'] text-white/50 hover:text-white/80 transition-colors"
+          >
+            Logout
+          </button>
+        </form>
+
+        {/* Hamburger with badge */}
+        <div className="relative">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="w-9 h-9 flex items-center justify-center rounded-lg text-[var(--gold)] hover:bg-white/5 transition-all duration-200"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+
+          {/* Cart badge */}
+          {cartCount > 0 && (
+            <span
+              className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
+              style={{ background: "#e53e3e" }}
+            >
+              {cartCount > 99 ? "99+" : cartCount}
+            </span>
+          )}
+
+          {/* Dropdown */}
+          {menuOpen && (
+            <>
+              <div
+                className="fixed inset-0 z-40"
+                onClick={() => setMenuOpen(false)}
+              />
+              <div className="absolute right-0 top-11 z-50 flex flex-col gap-1 p-1">
+                {NAV_ICONS.map(({ icon, href, label }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="transition-transform duration-200 hover:scale-110 active:scale-95"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={icon}
+                      alt={label}
+                      className="w-20 h-20 object-cover rounded-full"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );

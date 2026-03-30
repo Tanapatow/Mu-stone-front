@@ -4,43 +4,41 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import Image from "next/image";
 import LoginForm from "./login-form";
+import RegisterForm from "./register-form";
 
-interface AuthModalProps {
+type Tab = "login" | "signup";
+
+type AuthModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onGoogleLogin?: () => void;
-  onAppleLogin?: () => void;
-}
+};
 
-function SocialBtn({
-  label,
-  icon,
-  onClick,
-}: {
-  label: string;
-  icon: React.ReactNode;
-  onClick?: () => void;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl
-        text-sm font-['Sarabun'] text-white/60 bg-white/5 border border-white/10
-        transition-all duration-200 hover:bg-white/10 hover:text-white/80 active:scale-[0.98]"
-    >
-      {icon}
-      {label}
-    </button>
-  );
-}
+const TAB_CONFIG: Record<
+  Tab,
+  {
+    heading: string;
+    subheading: string;
+    switchText: string;
+    switchLabel: string;
+  }
+> = {
+  login: {
+    heading: "ลงชื่อเข้าใช้",
+    subheading: "ยินดีต้อนรับกลับสู่จักรวาล ✦",
+    switchText: "ยังไม่มีบัญชี? ",
+    switchLabel: "ลงทะเบียนฟรี",
+  },
+  signup: {
+    heading: "สร้างบัญชีใหม่",
+    subheading: "เริ่มต้นการเดินทางของคุณ ✦",
+    switchText: "มีบัญชีแล้ว? ",
+    switchLabel: "เข้าสู่ระบบ",
+  },
+};
 
-export default function AuthModal({
-  isOpen,
-  onClose,
-  onGoogleLogin,
-  onAppleLogin,
-}: AuthModalProps) {
-  const [tab, setTab] = useState<"login" | "signup">("login");
+export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const [tab, setTab] = useState<Tab>("login");
+  const config = TAB_CONFIG[tab];
 
   if (!isOpen) return null;
 
@@ -61,7 +59,7 @@ export default function AuthModal({
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ── Left: Tarot card ── */}
+        {/* Left: Tarot card */}
         <div
           className="hidden md:flex relative w-60 shrink-0 items-center justify-center overflow-hidden"
           style={{
@@ -77,6 +75,7 @@ export default function AuthModal({
             }}
           />
           <Image
+            loading="eager"
             src="/tarot-card.png"
             alt="Tarot card"
             width={200}
@@ -86,8 +85,8 @@ export default function AuthModal({
           />
         </div>
 
-        {/* ── Right: Form ── */}
-        <div className="flex-1 p-8 flex flex-col gap-5">
+        {/* Right: Form */}
+        <div className="flex-1 p-8 flex flex-col gap-5 overflow-y-auto max-h-screen">
           {/* Close */}
           <button
             onClick={onClose}
@@ -103,18 +102,16 @@ export default function AuthModal({
               className="font-['Cinzel_Decorative'] text-xl text-gold-light mb-1"
               style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
             >
-              {tab === "login" ? "ลงชื่อเข้าใช้" : "สร้างบัญชีใหม่"}
+              {config.heading}
             </h2>
             <p className="text-xs text-white/35 font-['Sarabun']">
-              {tab === "login"
-                ? "ยินดีต้อนรับกลับสู่จักรวาล ✦"
-                : "เริ่มต้นการเดินทางของคุณ ✦"}
+              {config.subheading}
             </p>
           </div>
 
           {/* Tab */}
           <div className="flex p-1 rounded-xl bg-white/5">
-            {(["login", "signup"] as const).map((t) => (
+            {(["login", "signup"] as Tab[]).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -135,39 +132,21 @@ export default function AuthModal({
             ))}
           </div>
 
-          <LoginForm onSuccess={onClose} />
-
-          {/* Divider */}
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-[rgba(201,162,39,0.12)]" />
-            <span className="text-[11px] text-white/25 font-['Sarabun']">
-              หรือ
-            </span>
-            <div className="flex-1 h-px bg-[rgba(201,162,39,0.12)]" />
-          </div>
-
-          {/* Social */}
-          <div className="flex gap-3">
-            <SocialBtn
-              label="Google"
-              icon={<span className="font-bold">G</span>}
-              onClick={onGoogleLogin}
-            />
-            <SocialBtn
-              label="Apple"
-              icon={<span></span>}
-              onClick={onAppleLogin}
-            />
-          </div>
+          {/* Forms */}
+          {tab === "login" ? (
+            <LoginForm onSuccess={onClose} />
+          ) : (
+            <RegisterForm onSuccess={onClose} />
+          )}
 
           {/* Switch tab */}
           <p className="text-center text-xs text-white/30 font-['Sarabun']">
-            {tab === "login" ? "ยังไม่มีบัญชี? " : "มีบัญชีแล้ว? "}
+            {config.switchText}
             <button
               onClick={() => setTab(tab === "login" ? "signup" : "login")}
               className="text-gold hover:text-gold-light transition-colors"
             >
-              {tab === "login" ? "ลงทะเบียนฟรี" : "เข้าสู่ระบบ"}
+              {config.switchLabel}
             </button>
           </p>
         </div>

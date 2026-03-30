@@ -30,6 +30,7 @@ export default function TarotCards() {
         }}
       >
         <Image
+          loading="eager"
           src={CARD_SRC}
           alt=""
           fill
@@ -48,6 +49,7 @@ export default function TarotCards() {
         }}
       >
         <Image
+          loading="eager"
           src={CARD_SRC}
           alt="Tarot card"
           fill

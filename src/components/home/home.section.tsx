@@ -13,11 +13,8 @@ export default function HeroSection() {
       max-md:[&_.hero-cards]:translate-x-1/2
     "
     >
-      {/* Layer 0 — animated cosmic background */}
       <HomeBackground />
-      {/* Layer 1 — text content */}
       <HomeContent />
-      {/* Layer 2 — floating tarot cards */}
       <TarotCards />
     </section>
   );

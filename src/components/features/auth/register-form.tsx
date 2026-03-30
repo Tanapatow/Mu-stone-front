@@ -8,36 +8,131 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { register } from "@/lib/actions/auth.action";
 import { RegisterInput, registerSchema } from "@/lib/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, Lock, Mail } from "lucide-react";
+import { Loader, Lock, Mail, User, Calendar } from "lucide-react";
 import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
+import {
+  formInputClass,
+  formLabelClass,
+  formIconClass,
+} from "@/lib/constants/form-styles";
 
-export default function RegisterForm() {
+type RegisterFormProps = {
+  onSuccess?: () => void;
+};
+
+export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   const {
     handleSubmit,
     control,
     setError,
     formState: { errors },
   } = useForm<RegisterInput>({
-    defaultValues: { email: "", password: "" },
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
+      dob: undefined,
+      gender: undefined,
+    },
     resolver: zodResolver(registerSchema),
   });
+
   const [isPending, startTransition] = useTransition();
 
-  return (
-    <form>
-      {/* Root error */}
-      {/* {errors.root && (
-      <Alert className="mb-4 rounded-xl border-red-500/40 bg-red-950/40">
-        <AlertTitle className="text-sm font-['Sarabun'] text-red-300">
-          {errors.root.message}
-        </AlertTitle>
-      </Alert> */}
-      {/* )} */}
+  const onSubmit = (data: RegisterInput) => {
+    startTransition(async () => {
+      console.log("data", data);
+      const res = await register(data);
+      console.log("res", res);
+      if (!res?.success) {
+        setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
+      } else {
+        onSuccess?.();
+      }
+    });
+  };
 
-      <FieldGroup className="flex flex-col gap-4">
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {errors.root && (
+        <p className="mb-3 text-xs text-red-400 font-['Sarabun'] text-center">
+          {errors.root.message}
+        </p>
+      )}
+
+      <FieldGroup className="flex flex-col gap-3">
+        {/* firstName + lastName */}
+        <div className="flex gap-3">
+          <Controller
+            control={control}
+            name="firstName"
+            render={({ field, fieldState }) => (
+              <Field
+                data-invalid={fieldState.invalid}
+                className="flex flex-col gap-1.5 flex-1"
+              >
+                <FieldLabel htmlFor={field.name} className={formLabelClass}>
+                  ชื่อ
+                </FieldLabel>
+                <div className="relative flex items-center">
+                  <User size={15} className={formIconClass} />
+                  <Input
+                    {...field}
+                    id={field.name}
+                    type="text"
+                    placeholder="ชื่อ"
+                    aria-invalid={fieldState.invalid}
+                    className={formInputClass}
+                  />
+                </div>
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-xs text-red-400 font-['Sarabun']"
+                  />
+                )}
+              </Field>
+            )}
+          />
+          <Controller
+            control={control}
+            name="lastName"
+            render={({ field, fieldState }) => (
+              <Field
+                data-invalid={fieldState.invalid}
+                className="flex flex-col gap-1.5 flex-1"
+              >
+                <FieldLabel htmlFor={field.name} className={formLabelClass}>
+                  นามสกุล
+                </FieldLabel>
+                <div className="relative flex items-center">
+                  <User size={15} className={formIconClass} />
+                  <Input
+                    {...field}
+                    id={field.name}
+                    type="text"
+                    placeholder="นามสกุล"
+                    aria-invalid={fieldState.invalid}
+                    className={formInputClass}
+                  />
+                </div>
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-xs text-red-400 font-['Sarabun']"
+                  />
+                )}
+              </Field>
+            )}
+          />
+        </div>
+
         {/* Email */}
         <Controller
           control={control}
@@ -47,32 +142,18 @@ export default function RegisterForm() {
               data-invalid={fieldState.invalid}
               className="flex flex-col gap-1.5"
             >
-              <FieldLabel
-                htmlFor={field.name}
-                className=" text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
-              >
+              <FieldLabel htmlFor={field.name} className={formLabelClass}>
                 อีเมล
               </FieldLabel>
               <div className="relative flex items-center">
-                <Mail
-                  size={15}
-                  className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
-                />
+                <Mail size={15} className={formIconClass} />
                 <Input
                   {...field}
                   id={field.name}
                   type="email"
                   placeholder="your@email.com"
                   aria-invalid={fieldState.invalid}
-                  className="
-                    pl-10 py-3 rounded-xl text-sm w-full
-                    bg-white/5 text-[#f5f0e8]
-                    border border-[rgba(201,162,39,0.2)]
-                    placeholder:text-white/20 font-['Sarabun']
-                    transition-all duration-200
-                    focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-                    focus-visible:border-[rgba(201,162,39,0.55)]
-                  "
+                  className={formInputClass}
                 />
               </div>
               {fieldState.invalid && (
@@ -94,32 +175,18 @@ export default function RegisterForm() {
               data-invalid={fieldState.invalid}
               className="flex flex-col gap-1.5"
             >
-              <FieldLabel
-                htmlFor={field.name}
-                className="text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
-              >
+              <FieldLabel htmlFor={field.name} className={formLabelClass}>
                 รหัสผ่าน
               </FieldLabel>
               <div className="relative flex items-center">
-                <Lock
-                  size={15}
-                  className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
-                />
+                <Lock size={15} className={formIconClass} />
                 <Input
                   {...field}
                   id={field.name}
                   type="password"
                   placeholder="••••••••"
                   aria-invalid={fieldState.invalid}
-                  className="
-                    pl-10 py-3 rounded-xl text-sm w-full
-                    bg-white/5 text-[#f5f0e8]
-                    border border-[rgba(201,162,39,0.2)]
-                    placeholder:text-white/20 font-['Sarabun']
-                    transition-all duration-200
-                    focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-                    focus-visible:border-[rgba(201,162,39,0.55)]
-                  "
+                  className={formInputClass}
                 />
               </div>
               {fieldState.invalid && (
@@ -132,41 +199,27 @@ export default function RegisterForm() {
           )}
         />
 
-        {/*confirem Password */}
+        {/* Confirm Password */}
         <Controller
           control={control}
-          name="password"
+          name="confirmPassword"
           render={({ field, fieldState }) => (
             <Field
               data-invalid={fieldState.invalid}
               className="flex flex-col gap-1.5"
             >
-              <FieldLabel
-                htmlFor={field.name}
-                className="text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
-              >
-                รหัสผ่าน
+              <FieldLabel htmlFor={field.name} className={formLabelClass}>
+                ยืนยันรหัสผ่าน
               </FieldLabel>
               <div className="relative flex items-center">
-                <Lock
-                  size={15}
-                  className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
-                />
+                <Lock size={15} className={formIconClass} />
                 <Input
                   {...field}
                   id={field.name}
                   type="password"
                   placeholder="••••••••"
                   aria-invalid={fieldState.invalid}
-                  className="
-                    pl-10 py-3 rounded-xl text-sm w-full
-                    bg-white/5 text-[#f5f0e8]
-                    border border-[rgba(201,162,39,0.2)]
-                    placeholder:text-white/20 font-['Sarabun']
-                    transition-all duration-200
-                    focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-                    focus-visible:border-[rgba(201,162,39,0.55)]
-                  "
+                  className={formInputClass}
                 />
               </div>
               {fieldState.invalid && (
@@ -178,98 +231,82 @@ export default function RegisterForm() {
             </Field>
           )}
         />
-        {/* firstName */}
-        <Controller
-          control={control}
-          name="firstName"
-          render={({ field, fieldState }) => (
-            <Field
-              data-invalid={fieldState.invalid}
-              className="flex flex-col gap-1.5"
-            >
-              <FieldLabel
-                htmlFor={field.name}
-                className="text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
+
+        {/* DOB + Gender */}
+        <div className="flex gap-3">
+          <Controller
+            control={control}
+            name="dob"
+            render={({ field, fieldState }) => (
+              <Field
+                data-invalid={fieldState.invalid}
+                className="flex flex-col gap-1.5 flex-1"
               >
-                รหัสผ่าน
-              </FieldLabel>
-              <div className="relative flex items-center">
-                <Lock
-                  size={15}
-                  className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
-                />
-                <Input
+                <FieldLabel htmlFor={field.name} className={formLabelClass}>
+                  วันเกิด
+                </FieldLabel>
+                <div className="relative flex items-center">
+                  <Calendar size={15} className={formIconClass} />
+                  <Input
+                    id={field.name}
+                    type="date"
+                    aria-invalid={fieldState.invalid}
+                    className={formInputClass}
+                    onChange={(e) => field.onChange(e.target.valueAsDate)}
+                    style={{ colorScheme: "dark" }}
+                  />
+                </div>
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-xs text-red-400 font-['Sarabun']"
+                  />
+                )}
+              </Field>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="gender"
+            render={({ field, fieldState }) => (
+              <Field
+                data-invalid={fieldState.invalid}
+                className="flex flex-col gap-1.5 flex-1"
+              >
+                <FieldLabel htmlFor={field.name} className={formLabelClass}>
+                  เพศ
+                </FieldLabel>
+                <select
                   {...field}
                   id={field.name}
-                  type="password"
-                  placeholder="••••••••"
-                  aria-invalid={fieldState.invalid}
                   className="
-                    pl-10 py-3 rounded-xl text-sm w-full
-                    bg-white/5 text-[#f5f0e8]
+                    py-3 px-3 rounded-xl text-sm w-full
+                    bg-white/5 text-cream
                     border border-[rgba(201,162,39,0.2)]
-                    placeholder:text-white/20 font-['Sarabun']
-                    transition-all duration-200
-                    focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-                    focus-visible:border-[rgba(201,162,39,0.55)]
+                    font-['Sarabun'] transition-all duration-200
+                    focus:outline-none focus:ring-2 focus:ring-[rgba(201,162,39,0.15)]
+                    focus:border-[rgba(201,162,39,0.55)]
                   "
-                />
-              </div>
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
-                />
-              )}
-            </Field>
-          )}
-        />
-        {/* lastName */}
-        <Controller
-          control={control}
-          name="lastName"
-          render={({ field, fieldState }) => (
-            <Field
-              data-invalid={fieldState.invalid}
-              className="flex flex-col gap-1.5"
-            >
-              <FieldLabel
-                htmlFor={field.name}
-                className="text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
-              >
-                รหัสผ่าน
-              </FieldLabel>
-              <div className="relative flex items-center">
-                <Lock
-                  size={15}
-                  className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
-                />
-                <Input
-                  {...field}
-                  id={field.name}
-                  type="password"
-                  placeholder="••••••••"
-                  aria-invalid={fieldState.invalid}
-                  className="
-                    pl-10 py-3 rounded-xl text-sm w-full
-                    bg-white/5 text-[#f5f0e8]
-                    border border-[rgba(201,162,39,0.2)]
-                    placeholder:text-white/20 font-['Sarabun']
-                    transition-all duration-200
-                    focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-                    focus-visible:border-[rgba(201,162,39,0.55)]
-                  "
-                />
-              </div>
-              {fieldState.invalid && (
-                <FieldError
-                  errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
-                />
-              )}
-            </Field>
-          )}
-        />
+                  style={{ colorScheme: "dark" }}
+                >
+                  <option value="" disabled>
+                    เลือกเพศ
+                  </option>
+                  <option value="MALE">ชาย</option>
+                  <option value="FEMALE">หญิง</option>
+                  <option value="OTHER">อื่นๆ</option>
+                </select>
+                {fieldState.invalid && (
+                  <FieldError
+                    errors={[fieldState.error]}
+                    className="text-xs text-red-400 font-['Sarabun']"
+                  />
+                )}
+              </Field>
+            )}
+          />
+        </div>
 
         {/* Submit */}
         <Field className="mt-2">
@@ -278,7 +315,7 @@ export default function RegisterForm() {
             className="
               w-full py-3 rounded-xl border-0
               font-['Sarabun'] font-semibold text-sm tracking-wide
-              text-[#0b0e2a] transition-all duration-200
+              text-navy transition-all duration-200
               hover:-translate-y-0.5 active:scale-[0.98]
               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0
             "
@@ -292,10 +329,10 @@ export default function RegisterForm() {
             {isPending ? (
               <span className="flex items-center justify-center gap-2">
                 <Loader size={14} className="animate-spin" />
-                กำลังเข้าสู่ระบบ...
+                กำลังสมัครสมาชิก...
               </span>
             ) : (
-              "เข้าสู่ระบบ"
+              "สมัครสมาชิก"
             )}
           </Button>
         </Field>
