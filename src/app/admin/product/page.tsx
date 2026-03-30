@@ -1,6 +1,6 @@
 import Product, {
   type ProductItem,
-} from '@/components/features/admin/productcard';
+} from '@/components/features/admin/product-card';
 
 const products: ProductItem[] = [
   {

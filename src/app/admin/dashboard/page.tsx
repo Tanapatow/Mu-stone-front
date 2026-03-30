@@ -42,37 +42,30 @@ export default function DashboardPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h1 className="text-6xl font-bold tracking-tight text-black font-saraban">
+        <h1 className="text-4xl font-bold tracking-tight text-black">
           ภาพรวมแดชบอร์ด
         </h1>
-        <p className="mt-4 text-3xl text-neutral-700 font-saraban">
-          ยินดีต้อนรับ นี่คือภาพรวมของระบบวันนี้
+        <p className="mt-2 text-lg text-neutral-700">
+          ยินดีต้อนรับกลับ นี่คือภาพรวมของระบบวันนี้
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 2xl:grid-cols-4 font-roboto">
+      <div className="grid gap-15 grid-cols-4 font-roboto">
         {status.map((item) => (
           <StatsCard key={item.title} title={item.title} value={item.value} />
         ))}
       </div>
 
       <div className="rounded-3xl bg-white p-7 shadow-[0_4px_12px_rgba(0,0,0,0.12)]">
-        <h2 className="text-6xl font-bold text-black font-saraban">
-          กิจกรรมล่าสุด
-        </h2>
+        <h2 className="text-4xl font-bold text-black">กิจกรรมล่าสุด</h2>
 
-        <div className="mt-8 space-y-7 font-roboto">
+        <div className="mt-8 space-y-7">
           {recentActivities.map((activity) => (
-            <div
-              className="flex flex-col gap-6 font-roboto"
-              key={activity.title}
-            >
-              <p className="text-3xl font-semibold text-neutral-900 font-roboto">
+            <div key={activity.title}>
+              <p className="text-2xl font-semibold text-neutral-900">
                 {activity.title}
               </p>
-              <p className="mt-2 text-xl text-neutral-500 font-roboto">
-                {activity.time}
-              </p>
+              <p className="mt-1 text-base text-neutral-500">{activity.time}</p>
             </div>
           ))}
         </div>

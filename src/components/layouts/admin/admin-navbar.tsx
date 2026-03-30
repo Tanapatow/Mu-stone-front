@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import {
   ArrowLeft,
   History,
@@ -9,10 +7,10 @@ import {
   LogOut,
   MessageSquareText,
   Package,
-  ShoppingCart,
   UserPen,
-  WalletCards,
 } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const menuItems = [
   {
@@ -24,11 +22,6 @@ const menuItems = [
     label: 'แก้ไขโปรไฟล์',
     href: '/admin/editprofile',
     icon: UserPen,
-  },
-  {
-    label: 'จัดการออเดอร์',
-    href: '/admin/manageorder',
-    icon: ShoppingCart,
   },
   {
     label: 'ประวัติ',
@@ -45,24 +38,19 @@ const menuItems = [
     href: '/admin/chat',
     icon: MessageSquareText,
   },
-  {
-    label: 'การชำระเงิน',
-    href: '/admin/payment',
-    icon: WalletCards,
-  },
 ];
 
 export default function AdminNavbar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex min-h-screen w-90 flex-col bg-[#151515] px-6 py-7 text-white">
+    <aside className="flex min-h-screen w-70 flex-col bg-[#151515] px-5 py-6 text-white">
       <Link
         href="/"
-        className="mb-15 flex items-center gap-3 text-4xl font-medium text-white transition hover:text-blue-300"
+        className="mb-8 flex items-center gap-2 text-lg font-medium text-white transition hover:text-blue-300"
       >
         <ArrowLeft className="h-5 w-5" />
-        <span className="flex flex-col">กลับหน้าแรก</span>
+        <span className="flex flex-col items-center">กลับหน้าแรก</span>
       </Link>
 
       <nav className="flex flex-1 flex-col">
@@ -75,7 +63,7 @@ export default function AdminNavbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-3xl font-medium transition ${
+                className={`flex items-center gap-2 rounded-2xl px-4 py-3 text-lg font-medium transition ${
                   isActive
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'text-neutral-300 hover:bg-white/5 hover:text-white'
@@ -91,7 +79,7 @@ export default function AdminNavbar() {
         <div className="mt-auto pt-8">
           <button
             type="button"
-            className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-3xl font-medium text-neutral-300 transition hover:bg-white/5 hover:text-white"
+            className="flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-xl font-medium text-neutral-300 transition hover:bg-white/5 hover:text-white"
           >
             <LogOut className="h-5 w-5" />
             <span>ออกจากระบบ</span>

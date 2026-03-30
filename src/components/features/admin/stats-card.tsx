@@ -2,16 +2,14 @@ type StatsProp = {
   title: string;
   value: string;
 };
+
 export default function StatsCard({ title, value }: StatsProp) {
   return (
-    <div
-      key={title}
-      className="flex flex-col gap-5 rounded-3xl bg-white p-6 shadow-[0_4px_12px_rgba(0,0,0,0.12)] font-roboto "
-    >
-      <p className="text-3xl font-medium text-neutral-900 font-roboto">
-        {title}
+    <div className="rounded-2xl bg-white p-6 shadow-[0_4px_10px_rgba(0,0,0,0.10)]">
+      <p className="text-[18px] font-medium text-neutral-800">{title}</p>
+      <p className="mt-3 text-[22px] font-bold text-black md:text-[26px]">
+        {value}
       </p>
-      <p className="mt-4 text-4xl font-bold text-black font-roboto">{value}</p>
     </div>
   );
 }
