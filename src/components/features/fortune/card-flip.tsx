@@ -7,7 +7,7 @@ type CardImageProps = {
 export default function CardFlip(cardImage: CardImageProps) {
   return (
     <div className="group perspective-[1000px]">
-      <div className="relative w-30 h-45 duration-500 transform-3d group-hover:transform-[rotateY(180deg)]">
+      <div className="relative w-24 h-36 duration-500 transform-3d group-hover:transform-[rotateY(180deg)]">
         {/* ด้านหน้า */}
         <div className="absolute inset-0 backface-hidden">
           <Image

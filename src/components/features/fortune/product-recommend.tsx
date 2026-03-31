@@ -1,3 +1,5 @@
+'use client';
+import { addToCart } from '@/lib/actions/cart.action';
 import Image from 'next/image';
 
 type ProductRecommendProps = {
@@ -9,19 +11,28 @@ type ProductRecommendProps = {
 
 export default function ProductRecommend({
   productId,
-  productImage,
   productName,
+  productImage,
   price,
 }: ProductRecommendProps) {
+  const handleClickAddToCart = async () => {
+    await addToCart(productId);
+  };
+
   return (
     <div className="w-96 h-100">
-      <div className="bg-black w-full h-2/3 rounded-t-sm">
-        <Image src={productImage} alt="productImg" width={72} height={64} />
+      <div className="bg-black w-full h-2/3 rounded-t-sm relative overflow-hidden">
+        <Image
+          src={productImage}
+          alt="product-image"
+          fill
+          className="object-cover"
+        />
       </div>
       <div className="bg-[#22143F] w-full h-1/3 rounded-b-sm">
-        <div className="flex w-full justify-between p-6 text-lg font-semibold">
+        <div className="flex w-full justify-between p-4 text-lg font-semibold">
           <span className="text-white">{productName}</span>
-          <span className="text-yellow-500">{price}</span>
+          <span className="text-yellow-500">฿{price}</span>
         </div>
         <div className="flex justify-center">
           <button
@@ -43,6 +54,7 @@ export default function ProductRecommend({
                 hover:shadow-[0_0_10px_rgba(250,204,21,0.9)]
                 transition-all duration-300
                 "
+            onClick={handleClickAddToCart}
           >
             Add to cart
           </button>

@@ -9,10 +9,12 @@ export type Card = {
 export type RecommendProduct = {
   id: string;
   name: string;
-  price: string;
+  price: number;
+  imageUrl: string;
 };
 
 export type FortunePredictResponse = {
+  predictionText: string;
   cards: Card[];
-  products: RecommendProduct[];
+  recommendedProducts: RecommendProduct[];
 };
