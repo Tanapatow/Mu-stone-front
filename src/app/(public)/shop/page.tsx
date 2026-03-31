@@ -1,8 +1,8 @@
 import { auth } from "@/lib/auth/auth";
 import { productService } from "@/lib/api/product/product.service";
 import type { ProductFilter } from "@/lib/api/product/product.service";
-import ProductFilterPanel from "@/components/features/product-filter";
-import ProductGrid from "@/components/features/product-grid";
+import ProductGrid from "@/components/features/shop/product-grid";
+import ProductFilterPanel from "@/components/features/shop/product-filter";
 
 type ShopPageProps = {
   searchParams: Promise<ProductFilter>;

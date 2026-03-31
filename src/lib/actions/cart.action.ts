@@ -3,6 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { cartService } from "../api/cart/cart.service";
 import { ActionResult } from "./action.type";
+import type { Cart } from "../api/cart/cart.type";
+
+export const getCart = async (): Promise<Cart | null> => {
+  try {
+    return await cartService.getCart();
+  } catch {
+    return null;
+  }
+};
 
 export const addToCart = async (
   productId: string,

@@ -90,7 +90,7 @@ export default function ProductDetail({
             className="text-2xl font-semibold font-['Sarabun']"
             style={{ color: "#c9a227" }}
           >
-            ฿{Number(product.price).toLocaleString()}
+            ฿ {Number(product.price).toLocaleString()}
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function ProductDetail({
                   key={i}
                   className="flex items-center gap-2 text-sm text-white/70 font-['Sarabun']"
                 >
-                  <Check size={13} className="text-[#c9a227] shrink-0" />
+                  <Check size={13} className="text-gold shrink-0" />
                   {b}
                 </li>
               ))}
