@@ -41,7 +41,7 @@ function ProductCard({
   registerInputRef,
 }: ProductCardProps) {
   return (
-    <div className="w-full max-w-200 rounded-lg bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)]">
+    <div className="w-full max-w-150 rounded-lg bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)]">
       <div className="relative h-120 w-full overflow-hidden rounded-lg bg-black">
         <Image
           src={product.image}
