@@ -1,6 +1,6 @@
-import Product, {
-  type ProductItem,
-} from '@/components/features/admin/product-card';
+import ProductList, {
+  ProductItem,
+} from '@/components/features/admin/product-management/product-list';
 
 const products: ProductItem[] = [
   {
@@ -187,7 +187,7 @@ const products: ProductItem[] = [
 
 export default function ProductPage() {
   return (
-    <Product
+    <ProductList
       title="สินค้า"
       subtitle="จัดการสินค้าคงคลัง"
       addButtonText="+ เพิ่มสินค้า"
