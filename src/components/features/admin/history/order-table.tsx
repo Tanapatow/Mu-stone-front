@@ -8,13 +8,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { useMemo, useState } from 'react';
+import CancelButton from './cancel-button';
+import ShippedButton from './shipped-button';
+
+enum ShippingStatus {
+  PENDING = 'PENDING',
+  PAID = 'PAID',
+  SHIPPED = 'SHIPPED',
+  CANCELLED = 'CANCELLED',
+}
 
 const orders = [
   {
@@ -22,48 +25,43 @@ const orders = [
     name: 'วิภาดา กิจขยัน',
     date: '12 ต.ค. 2023',
     total: '12,450.00',
-    shipping: 'จัดส่งแล้ว',
-    status: 'success',
+    status: ShippingStatus.SHIPPED,
   },
   {
     id: '#ORD-2024-002',
     name: 'ธนากร สุขสวัสดิ์',
     date: '14 ต.ค. 2023',
     total: '8,200.00',
-    shipping: 'ชำระเงินแล้ว',
-    status: 'paid',
+    status: ShippingStatus.PAID,
   },
   {
     id: '#ORD-2024-003',
     name: 'ธนากร สุขสวัสดิ์',
     date: '14 ต.ค. 2023',
     total: '8,200.00',
-    shipping: 'รอตรวจสอบ',
-    status: 'pending',
+    status: ShippingStatus.PENDING,
   },
   {
     id: '#ORD-2024-004',
     name: 'ธนากร สุขสวัสดิ์',
     date: '14 ต.ค. 2023',
     total: '250.00',
-    shipping: 'ชำระเงินแล้ว',
-    status: 'paid',
+    status: ShippingStatus.PAID,
   },
   {
     id: '#ORD-2024-005',
     name: 'ธนากร สุขสวัสดิ์ตอนบ่าย',
     date: '14 ต.ค. 2023',
     total: '8,200.00',
-    shipping: 'ยกเลิก',
-    status: 'cancel',
+    status: ShippingStatus.CANCELLED,
   },
 ];
 
 const statusStyle = {
-  success: 'bg-green-100 text-green-600',
-  paid: 'bg-blue-100 text-blue-600',
-  pending: 'bg-yellow-100 text-yellow-600',
-  cancel: 'bg-red-100 text-red-500',
+  SHIPPED: 'bg-green-100 text-green-600',
+  PAID: 'bg-blue-100 text-blue-600',
+  PENDING: 'bg-yellow-100 text-yellow-600',
+  CANCELLED: 'bg-red-100 text-red-600',
 };
 
 export default function OrderTable() {
@@ -105,9 +103,9 @@ export default function OrderTable() {
 
                 <td className="px-6">
                   <span
-                  // className={`rounded-full px-3 py-1 text-xs font-medium ${statusStyle[item.status]}`}
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${statusStyle[item.status]}`}
                   >
-                    {item.shipping}
+                    {item.status}
                   </span>
                 </td>
 
@@ -118,19 +116,21 @@ export default function OrderTable() {
                 </td>
 
                 <td className="px-6 py-6 text-center">
-                  <div>
-                    {/* Dropdown */}
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button>⌄</button>
-                      </DropdownMenuTrigger>
-
-                      <DropdownMenuContent>
-                        <DropdownMenuItem onClick={() => setOpenDialog(true)}>
-                          Delete Item
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                  <div className="flex justify-center">
+                    {item.status === ShippingStatus.PAID ? (
+                      <div className="flex gap-2">
+                        <CancelButton /> <ShippedButton />
+                      </div>
+                    ) : item.status === ShippingStatus.PENDING ? (
+                      <>
+                        <CancelButton />
+                      </>
+                    ) : item.status === ShippingStatus.CANCELLED ||
+                      item.status === ShippingStatus.SHIPPED ? (
+                      <>-</>
+                    ) : (
+                      <>-</>
+                    )}
 
                     {/* Dialog */}
                     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
