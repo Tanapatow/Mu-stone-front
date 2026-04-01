@@ -1,0 +1,171 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useMemo, useState } from 'react';
+
+const orders = [
+  {
+    id: '#ORD-2024-001',
+    name: 'วิภาดา กิจขยัน',
+    date: '12 ต.ค. 2023',
+    total: '12,450.00',
+    shipping: 'จัดส่งแล้ว',
+    status: 'success',
+  },
+  {
+    id: '#ORD-2024-002',
+    name: 'ธนากร สุขสวัสดิ์',
+    date: '14 ต.ค. 2023',
+    total: '8,200.00',
+    shipping: 'ชำระเงินแล้ว',
+    status: 'paid',
+  },
+  {
+    id: '#ORD-2024-003',
+    name: 'ธนากร สุขสวัสดิ์',
+    date: '14 ต.ค. 2023',
+    total: '8,200.00',
+    shipping: 'รอตรวจสอบ',
+    status: 'pending',
+  },
+  {
+    id: '#ORD-2024-004',
+    name: 'ธนากร สุขสวัสดิ์',
+    date: '14 ต.ค. 2023',
+    total: '250.00',
+    shipping: 'ชำระเงินแล้ว',
+    status: 'paid',
+  },
+  {
+    id: '#ORD-2024-005',
+    name: 'ธนากร สุขสวัสดิ์ตอนบ่าย',
+    date: '14 ต.ค. 2023',
+    total: '8,200.00',
+    shipping: 'ยกเลิก',
+    status: 'cancel',
+  },
+];
+
+const statusStyle = {
+  success: 'bg-green-100 text-green-600',
+  paid: 'bg-blue-100 text-blue-600',
+  pending: 'bg-yellow-100 text-yellow-600',
+  cancel: 'bg-red-100 text-red-500',
+};
+
+export default function OrderTable() {
+  const [search, setSearch] = useState('');
+  const [openDialog, setOpenDialog] = useState(false);
+
+  //   const filteredOrder = useMemo(() => {});
+  return (
+    <div>
+      <div className="rounded-2xl border bg-white shadow-sm">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50 text-gray-500">
+            <tr className="text-center">
+              <th className="px-6 py-4 font-medium">รหัสคำสั่งซื้อ</th>
+              <th className="px-6 py-4 font-medium">ลูกค้า</th>
+              <th className="px-6 py-4 font-medium">วันที่</th>
+              <th className="px-6 py-4 font-medium">ยอดรวม</th>
+              <th className="px-6 py-4 font-medium">สถานะจัดส่ง</th>
+              <th className="px-6 py-4 font-medium text-center">รายละเอียด</th>
+              <th className="px-6 py-4 font-medium text-center">สถานะ</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {orders.map((item, i) => (
+              <tr
+                key={i}
+                className="border-t transition hover:bg-gray-50 text-center"
+              >
+                <td className="px-6 py-8 font-medium text-blue-600">
+                  {item.id}
+                </td>
+
+                <td className="px-6">{item.name}</td>
+
+                <td className="px-6 text-gray-500">{item.date}</td>
+
+                <td className="px-6 font-semibold">{item.total}</td>
+
+                <td className="px-6">
+                  <span
+                  // className={`rounded-full px-3 py-1 text-xs font-medium ${statusStyle[item.status]}`}
+                  >
+                    {item.shipping}
+                  </span>
+                </td>
+
+                <td className="px-6 text-center">
+                  <button className="font-medium text-blue-600 hover:underline">
+                    VIEW
+                  </button>
+                </td>
+
+                <td className="px-6 py-6 text-center">
+                  <div>
+                    {/* Dropdown */}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button>⌄</button>
+                      </DropdownMenuTrigger>
+
+                      <DropdownMenuContent>
+                        <DropdownMenuItem onClick={() => setOpenDialog(true)}>
+                          Delete Item
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    {/* Dialog */}
+                    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Confirm Action</DialogTitle>
+                        </DialogHeader>
+
+                        <p>คุณแน่ใจหรือไม่ว่าต้องการลบ?</p>
+
+                        <DialogFooter>
+                          <Button
+                            variant="outline"
+                            onClick={() => setOpenDialog(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant="destructive"
+                            onClick={() => {
+                              setOpenDialog(false);
+                            }}
+                          >
+                            Confirm
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

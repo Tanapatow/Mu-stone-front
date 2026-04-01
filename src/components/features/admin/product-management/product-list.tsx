@@ -14,17 +14,11 @@ export type ProductItem = {
 };
 
 type ProductProps = {
-  title: string;
-  subtitle: string;
-  addButtonText: string;
   searchPlaceholder?: string;
   products: ProductItem[];
 };
 
 export default function ProductList({
-  title,
-  subtitle,
-  addButtonText,
   searchPlaceholder = 'ค้นหาสินค้า...',
   products,
 }: ProductProps) {
@@ -73,24 +67,8 @@ export default function ProductList({
   };
 
   return (
-    <section className="px-6 py-7 md:px-10">
+    <section className="py-4 md:px-10">
       <div className="mx-auto w-full">
-        <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
-          <div>
-            <h1 className="text-[56px] font-bold leading-none text-black">
-              {title}
-            </h1>
-            <p className="mt-4 text-[18px] text-neutral-700">{subtitle}</p>
-          </div>
-
-          <button
-            type="button"
-            className="h-14 rounded-2xl bg-[#3b82f6] px-7 text-[18px] font-medium text-white transition hover:bg-[#2563eb]"
-          >
-            {addButtonText}
-          </button>
-        </div>
-
         <div className="mb-12 rounded-[20px] bg-white px-5 py-4 shadow-[0_3px_10px_rgba(0,0,0,0.12)]">
           <div className="relative">
             <Search className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-neutral-500" />

@@ -14,16 +14,12 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col px-10 pt-10">
-      {/* Header */}
-      <div className="mb-8 p-4  rounded-xl bg-black/30 backdrop-blur-sm border border-white/10">
-        <h1
-          className="font-['Sarabun'] text-2xl text-gold mb-1"
-          style={{ textShadow: '0 0 24px rgba(201,162,39,0.35)' }}
-        >
+    <section className="space-y-4 px-8">
+      <div className="mx-auto w-full max-w-310 space-y-6">
+        <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
           ภาพรวมแดชบอร์ด
         </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
+        <p className="text-base text-neutral-700 md:text-lg">
           ยินดีต้อนรับกลับ นี่คือภาพรวมของระบบวันนี้
         </p>
       </div>

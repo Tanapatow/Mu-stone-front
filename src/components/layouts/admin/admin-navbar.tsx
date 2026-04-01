@@ -52,23 +52,13 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside
-      className="fixed h-screen w-67.5 shrink-0 flex flex-col px-4 py-6 z-10"
-      style={{
-        background:
-          'linear-gradient(180deg, rgba(11,8,42,0.98) 0%, rgba(6,4,26,0.99) 100%)',
-        borderRight: '1px solid rgba(201,162,39,0.1)',
-      }}
-    >
-      {/* Logo */}
-      <Link href="/" className="flex items-center gap-2 mb-8 group">
-        {/* <ArrowLeft
-          size={16}
-          className="text-white/40 group-hover:text-gold transition-colors"
-        /> */}
-        <span className="font-['Cinzel_Decorative'] text-sm text-gold/80 group-hover:text-gold transition-colors">
-          Mu Stone
-        </span>
+    <aside className="flex h-screen w-67.5 shrink-0 flex-col bg-[#151515] px-5 py-6 text-white">
+      <Link
+        href="/"
+        className="mb-8 flex items-center gap-2 text-lg font-medium text-white transition hover:text-blue-300"
+      >
+        <ArrowLeft className="h-5 w-5" />
+        <span>กลับหน้าแรก</span>
       </Link>
 
       {/* Admin badge */}
