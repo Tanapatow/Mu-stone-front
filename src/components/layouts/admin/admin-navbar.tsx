@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  Archive,
   ArrowLeft,
   History,
   LayoutDashboard,
@@ -39,6 +40,11 @@ const menuItems = [
     label: 'การจัดการสินค้า',
     href: '/admin/manage-user',
     icon: Package2,
+  },
+  {
+    label: 'การจัดการผู้ใช้งาน',
+    href: '/admin/manage-user',
+    icon: Archive,
   },
 ];
 
