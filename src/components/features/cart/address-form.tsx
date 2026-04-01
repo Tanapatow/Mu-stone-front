@@ -69,19 +69,37 @@ export default function AddressForm({ address }: AddressFormProps) {
   // มีที่อยู่แล้ว และไม่ได้กำลังแก้ไข → แสดงที่อยู่
   if (address && !isEditing) {
     return (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-4 ">
+        {/* Address card */}
         <div
-          className="flex items-start gap-3 p-4 rounded-xl"
+          className="relative flex items-start gap-4 p-5 rounded-xl cursor-pointer transition-all duration-200"
           style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(201,162,39,0.15)",
+            background: "rgba(201,162,39,0.05)",
+            border: "2px solid rgba(201,162,39,0.4)",
           }}
         >
-          <MapPin size={16} className="text-[#c9a227] mt-0.5 shrink-0" />
-          <div className="flex-1 flex flex-col gap-0.5">
-            <p className="text-sm font-semibold font-['Sarabun'] text-[#f5f0e8]">
-              {address.receiverName} · {address.phone}
-            </p>
+          {/* Selected indicator */}
+          <div
+            className="w-5 h-5 rounded-full shrink-0 mt-0.5 flex items-center justify-center"
+            style={{
+              background: "linear-gradient(135deg, #c9a227, #7a5c0a)",
+              boxShadow: "0 0 8px rgba(201,162,39,0.4)",
+            }}
+          >
+            <div className="w-2 h-2 rounded-full bg-navy" />
+          </div>
+
+          {/* Info */}
+          <div className="flex-1 flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-semibold font-['Sarabun'] text-[#f5f0e8]">
+                {address.receiverName}
+              </p>
+              <span className="text-white/30 text-xs">·</span>
+              <p className="text-sm font-['Sarabun'] text-white/60">
+                {address.phone}
+              </p>
+            </div>
             <p className="text-xs text-white/50 font-['Sarabun']">
               {address.addressLine1}
             </p>
@@ -90,6 +108,8 @@ export default function AddressForm({ address }: AddressFormProps) {
               {address.postalCode}
             </p>
           </div>
+
+          {/* Edit button */}
           <button
             onClick={() => setIsEditing(true)}
             className="flex items-center gap-1.5 text-xs text-[#c9a227] hover:text-[#f5f0e8] transition-colors shrink-0"
@@ -98,6 +118,16 @@ export default function AddressForm({ address }: AddressFormProps) {
             แก้ไข
           </button>
         </div>
+
+        {/*  placeholder */}
+        <button
+          className="flex items-center justify-center gap-2 p-4 rounded-xl text-xs font-['Sarabun'] text-white/30 hover:text-white/60 transition-all duration-200"
+          style={{ border: "1px dashed rgba(255,255,255,0.1)" }}
+          disabled
+          title="รองรับหลายที่อยู่ในอนาคต"
+        >
+          <MapPin size={13} />+ เพิ่มที่อยู่ใหม่
+        </button>
       </div>
     );
   }

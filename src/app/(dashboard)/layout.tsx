@@ -14,7 +14,7 @@ export default async function DashboardLayout({
     <div
       className="min-h-screen flex"
       style={{
-        backgroundImage: "url('/hero-bg.png')",
+        backgroundImage: "url('/user-background.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

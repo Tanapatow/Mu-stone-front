@@ -1,3 +1,3 @@
 export default function OrderUserOage() {
-  return <div>OrderUserOage</div>;
+  return <div>OrderUserPage</div>;
 }

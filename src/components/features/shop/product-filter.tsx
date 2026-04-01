@@ -118,13 +118,12 @@ export default function ProductFilterPanel({ filter }: ProductFilterProps) {
             ];
             updateFilter({ sortBy: sortBy as ProductFilter["sortBy"], order });
           }}
-          className="
-            px-3 py-2 rounded-lg text-sm
-            bg-white/5 text-cream
-            border border-[rgba(201,162,39,0.2)]
-            font-['Sarabun'] transition-all duration-200
-            focus:outline-none focus:border-[rgba(201,162,39,0.55)]
-          "
+          className="px-3 py-2 rounded-lg text-sm w-full
+    bg-[rgba(11,8,42,0.95)] text-cream
+    border border-[rgba(201,162,39,0.2)]
+    font-['Sarabun'] transition-all duration-200
+    focus:outline-none focus:border-[rgba(201,162,39,0.55)]
+  "
           style={{ colorScheme: "dark" }}
         >
           <option value="createdAt-desc">ใหม่ล่าสุด</option>
