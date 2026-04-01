@@ -1,13 +1,5 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import { useMemo, useState } from 'react';
 import CancelButton from './cancel-button';
 import ShippedButton from './shipped-button';
@@ -66,7 +58,6 @@ const statusStyle = {
 
 export default function OrderTable() {
   const [search, setSearch] = useState('');
-  const [openDialog, setOpenDialog] = useState(false);
 
   //   const filteredOrder = useMemo(() => {});
   return (
@@ -131,34 +122,6 @@ export default function OrderTable() {
                     ) : (
                       <>-</>
                     )}
-
-                    {/* Dialog */}
-                    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Confirm Action</DialogTitle>
-                        </DialogHeader>
-
-                        <p>คุณแน่ใจหรือไม่ว่าต้องการลบ?</p>
-
-                        <DialogFooter>
-                          <Button
-                            variant="outline"
-                            onClick={() => setOpenDialog(false)}
-                          >
-                            Cancel
-                          </Button>
-                          <Button
-                            variant="destructive"
-                            onClick={() => {
-                              setOpenDialog(false);
-                            }}
-                          >
-                            Confirm
-                          </Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
                   </div>
                 </td>
               </tr>
