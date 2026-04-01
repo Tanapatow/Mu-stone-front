@@ -30,12 +30,6 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
           </p>
         </div>
 
-        {session_id && (
-          <p className="text-xs text-white/25 font-['Sarabun'] break-all">
-            Session: {session_id}
-          </p>
-        )}
-
         <div className="flex flex-col gap-2 w-full">
           <Link
             href="/order"
