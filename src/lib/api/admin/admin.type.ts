@@ -32,3 +32,12 @@ export type ProductResponse = {
     hasPreviousPage: boolean;
   };
 };
+
+export type CreateProductDto = {
+  name: string;
+  description: string;
+  price: string;
+  stock: number;
+  stoneType: string;
+  benefit: string;
+};
