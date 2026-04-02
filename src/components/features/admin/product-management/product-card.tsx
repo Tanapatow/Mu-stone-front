@@ -1,3 +1,5 @@
+'use client';
+
 import { Pencil, Trash2, Upload } from 'lucide-react';
 import Image from 'next/image';
 import { ChangeEvent } from 'react';
@@ -12,18 +14,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-
-export type ProductItem = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  image: string;
-};
+import { Product } from '@/lib/api/admin/admin.type';
 
 type ProductCardProps = {
-  product: ProductItem;
+  product: Product;
   onDelete: (id: string) => void;
   onUploadClick: (id: string) => void;
   onImageUpload: (id: string, event: ChangeEvent<HTMLInputElement>) => void;
@@ -45,7 +39,7 @@ export default function ProductCard({
     <div className="w-full max-w-150 rounded-lg bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)]">
       <div className="relative h-60 w-full overflow-hidden rounded-lg bg-black">
         <Image
-          src={product.image}
+          src={product.images[0].url}
           alt={product.name}
           fill
           className="object-cover"
@@ -77,7 +71,7 @@ export default function ProductCard({
 
         <div className="mt-2 flex items-center justify-between">
           <p className="text-xl font-bold text-[#d8a62b]">
-            {formatPrice(product.price)}
+            {formatPrice(Number(product.price))}
           </p>
           <p className="text-sm text-neutral-400">
             คงเหลือ {product.stock} ชิ้น

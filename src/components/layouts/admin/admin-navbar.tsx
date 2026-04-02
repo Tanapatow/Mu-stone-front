@@ -6,10 +6,7 @@ import {
   History,
   LayoutDashboard,
   LogOut,
-  MessageSquareText,
   Package,
-  Package2,
-  ShoppingCart,
   UserPen,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -37,11 +34,6 @@ const menuItems = [
     icon: Package,
   },
   {
-    label: 'การจัดการสินค้า',
-    href: '/admin/manage-user',
-    icon: Package2,
-  },
-  {
     label: 'การจัดการผู้ใช้งาน',
     href: '/admin/manage-user',
     icon: Archive,
@@ -52,7 +44,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-67.5 shrink-0 flex-col bg-[#151515] px-5 py-6 text-white">
+    <aside className="sticky top-0 flex h-screen w-67.5 shrink-0 flex-col bg-[#151515] px-5 py-6 text-white">
       <Link
         href="/"
         className="mb-8 flex items-center gap-2 text-lg font-medium text-white transition hover:text-blue-300"

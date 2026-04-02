@@ -3,27 +3,25 @@
 import { useMemo, useRef, useState, type ChangeEvent } from 'react';
 import { Search } from 'lucide-react';
 import ProductCard from './product-card';
-
-export type ProductItem = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  image: string;
-};
+import { Product } from '@/lib/api/admin/admin.type';
+import { deleteProduct } from '@/lib/actions/admin.action';
 
 type ProductProps = {
-  searchPlaceholder?: string;
-  products: ProductItem[];
+  data: Product[];
+  meta: {
+    totalItems: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
 };
 
-export default function ProductList({
-  searchPlaceholder = 'ค้นหาสินค้า...',
-  products,
-}: ProductProps) {
+export default function ProductList({ data, meta }: ProductProps) {
   const [search, setSearch] = useState('');
-  const [productList, setProductList] = useState<ProductItem[]>(products);
+  const [productList, setProductList] = useState<Product[]>(data);
 
   const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
@@ -38,8 +36,12 @@ export default function ProductList({
     });
   }, [productList, search]);
 
-  const handleDelete = (id: string) => {
-    setProductList((prev) => prev.filter((item) => item.id !== id));
+  const handleDelete = async (id: string) => {
+    const res = await deleteProduct(id);
+
+    if (res?.success) {
+      setProductList((prev) => prev.filter((item) => item.id !== id));
+    }
   };
 
   const handleUploadClick = (id: string) => {
@@ -75,9 +77,9 @@ export default function ProductList({
             <input
               type="text"
               value={search}
-              placeholder={searchPlaceholder}
               onChange={(e) => setSearch(e.target.value)}
               className="h-14 w-full rounded-[12px] border border-neutral-500 bg-[#f5f5f5] pl-14 pr-4 text-[17px] text-neutral-800 outline-none placeholder:text-neutral-400"
+              placeholder="ค้นหาสินค้า..."
             />
           </div>
         </div>
