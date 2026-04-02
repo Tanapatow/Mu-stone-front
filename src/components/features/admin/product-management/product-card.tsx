@@ -1,8 +1,7 @@
 'use client';
 
-import { Pencil, Trash2, Upload } from 'lucide-react';
+import { Pencil, Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -19,8 +18,8 @@ import { Product } from '@/lib/api/admin/admin.type';
 type ProductCardProps = {
   product: Product;
   onDelete: (id: string) => void;
-  onUploadClick: (id: string) => void;
-  onImageUpload: (id: string, event: ChangeEvent<HTMLInputElement>) => void;
+  // onUploadClick: (id: string) => void;
+  // onImageUpload: (id: string, event: ChangeEvent<HTMLInputElement>) => void;
   registerInputRef: (id: string, element: HTMLInputElement | null) => void;
 };
 
@@ -31,8 +30,8 @@ const formatPrice = (price: number) => {
 export default function ProductCard({
   product,
   onDelete,
-  onUploadClick,
-  onImageUpload,
+  // onUploadClick,
+  // onImageUpload,
   registerInputRef,
 }: ProductCardProps) {
   return (
@@ -46,21 +45,12 @@ export default function ProductCard({
           unoptimized
         />
 
-        <button
-          type="button"
-          title="อัปโหลดรูป"
-          onClick={() => onUploadClick(product.id)}
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-neutral-700 shadow-md transition hover:bg-white"
-        >
-          <Upload className="h-4 w-4" />
-        </button>
-
         <input
           ref={(element) => registerInputRef(product.id, element)}
           type="file"
           accept="image/*"
           className="hidden"
-          onChange={(event) => onImageUpload(product.id, event)}
+          // onChange={(event) => onImageUpload(product.id, event)}
         />
       </div>
 

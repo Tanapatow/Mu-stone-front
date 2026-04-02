@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { adminService } from '../api/admin/admin.service';
+import { CreateProductDto } from '../api/admin/admin.type';
 
 export const deleteProduct = async (productId: string) => {
   try {
@@ -10,5 +11,15 @@ export const deleteProduct = async (productId: string) => {
     return { success: true };
   } catch {
     return { success: false, code: 'DELETE_PRODUCT_FAILED' };
+  }
+};
+
+export const createProduct = async (createProductDto: CreateProductDto) => {
+  try {
+    await adminService.createProduct(createProductDto);
+    revalidatePath('/');
+    return { success: true };
+  } catch {
+    return { success: false, code: 'CREATE_PRODUCT_FAILED' };
   }
 };
