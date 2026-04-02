@@ -42,7 +42,7 @@ export default function ProductDetail({
       .filter(Boolean) ?? [];
 
   return (
-    <div className="flex flex-col md:flex-row gap-10">
+    <div className="flex flex-col md:flex-row gap-10 p-8 rounded-2xl bg-gradient-to-br from-[#1a144a]/70 to-[#0b082a]/80 border border-[rgba(201,162,39,0.15)]">
       {/* Images */}
       <div className="flex flex-col gap-3 md:w-96 shrink-0">
         {/* Main image */}
@@ -83,7 +83,7 @@ export default function ProductDetail({
       {/* Info */}
       <div className="flex flex-col gap-5 flex-1">
         <div>
-          <h1 className="font-['Cinzel_Decorative'] text-xl text-[#f5f0e8] mb-2">
+          <h1 className="font-['Sarabun'] text-xl text-[#f5f0e8] mb-2">
             {product.name}
           </h1>
           <p
@@ -99,7 +99,7 @@ export default function ProductDetail({
           <p className="text-xs text-white/40 font-['Sarabun'] mb-1.5">
             คำอธิบาย
           </p>
-          <p className="text-sm text-white/70 font-['Sarabun'] leading-relaxed">
+          <p className="text-lg text-white/70 font-['Sarabun'] leading-relaxed">
             {product.description}
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function ProductDetail({
               {benefits.map((b, i) => (
                 <li
                   key={i}
-                  className="flex items-center gap-2 text-sm text-white/70 font-['Sarabun']"
+                  className="flex items-center gap-2 text-lg text-white/70 font-['Sarabun']"
                 >
                   <Check size={13} className="text-gold shrink-0" />
                   {b}
@@ -143,7 +143,7 @@ export default function ProductDetail({
             >
               −
             </button>
-            <span className="w-10 text-center text-sm font-['Sarabun'] text-[#f5f0e8]">
+            <span className="w-10 text-center text-lg font-['Sarabun'] text-[#f5f0e8]">
               {quantity}
             </span>
             <button
@@ -161,7 +161,7 @@ export default function ProductDetail({
             disabled={!isLoggedIn || product.stock === 0 || isPending}
             className="
               flex-1 py-2.5 rounded-xl border-0
-              font-['Sarabun'] text-sm font-semibold
+              font-['Sarabun'] text-lg font-semibold
               text-navy transition-all duration-200
               hover:-translate-y-0.5 active:scale-[0.98]
               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0

@@ -17,6 +17,7 @@ import {
 } from "@/lib/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Mail, Lock } from "lucide-react";
+import Link from "next/link";
 import { useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -49,7 +50,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       {/* Root error */}
       {errors.root && (
         <Alert className="mb-4 rounded-xl border-red-500/40 bg-red-950/40">
-          <AlertTitle className="text-sm font-['Sarabun'] text-red-300">
+          <AlertTitle className="text-lg font-['Sarabun'] text-red-300">
             {errors.root.message}
           </AlertTitle>
         </Alert>
@@ -83,7 +84,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
                   placeholder="your@email.com"
                   aria-invalid={fieldState.invalid}
                   className="
-                    pl-10 py-3 rounded-xl text-sm w-full
+                    pl-10 py-3 rounded-xl text-lg w-full
                     bg-white/5 text-[#f5f0e8]
                     border border-[rgba(201,162,39,0.2)]
                     placeholder:text-white/20 font-['Sarabun']
@@ -130,7 +131,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
                   placeholder="••••••••"
                   aria-invalid={fieldState.invalid}
                   className="
-                    pl-10 py-3 rounded-xl text-sm w-full
+                    pl-10 py-3 rounded-xl text-lg w-full
                     bg-white/5 text-[#f5f0e8]
                     border border-[rgba(201,162,39,0.2)]
                     placeholder:text-white/20 font-['Sarabun']
@@ -156,7 +157,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             disabled={isPending}
             className="
               w-full py-3 rounded-xl border-0
-              font-['Sarabun'] font-semibold text-sm tracking-wide
+              font-['Sarabun'] font-semibold text-lg tracking-wide
               text-[#0b0e2a] transition-all duration-200
               hover:-translate-y-0.5 active:scale-[0.98]
               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0
@@ -178,6 +179,14 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
             )}
           </Button>
         </Field>
+        <p className="text-center text-xs text-white/30 font-['Sarabun'] mt-2">
+          <Link
+            href="/forgot-password"
+            className="text-gold hover:text-gold-light transition-colors"
+          >
+            ลืมรหัสผ่าน?
+          </Link>
+        </p>
       </FieldGroup>
     </form>
   );

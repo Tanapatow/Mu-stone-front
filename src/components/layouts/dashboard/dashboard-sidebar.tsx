@@ -52,7 +52,7 @@ export default function DashboardSidebar({ session }: DashboardSidebarProps) {
       {/* Avatar + Name */}
       <div className="flex flex-col items-center gap-2 px-4 py-6 border-b border-white/5">
         <div className="text-center">
-          <p className="text-sm font-['Sarabun'] text-cream">
+          <p className="text-lg font-['Sarabun'] text-cream">
             {session?.user?.firstName} {session?.user?.lastName}
           </p>
           <p className="text-xs text-white/30 font-['Saran'] truncate max-w-35">
@@ -69,7 +69,7 @@ export default function DashboardSidebar({ session }: DashboardSidebarProps) {
             <Link
               key={href}
               href={href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-['Sarabun'] transition-all duration-200"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-lg font-['Sarabun'] transition-all duration-200"
               style={{
                 background: isActive ? "rgba(201,162,39,0.1)" : "transparent",
                 color: isActive ? "#c9a227" : "rgba(245,240,232,0.45)",
@@ -90,7 +90,7 @@ export default function DashboardSidebar({ session }: DashboardSidebarProps) {
         <form action={logout}>
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/30 hover:text-red-400 hover:bg-red-400/5 transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-lg font-['Sarabun'] text-white/30 hover:text-red-400 hover:bg-red-400/5 transition-all duration-200"
           >
             <LogOut size={15} />
             Log out

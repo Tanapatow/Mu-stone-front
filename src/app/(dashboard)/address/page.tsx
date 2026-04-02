@@ -19,7 +19,7 @@ export default async function AddressPage() {
         >
           ที่อยู่จัดส่ง
         </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
+        <p className="text-lg text-white/70 font-['Sarabun']">
           จัดการที่อยู่สำหรับการจัดส่งสินค้าของคุณ
         </p>
       </div>

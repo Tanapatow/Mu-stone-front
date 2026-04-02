@@ -25,6 +25,23 @@ export const registerSchema = z
     message: "รหัสผ่านไม่ตรงกัน",
     path: ["confirmPassword"],
   });
+
+export const forgotPasswordSchema = z.object({
+  email: z.email("รูปแบบอีเมลไม่ถูกต้อง"),
+});
+
+export const resetPasswordSchema = z
+  .object({
+    password: z.string().min(6, "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร"),
+    confirmPassword: z.string(),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    message: "รหัสผ่านไม่ตรงกัน",
+    path: ["confirmPassword"],
+  });
+
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type RegisterPayload = Omit<RegisterInput, "confirmPassword">;

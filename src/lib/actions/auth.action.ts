@@ -33,3 +33,23 @@ export const logout = async () => {
   "use server"; // มีอยู่แล้วที่ top ของไฟล์ ไม่ต้องเพิ่ม
   await signOut({ redirectTo: "/" });
 };
+export const forgotPassword = async (email: string): Promise<ActionResult> => {
+  try {
+    await authService.forgotPassword(email);
+    return { success: true };
+  } catch {
+    return { success: false, code: "FORGOT_PASSWORD_FAILED" };
+  }
+};
+
+export const resetPassword = async (
+  token: string,
+  password: string,
+): Promise<ActionResult> => {
+  try {
+    await authService.resetPassword(token, password);
+    return { success: true };
+  } catch {
+    return { success: false, code: "RESET_PASSWORD_FAILED" };
+  }
+};

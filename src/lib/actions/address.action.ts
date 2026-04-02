@@ -19,6 +19,7 @@ export const upsertAddress = async (
   try {
     await addressService.upsertAddress(data);
     revalidatePath("/cart");
+    revalidatePath("/account"); // เพิ่มด้วยเผื่อใช้ใน dashboard
     return { success: true };
   } catch {
     return { success: false, code: "UPSERT_ADDRESS_FAILED" };

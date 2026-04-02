@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export function HomeContent() {
   return (
@@ -15,7 +15,7 @@ export function HomeContent() {
           text-(--gold-light) text-[0.72rem] tracking-[0.12em] uppercase
           opacity-0 animate-fade-slide-in
         "
-        style={{ animationDelay: '0.2s' }}
+        style={{ animationDelay: "0.2s" }}
       >
         ✦ &nbsp; ศาสตร์แห่งดวงดาว &nbsp; ✦
       </div>
@@ -30,8 +30,8 @@ export function HomeContent() {
         "
         style={{
           textShadow:
-            '0 0 40px rgba(201,162,39,0.5), 0 0 80px rgba(201,162,39,0.2)',
-          animationDelay: '0.4s',
+            "0 0 40px rgba(201,162,39,0.5), 0 0 80px rgba(201,162,39,0.2)",
+          animationDelay: "0.4s",
         }}
       >
         Discover Your
@@ -48,7 +48,7 @@ export function HomeContent() {
           max-w-110 mb-[2.4rem]
           opacity-0 animate-fade-slide-in
         "
-        style={{ animationDelay: '0.6s' }}
+        style={{ animationDelay: "0.6s" }}
       >
         เชื่อมต่อกับพลังของจักรวาล ค้นพบความลึกลับของดวงชะตา
         และเปิดเผยเส้นทางชีวิตของคุณผ่านศาสตร์ไพ่ทาโรต์และโหราศาสตร์
@@ -57,7 +57,7 @@ export function HomeContent() {
       {/* CTA buttons */}
       <div
         className="flex flex-wrap gap-3.5 opacity-0 animate-fade-slide-in"
-        style={{ animationDelay: '0.8s' }}
+        style={{ animationDelay: "0.8s" }}
       >
         <Link
           href="/fortune/cards"
@@ -71,16 +71,16 @@ export function HomeContent() {
           "
           style={{
             background:
-              'linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)',
-            boxShadow: '0 4px 24px rgba(201,162,39,0.4)',
+              "linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%)",
+            boxShadow: "0 4px 24px rgba(201,162,39,0.4)",
           }}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-              '0 8px 32px rgba(201,162,39,0.55)';
+              "0 8px 32px rgba(201,162,39,0.55)";
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-              '0 4px 24px rgba(201,162,39,0.4)';
+              "0 4px 24px rgba(201,162,39,0.4)";
           }}
         >
           ทำนายดวง

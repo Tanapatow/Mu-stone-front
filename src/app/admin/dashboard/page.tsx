@@ -1,17 +1,17 @@
-import StatsCard from '@/components/features/admin/stats-card';
+import StatsCard from "@/components/features/admin/stats-card";
 
 const status = [
-  { title: 'ยอดขายรวม', value: '45,231 บาท' },
-  { title: 'สินค้าทั้งหมด', value: '156' },
-  { title: 'จำนวนการสั่งซื้อ', value: '89' },
-  { title: 'จำนวนลูกค้า', value: '1245' },
+  { title: "ยอดขายรวม", value: "45,231 บาท" },
+  { title: "สินค้าทั้งหมด", value: "156" },
+  { title: "จำนวนการสั่งซื้อ", value: "89" },
+  { title: "จำนวนลูกค้า", value: "1245" },
 ];
 
 const recentActivities = [
-  { title: 'มีออเดอร์ใหม่เข้ามา', time: '5 นาทีที่แล้ว' },
-  { title: 'อัปเดตคลังสินค้าแล้ว', time: '1 ชั่วโมงที่แล้ว' },
-  { title: 'มีลูกค้าใหม่สมัครสมาชิก', time: '2 ชั่วโมงที่แล้ว' },
-  { title: 'ออเดอร์เสร็จสมบูรณ์', time: '3 ชั่วโมงที่แล้ว' },
+  { title: "มีออเดอร์ใหม่เข้ามา", time: "5 นาทีที่แล้ว" },
+  { title: "อัปเดตคลังสินค้าแล้ว", time: "1 ชั่วโมงที่แล้ว" },
+  { title: "มีลูกค้าใหม่สมัครสมาชิก", time: "2 ชั่วโมงที่แล้ว" },
+  { title: "ออเดอร์เสร็จสมบูรณ์", time: "3 ชั่วโมงที่แล้ว" },
 ];
 
 export default function DashboardPage() {
@@ -43,7 +43,7 @@ export default function DashboardPage() {
               <p className="text-xl font-semibold text-neutral-900 md:text-xl">
                 {activity.title}
               </p>
-              <p className="mt-1 text-sm text-neutral-500 md:text-base">
+              <p className="mt-1 text-lg text-neutral-500 md:text-base">
                 {activity.time}
               </p>
             </div>

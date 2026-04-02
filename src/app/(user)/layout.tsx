@@ -16,16 +16,7 @@ export default async function UserLayout({
   }
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundImage: "url('/shop_bg.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-      }}
-    >
+    <div className="min-h-screen bg-[url('/auth-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed">
       <UserNavbar session={session} cartCount={cartCount} />
       <main>{children}</main>
     </div>

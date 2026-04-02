@@ -1,5 +1,5 @@
 export const formInputClass = `
-  pl-10 py-3 rounded-xl text-sm w-full
+  pl-10 py-3 rounded-xl text-lg w-full
   bg-white/5 text-[#f5f0e8]
   border border-[rgba(201,162,39,0.2)]
   placeholder:text-white/20 font-['Sarabun']

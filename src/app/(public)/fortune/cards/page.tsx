@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const PickTarotCard = dynamic(
-  () => import('@/components/features/fortune/pick-tarot-card'),
+  () => import("@/components/features/fortune/pick-tarot-card"),
   { ssr: false },
 );
 
@@ -21,15 +21,15 @@ export default function CardPage() {
       <div className="mb-8 p-8 text-center bg-black/40">
         <h1
           className="
-          font-['Cinzel_Decorative'] font-bold leading-[1.1]
+          font-['Sarabun'] font-bold leading-[1.1]
           text-[clamp(2.2rem,4.5vw,3.6rem)]
           text-(--gold) mb-[1.4rem]
           opacity-0 animate-fade-slide-in
         "
           style={{
             textShadow:
-              '0 0 40px rgba(201,162,39,0.5), 0 0 80px rgba(201,162,39,0.2)',
-            animationDelay: '0.4s',
+              "0 0 40px rgba(201,162,39,0.5), 0 0 80px rgba(201,162,39,0.2)",
+            animationDelay: "0.4s",
           }}
         >
           The Celestial Spread

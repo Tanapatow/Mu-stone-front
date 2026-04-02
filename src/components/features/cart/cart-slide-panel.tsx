@@ -71,7 +71,7 @@ export default function CartSlidePanel({
         <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
           <div className="flex items-center gap-2">
             <ShoppingBag size={16} className="text-[#c9a227]" />
-            <h2 className="font-['Cinzel_Decorative'] text-sm text-[#f5f0e8]">
+            <h2 className="font-['Sarabun'] text-lg text-[#f5f0e8]">
               ตะกร้าสินค้า
             </h2>
           </div>
@@ -88,7 +88,7 @@ export default function CartSlidePanel({
           {!cart || cart.items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-3">
               <ShoppingBag size={40} className="text-white/10" />
-              <p className="text-white/30 font-['Sarabun'] text-sm">
+              <p className="text-white/30 font-['Sarabun'] text-lg">
                 ตะกร้าสินค้าว่างเปล่า
               </p>
               <Link
@@ -194,7 +194,7 @@ export default function CartSlidePanel({
         {/* Footer */}
         {cart && cart.items.length > 0 && (
           <div className="px-5 py-4 border-t border-white/10 flex flex-col gap-3">
-            <div className="flex justify-between text-sm font-['Sarabun']">
+            <div className="flex justify-between text-lg font-['Sarabun']">
               <span className="text-white/50">รวมทั้งหมด</span>
               <span className="text-[#f5f0e8] font-semibold">
                 ฿{Number(cart.totalPrice).toLocaleString()}
@@ -202,7 +202,7 @@ export default function CartSlidePanel({
             </div>
             <Link href="/cart" onClick={onClose}>
               <Button
-                className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+                className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
                 style={{
                   background:
                     "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",

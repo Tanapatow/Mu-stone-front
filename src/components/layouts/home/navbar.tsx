@@ -4,6 +4,7 @@ import AuthModal from "@/components/features/auth/auth-login-and-regis-modal";
 import { logout } from "@/lib/actions/auth.action";
 import { LogOut, ShoppingBag, User } from "lucide-react";
 import type { Session } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -28,20 +29,17 @@ export default function Navbar({ session }: NavbarProps) {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 no-underline">
-          <span
-            className="
-              w-9 h-9 rounded-full flex items-center justify-center text-xl
-              border-2 border-(--gold)
-              bg-[radial-gradient(circle,var(--purple),var(--navy))]
-            "
-          >
-            🔮
-          </span>
+          <Image
+            src="/logo-mustone.png"
+            alt="Mu Stone"
+            width={36}
+            height={36}
+            className="rounded-full"
+          />
           <span className="font-['Cinzel_Decorative'] text-[1.05rem] text-(--gold-light) tracking-wide">
             Mu Stone
           </span>
         </Link>
-
         {/* Actions */}
         <div className="flex items-center gap-2">
           <Link
@@ -61,7 +59,7 @@ export default function Navbar({ session }: NavbarProps) {
               {/* ชื่อ user */}
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5">
                 <User size={14} className="text-[rgba(201,162,39,0.7)]" />
-                <span className="text-xs font-['Sarabun'] text-[#f5f0e8]/70">
+                <span className="text-xs font-['Sarabun'] text-cream/70">
                   {user.firstName}
                 </span>
               </div>

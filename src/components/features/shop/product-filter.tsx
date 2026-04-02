@@ -47,7 +47,7 @@ export default function ProductFilterPanel({ filter }: ProductFilterProps) {
         border: "1px solid rgba(201,162,39,0.15)",
       }}
     >
-      <p className="font-['Sarabun'] text-sm font-semibold text-cream">
+      <p className="font-['Sarabun'] text-lg font-semibold text-cream">
         Filters
       </p>
 
@@ -60,7 +60,7 @@ export default function ProductFilterPanel({ filter }: ProductFilterProps) {
           placeholder="ค้นหาสินค้า..."
           onChange={(e) => updateFilter({ search: e.target.value })}
           className="
-            px-3 py-2 rounded-lg text-sm
+            px-3 py-2 rounded-lg text-lg
             bg-white/5 text-cream
             border border-[rgba(201,162,39,0.2)]
             placeholder:text-white/20 font-['Sarabun']
@@ -118,7 +118,7 @@ export default function ProductFilterPanel({ filter }: ProductFilterProps) {
             ];
             updateFilter({ sortBy: sortBy as ProductFilter["sortBy"], order });
           }}
-          className="px-3 py-2 rounded-lg text-sm w-full
+          className="px-3 py-2 rounded-lg text-lg w-full
     bg-[rgba(11,8,42,0.95)] text-cream
     border border-[rgba(201,162,39,0.2)]
     font-['Sarabun'] transition-all duration-200

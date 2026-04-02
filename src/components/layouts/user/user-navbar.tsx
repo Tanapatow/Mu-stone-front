@@ -6,6 +6,7 @@ import { useState } from "react";
 import { logout } from "@/lib/actions/auth.action";
 import type { Session } from "next-auth";
 import CartSlidePanel from "@/components/features/cart/cart-slide-panel";
+import Image from "next/image";
 
 const NAV_ICONS = [
   {
@@ -47,7 +48,6 @@ export default function UserNavbar({
   session,
   cartCount = 0,
 }: UserNavbarProps) {
-  const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -62,46 +62,19 @@ export default function UserNavbar({
         }}
       >
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 shrink-0 no-underline"
-        >
-          <span
-            className="w-9 h-9 rounded-full flex items-center justify-center text-lg"
-            style={{
-              border: "2px solid var(--gold)",
-              background: "radial-gradient(circle, var(--purple), var(--navy))",
-            }}
-          >
-            🔮
-          </span>
-          <span className="font-['Cinzel_Decorative'] text-[1rem] text-(--gold-light) tracking-wide">
+
+        <Link href="/" className="flex items-center gap-2.5 no-underline">
+          <Image
+            src="/logo-mustone.png"
+            alt="Mu Stone"
+            width={36}
+            height={36}
+            className="rounded-full"
+          />
+          <span className="font-['Cinzel_Decorative'] text-[1.5rem] text-(--gold-light) tracking-wide">
             Mu Stone
           </span>
         </Link>
-
-        {/* Search */}
-        <div className="relative flex-1 max-w-sm mx-auto">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="
-              w-full pl-4 pr-10 py-2 rounded-xl text-sm
-              bg-[rgba(255,255,255,0.07)] text-[var(--cream)]
-              border border-[rgba(255,255,255,0.1)]
-              outline-none placeholder:text-white/30
-              font-['Sarabun'] transition-all duration-200
-              focus:border-[rgba(201,162,39,0.4)]
-              focus:bg-[rgba(255,255,255,0.1)]
-            "
-          />
-          <Search
-            size={15}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none"
-          />
-        </div>
 
         <div className="flex items-center gap-3 ml-auto">
           {session?.user?.firstName && (
@@ -115,7 +88,7 @@ export default function UserNavbar({
           <form action={logout}>
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg text-sm font-['Sarabun'] text-white/50 hover:text-white/80 transition-colors"
+              className="px-4 py-2 rounded-lg text-lg font-['Sarabun'] text-white/50 hover:text-white/80 transition-colors"
             >
               Logout
             </button>
@@ -133,7 +106,7 @@ export default function UserNavbar({
             {/* Badge */}
             {cartCount > 0 && !menuOpen && (
               <span
-                className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
+                className="absolute -top-1 -right-1 min-w-4.5 h-4.5 flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
                 style={{ background: "#e53e3e" }}
               >
                 {cartCount > 99 ? "99+" : cartCount}
@@ -176,7 +149,7 @@ export default function UserNavbar({
                         </div>
                         {showBadge && cartCount > 0 && (
                           <span
-                            className="absolute top-2 right-0 min-w-[18px] h-[18px] flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
+                            className="absolute top-2 right-0 min-w-4.5 h-4.5 flex items-center justify-center rounded-full text-[10px] font-bold text-white px-1"
                             style={{ background: "#e53e3e" }}
                           >
                             {cartCount > 99 ? "99+" : cartCount}

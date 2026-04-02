@@ -18,3 +18,13 @@ export type FortunePredictResponse = {
   cards: Card[];
   recommendedProducts: RecommendProduct[];
 };
+
+export type FortuneLog = {
+  id: string;
+  userId: string;
+  topic: string;
+  predictionText: string;
+  cards: Card[];
+  recommendedProducts: RecommendProduct[];
+  createdAt: string;
+};

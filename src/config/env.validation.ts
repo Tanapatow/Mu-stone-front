@@ -1,5 +1,4 @@
 import z from "zod";
-console.log("RUN:", typeof window);
 const serverEnvSchema = z.object({
   BACKEND_URL: z.string().url(),
 });

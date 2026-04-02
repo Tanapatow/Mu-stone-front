@@ -1,14 +1,14 @@
-'use client';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 // const simLoading = (second: number = 3) =>
 //   new Promise((resolve) => setTimeout(() => resolve(null), second * 1000));
 
 const cards = Array.from({ length: 78 }, (_, i) => ({
   id: i + 1,
-  image: '/tarot-cards.png',
+  image: "/tarot-cards.png",
 }));
 
 export default function PickTarotCard() {
@@ -78,12 +78,12 @@ export default function PickTarotCard() {
             border border-gray-600
             transition-all duration-500 ease-out overflow-hidden
 
-            ${isSelected ? 'scale-125 z-50 border-purple-400 shadow-xl' : 'z-10'}
-            ${isDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:-translate-y-1'}
+            ${isSelected ? "scale-125 z-50 border-purple-400 shadow-xl" : "z-10"}
+            ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover:-translate-y-1"}
           `}
               style={{
-                left: '50%',
-                top: '50%',
+                left: "50%",
+                top: "50%",
                 transform: `
               translate(-50%, -50%)
               translate(${x}px, ${y}px)
@@ -108,7 +108,7 @@ export default function PickTarotCard() {
         <h2 className="text-xl font-semibold mb-2 text-white font-saraban">
           ไกด์
         </h2>
-        <p className="text-sm text-gray-300 opacity-80 font-saraban">
+        <p className="text-lg text-gray-300 opacity-80 font-saraban">
           ขณะนี้คุณกำลังใช้ผังไพ่แบบ Celtic Crossจงเลือกไพ่ 3 ใบ
           เพื่อเริ่มต้นการหยั่งรู้สายใยแห่งจักรวาล
         </p>
