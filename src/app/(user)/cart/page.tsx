@@ -22,16 +22,16 @@ export default async function CartPage() {
       <main className="min-h-screen flex flex-col items-center justify-center gap-5">
         <ShoppingBag size={64} className="text-white/10" />
         <div className="text-center">
-          <p className="font-['Cinzel_Decorative'] text-xl text-[#f5f0e8]/50 mb-2">
+          <p className="font-['Sarabun'] text-xl text-[#f5f0e8]/50 mb-2">
             ตะกร้าว่างเปล่า
           </p>
-          <p className="text-sm text-white/30 font-['Sarabun']">
+          <p className="text-lg text-white/30 font-['Sarabun']">
             ยังไม่มีสินค้าในตะกร้าของคุณ
           </p>
         </div>
         <Link
           href="/shop"
-          className="px-6 py-2.5 rounded-xl text-sm font-['Sarabun'] font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+          className="px-6 py-2.5 rounded-xl text-lg font-['Sarabun'] font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
           style={{
             background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
             boxShadow: "0 4px 20px rgba(201,162,39,0.35)",
@@ -46,7 +46,7 @@ export default async function CartPage() {
   return (
     <main className="min-h-screen px-6 py-10 pt-24 max-w-6xl mx-auto">
       <h1
-        className="font-['Cinzel_Decorative'] text-2xl text-gold mb-1"
+        className="font-['Sarabun'] text-2xl text-gold mb-1"
         style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
       >
         Cart
@@ -66,7 +66,7 @@ export default async function CartPage() {
               border: "1px solid rgba(201,162,39,0.15)",
             }}
           >
-            <p className="font-['Cinzel_Decorative'] text-sm text-[#f5f0e8] mb-4">
+            <p className="font-['Sarabun'] text-lg text-[#f5f0e8] mb-4">
               {address ? "ที่อยู่จัดส่ง" : "เพิ่มที่อยู่จัดส่ง"}
             </p>
             <AddressForm address={address} />

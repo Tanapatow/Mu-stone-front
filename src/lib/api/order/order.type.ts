@@ -15,9 +15,13 @@ export type OrderItem = {
   productId: string;
   quantity: number;
   price: number;
-  product: Product & { images: ProductImage[] };
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    imageUrl: string | null;
+  };
 };
-
 export type Order = {
   id: string;
   userId: string;

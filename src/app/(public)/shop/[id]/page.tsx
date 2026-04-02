@@ -17,21 +17,11 @@ export default async function ProductDetailPage({
   const result = await productService.getById(id).catch(() => null);
   if (!result) notFound();
   const product = result.data;
-  console.log("product:", JSON.stringify(product, null, 2));
-  console.log("keys:", Object.keys(product ?? {}));
   if (!product) notFound();
-
   return (
     <>
-      <div
-        className="fixed inset-0 -z-10"
-        style={{
-          backgroundImage: "url('/shop_bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <main className="min-h-screen px-6 pt-24 pb-10 max-w-5xl mx-auto">
+      <div className="fixed inset-0 -z-10 bg-[url('/auth-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed" />
+      <main className=" min-h-screen px-6 pt-24 pb-10 max-w-5xl mx-auto">
         <Link
           href="/shop"
           className="inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 font-['Sarabun'] transition-colors mb-8"

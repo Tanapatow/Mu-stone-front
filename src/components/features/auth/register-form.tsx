@@ -280,17 +280,13 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                 <select
                   {...field}
                   id={field.name}
-                  className="
-                    py-3 px-3 rounded-xl text-sm w-full
-                    bg-white/5 text-cream
-                    border border-[rgba(201,162,39,0.2)]
-                    font-['Sarabun'] transition-all duration-200
-                    focus:outline-none focus:ring-2 focus:ring-[rgba(201,162,39,0.15)]
-                    focus:border-[rgba(201,162,39,0.55)]
-                  "
-                  style={{ colorScheme: "dark" }}
+                  style={{
+                    colorScheme: "dark",
+                    background: "rgba(255,255,255,0.05)",
+                  }}
+                  className="py-3 px-3 rounded-xl text-lg w-full text-cream border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
                 >
-                  <option value="" disabled>
+                  <option value="" disabled hidden>
                     เลือกเพศ
                   </option>
                   <option value="MALE">ชาย</option>
@@ -314,7 +310,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
             disabled={isPending}
             className="
               w-full py-3 rounded-xl border-0
-              font-['Sarabun'] font-semibold text-sm tracking-wide
+              font-['Sarabun'] font-semibold text-lg tracking-wide
               text-navy transition-all duration-200
               hover:-translate-y-0.5 active:scale-[0.98]
               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0

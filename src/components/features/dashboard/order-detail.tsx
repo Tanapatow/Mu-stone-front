@@ -47,7 +47,7 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
           }}
         >
           <div>
-            <p className="font-['Cinzel_Decorative'] text-sm text-[#f5f0e8]">
+            <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">
               #{order.id.slice(0, 8).toUpperCase()}
             </p>
             <p className="text-xs text-white/30 font-['Sarabun'] mt-0.5">
@@ -82,7 +82,7 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
             </p>
             <div className="flex flex-col gap-3">
               {order.items.map((item) => {
-                const image = item.product.images[0]?.url ?? "/placeholder.png";
+                const image = item.product.imageUrl ?? "/placeholder.png";
                 return (
                   <div
                     key={item.id}
@@ -101,14 +101,14 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-['Sarabun'] text-[#f5f0e8] truncate">
+                      <p className="text-lg font-['Sarabun'] text-[#f5f0e8] truncate">
                         {item.product.name}
                       </p>
                       <p className="text-xs text-white/40 font-['Sarabun']">
                         ฿{Number(item.price).toLocaleString()} x {item.quantity}
                       </p>
                     </div>
-                    <p className="text-sm font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
+                    <p className="text-lg font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
                       ฿{(Number(item.price) * item.quantity).toLocaleString()}
                     </p>
                   </div>
@@ -143,7 +143,7 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
               border: "1px solid rgba(201,162,39,0.15)",
             }}
           >
-            <p className="text-sm text-white/50 font-['Sarabun']">
+            <p className="text-lg text-white/50 font-['Sarabun']">
               ยอดรวมทั้งหมด
             </p>
             <p className="text-lg font-bold font-['Sarabun'] text-[#c9a227]">

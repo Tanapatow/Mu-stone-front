@@ -60,12 +60,12 @@ export default function ProductCard({
 
       {/* Info */}
       <div className="flex flex-col gap-2 p-3">
-        <p className="text-sm font-['Sarabun'] text-cream truncate">
+        <p className="text-lg font-['Sarabun'] text-cream truncate">
           {product.name}
         </p>
         <div className="flex items-center justify-between">
           <span
-            className="text-sm font-semibold font-['Sarabun']"
+            className="text-lg font-semibold font-['Sarabun']"
             style={{ color: "#c9a227" }}
           >
             ฿{product.price.toLocaleString()}

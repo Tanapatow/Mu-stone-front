@@ -99,7 +99,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           {/* Header */}
           <div>
             <h2
-              className="font-['Cinzel_Decorative'] text-xl text-gold-light mb-1"
+              className="font-['Sarabun'] text-xl text-gold-light mb-1"
               style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
             >
               {config.heading}
@@ -115,7 +115,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className="flex-1 py-2 rounded-lg text-sm font-['Sarabun'] transition-all duration-200 active:scale-[0.98]"
+                className="flex-1 py-2 rounded-lg text-lg font-['Sarabun'] transition-all duration-200 active:scale-[0.98]"
                 style={{
                   background:
                     tab === t

@@ -45,7 +45,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
         className="px-5 py-4"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
       >
-        <p className="font-['Cinzel_Decorative'] text-sm text-[#f5f0e8]">
+        <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">
           ยอดที่ต้องชำระ
         </p>
         <p className="text-2xl font-bold font-['Sarabun'] text-[#c9a227] mt-1">
@@ -72,7 +72,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
 
         {address ? (
           <div className="flex flex-col gap-0.5">
-            <p className="text-sm font-semibold font-['Sarabun'] text-[#f5f0e8]">
+            <p className="text-lg font-semibold font-['Sarabun'] text-[#f5f0e8]">
               {address.receiverName} · {address.phone}
             </p>
             <p className="text-xs text-white/50 font-['Sarabun']">
@@ -141,7 +141,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
           </div>
 
           <div
-            className="flex justify-between text-sm font-['Sarabun'] mt-3 pt-3"
+            className="flex justify-between text-lg font-['Sarabun'] mt-3 pt-3"
             style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
           >
             <span className="text-white/50">ยอดรวม</span>
@@ -162,7 +162,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
         <Button
           onClick={handleCheckout}
           disabled={!address || !hasItems || isPending}
-          className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
           style={{
             background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
             boxShadow:

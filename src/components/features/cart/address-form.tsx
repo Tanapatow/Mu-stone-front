@@ -15,13 +15,14 @@ import { Input } from "@/components/ui/input";
 import { addressSchema, type AddressInput } from "@/lib/schemas/address.schema";
 import { upsertAddress } from "@/lib/actions/address.action";
 import { Address } from "@/lib/api/user/address/address.type";
+import { useRouter } from "next/navigation";
 
 type AddressFormProps = {
   address: Address | null;
 };
 
 const inputClass = `
-  px-3 py-2.5 rounded-xl text-sm w-full
+  px-3 py-2.5 rounded-xl text-lg w-full
   bg-white/5 text-[#f5f0e8]
   border border-[rgba(201,162,39,0.2)]
   placeholder:text-white/20 font-['Sarabun']
@@ -34,6 +35,7 @@ const labelClass =
   "text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide";
 
 export default function AddressForm({ address }: AddressFormProps) {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isEditing, setIsEditing] = useState(!address); // ถ้าไม่มีที่อยู่ → เปิด form เลย
 
@@ -62,6 +64,7 @@ export default function AddressForm({ address }: AddressFormProps) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
       } else {
         setIsEditing(false);
+        router.refresh();
       }
     });
   };
@@ -92,11 +95,11 @@ export default function AddressForm({ address }: AddressFormProps) {
           {/* Info */}
           <div className="flex-1 flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <p className="text-sm font-semibold font-['Sarabun'] text-[#f5f0e8]">
+              <p className="text-lg font-semibold font-['Sarabun'] text-cream">
                 {address.receiverName}
               </p>
               <span className="text-white/30 text-xs">·</span>
-              <p className="text-sm font-['Sarabun'] text-white/60">
+              <p className="text-lg font-['Sarabun'] text-white/60">
                 {address.phone}
               </p>
             </div>
@@ -112,7 +115,7 @@ export default function AddressForm({ address }: AddressFormProps) {
           {/* Edit button */}
           <button
             onClick={() => setIsEditing(true)}
-            className="flex items-center gap-1.5 text-xs text-[#c9a227] hover:text-[#f5f0e8] transition-colors shrink-0"
+            className="flex items-center gap-1.5 text-xs text-gold hover:text-cream transition-colors shrink-0"
           >
             <Pencil size={12} />
             แก้ไข
@@ -339,14 +342,14 @@ export default function AddressForm({ address }: AddressFormProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
+              className="flex-1 py-2.5 rounded-xl text-lg font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
             >
               ยกเลิก
             </button>
           )}
           <Button
             disabled={isPending}
-            className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
             style={{
               background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
               boxShadow: isPending

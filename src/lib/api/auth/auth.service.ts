@@ -10,5 +10,10 @@ const login = (input: unknown) =>
 
 const register = (input: RegisterPayload) =>
   api.post<void>("auth/register", input);
+const forgotPassword = (email: string) =>
+  api.post<void>("auth/forgot-password", { email });
 
-export const authService = { login, register };
+const resetPassword = (token: string, password: string) =>
+  api.post<void>("auth/reset-password", { token, password });
+
+export const authService = { login, register, forgotPassword, resetPassword };

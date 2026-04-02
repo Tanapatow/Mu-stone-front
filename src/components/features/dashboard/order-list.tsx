@@ -42,7 +42,7 @@ export default function OrderList({ orders }: OrderListProps) {
       {/* Orders */}
       {filtered.length === 0 ? (
         <div className="flex items-center justify-center py-16">
-          <p className="text-white/30 font-['Sarabun'] text-sm">
+          <p className="text-white/30 font-['Sarabun'] text-lg">
             ไม่มีคำสั่งซื้อ
           </p>
         </div>
@@ -90,8 +90,7 @@ export default function OrderList({ orders }: OrderListProps) {
                 {/* Items */}
                 <div className="flex flex-col gap-3">
                   {order.items.map((item) => {
-                    const image =
-                      item.product.images[0]?.url ?? "/placeholder.png";
+                    const image = item.product.imageUrl ?? "/placeholder.png";
                     return (
                       <div key={item.id} className="flex items-center gap-3">
                         <div className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
@@ -103,14 +102,14 @@ export default function OrderList({ orders }: OrderListProps) {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-['Sarabun'] text-[#f5f0e8] truncate">
+                          <p className="text-lg font-['Sarabun'] text-[#f5f0e8] truncate">
                             {item.product.name}
                           </p>
                           <p className="text-xs text-white/40 font-['Sarabun']">
                             จำนวน {item.quantity} ชิ้น
                           </p>
                         </div>
-                        <p className="text-sm font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
+                        <p className="text-lg font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
                           ฿
                           {(
                             Number(item.price) * item.quantity
@@ -130,7 +129,7 @@ export default function OrderList({ orders }: OrderListProps) {
                     {order.shippingAddressSnapshot.split("\n")[0]}
                   </p>
                   <div className="flex items-center gap-3 shrink-0">
-                    <p className="text-sm font-semibold font-['Sarabun'] text-[#f5f0e8]">
+                    <p className="text-lg font-semibold font-['Sarabun'] text-[#f5f0e8]">
                       ฿{Number(order.totalAmount).toLocaleString()}
                     </p>
                     <button

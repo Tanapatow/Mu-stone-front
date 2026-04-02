@@ -27,16 +27,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   return (
     <>
-      <div
-        className="fixed inset-0 -z-10"
-        style={{
-          backgroundImage: "url('/shop_bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-      <main className="min-h-screen px-6 py-10 pt-24 max-w-6xl mx-auto flex flex-col">
+      <div />
+      <main className="min-h-screen px-6 py-10 pt-24 max-w-6xl mx-auto flex flex-col  bg-[url('/auth-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed">
         <div className="mb-8">
           <h1
             className="font-['Cinzel_Decorative'] text-2xl font-bold text-gold mb-1"

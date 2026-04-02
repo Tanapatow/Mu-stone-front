@@ -19,7 +19,7 @@ export default async function OrderPage() {
         >
           การสั่งซื้อของฉัน
         </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
+        <p className="text-lg text-white/70 font-['Sarabun']">
           {orders.length} รายการ
         </p>
       </div>

@@ -24,7 +24,7 @@ type AccountFormProps = {
 };
 
 const inputClass = `
-  px-3 py-2.5 rounded-xl text-sm w-full
+  px-3 py-2.5 rounded-xl text-lg w-full
   bg-white/5 text-[#f5f0e8]
   border border-[rgba(201,162,39,0.2)]
   placeholder:text-white/20 font-['Sarabun']
@@ -182,7 +182,7 @@ export default function AccountForm({ user }: AccountFormProps) {
                 <select
                   {...field}
                   id={field.name}
-                  className="px-3 py-2.5 rounded-xl text-sm w-full bg-[rgba(11,8,42,0.95)] text-[#f5f0e8] border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
+                  className="px-3 py-2.5 rounded-xl text-lg w-full bg-[rgba(11,8,42,0.95)] text-[#f5f0e8] border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
                   style={{ colorScheme: "dark" }}
                 >
                   <option value="MALE">ชาย</option>
@@ -202,7 +202,7 @@ export default function AccountForm({ user }: AccountFormProps) {
 
         <Button
           disabled={isPending}
-          className="w-full py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed mt-2"
+          className="w-full py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed mt-2"
           style={{
             background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
             boxShadow: isPending ? "none" : "0 4px 20px rgba(201,162,39,0.35)",

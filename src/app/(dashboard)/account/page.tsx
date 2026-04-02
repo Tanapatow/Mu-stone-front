@@ -20,7 +20,7 @@ export default async function AccountPage() {
         >
           ข้อมูลส่วนตัว
         </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
+        <p className="text-lg text-white/70 font-['Sarabun']">
           จัดการข้อมูลบัญชีและการตั้งค่าส่วนตัวของคุณ
         </p>
       </div>
