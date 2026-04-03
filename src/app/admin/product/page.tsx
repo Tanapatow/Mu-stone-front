@@ -35,7 +35,7 @@ export default async function ProductPage({ searchParams }: ShopPageProps) {
         </div>
         <ProductCreate />
       </div>
-      <ProductList data={products} meta={meta} />
+      <ProductList products={products} />
       {/* Pagination */}
       {meta.totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-10">

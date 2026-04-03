@@ -1,11 +1,13 @@
 'use client';
 
 import { banUser } from '@/lib/actions/admin.action';
-import { GetAllUserResponse } from '@/lib/api/admin/admin.type';
+import { User } from '@/lib/api/admin/admin.type';
 
-type UserTableProps = GetAllUserResponse;
+type UserTableProps = {
+  users: User[];
+};
 
-export default function UserTable({ users, meta }: UserTableProps) {
+export default function UserTable({ users }: UserTableProps) {
   return (
     <div className="p-6">
       <div className="bg-white rounded-2xl shadow overflow-hidden">

@@ -6,13 +6,13 @@ import {
   UpdateProductDto,
 } from './admin.type';
 
-type GetAllUsersParams = {
+export type UserFilter = {
   search?: string;
   page?: number;
   limit?: number;
 };
 
-const getAllUsers = async (params?: GetAllUsersParams) => {
+const getAllUsers = async (params?: UserFilter) => {
   const query = new URLSearchParams();
 
   if (params?.search) {

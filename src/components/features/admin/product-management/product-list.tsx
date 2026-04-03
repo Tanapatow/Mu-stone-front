@@ -1,12 +1,14 @@
 'use client';
 import ProductCard from './product-card';
-import { ProductResponse } from '@/lib/api/admin/admin.type';
+import { Product } from '@/lib/api/admin/admin.type';
 import { deleteProduct } from '@/lib/actions/admin.action';
 import SearchBar from './searchbar';
 
-type ProductProps = ProductResponse;
+type ProductProps = {
+  products: Product[];
+};
 
-export default function ProductList({ data: productList, meta }: ProductProps) {
+export default function ProductList({ products }: ProductProps) {
   const handleDelete = async (id: string) => {
     await deleteProduct(id);
   };
@@ -17,13 +19,13 @@ export default function ProductList({ data: productList, meta }: ProductProps) {
         <SearchBar />
       </div>
 
-      {productList.length === 0 ? (
+      {products.length === 0 ? (
         <div className="rounded-[20px] bg-white py-16 text-center text-neutral-500">
           ไม่พบสินค้า
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {productList.map((product) => (
+          {products.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
