@@ -1,13 +1,13 @@
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
-import { authService } from '../api/auth/auth.service';
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { authService } from "../api/auth/auth.service";
 
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
         const result = await authService.login(credentials);
-        console.log('authorize result:', result);
+        console.log("authorize result:", result);
         return result
           ? {
               ...result.user,
@@ -26,7 +26,6 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         token.accessToken = user.accessToken;
         token.role = user.role;
         token.email = user.email;
-
         token.accessTokenExpiresAt = user.expiresIn
           ? Date.now() + (user.expiresIn - 3) * 1000
           : Date.now() + 3600 * 1000; // default 1 ชั่วโมง
@@ -47,6 +46,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
       session.user.lastName = token.lastName;
       session.user.id = token.sub;
       session.user.role = token.role;
+      session.user.email = token.email;
       session.user.email = token.email;
       return session;
     },
