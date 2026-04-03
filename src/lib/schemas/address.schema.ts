@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const addressSchema = z.object({
+  title: z.string().min(1, "กรุณากรอกชื่อที่อยู่"),
   receiverName: z.string().min(1, "กรุณากรอกชื่อผู้รับ"),
   phone: z.string().min(9, "กรุณากรอกเบอร์โทรศัพท์"),
   addressLine1: z.string().min(1, "กรุณากรอกที่อยู่"),

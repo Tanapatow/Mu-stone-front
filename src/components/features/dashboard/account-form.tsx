@@ -56,6 +56,7 @@ export default function AccountForm({ user }: AccountFormProps) {
 
   const onSubmit = (data: UpdateProfileInput) => {
     startTransition(async () => {
+      console.log("data", data);
       const res = await updateProfile(data);
       if (!res.success) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });

@@ -39,16 +39,14 @@ export default function FortuneLogDetail({
       >
         {/* Header */}
         <div
-          className="flex items-center justify-between p-5 border-b border-white/10 sticky top-0"
+          className="flex items-center justify-between p-5 border-b border-white/10 sticky top-0 z-10"
           style={{
             background: "rgba(11,8,42,0.95)",
             backdropFilter: "blur(12px)",
           }}
         >
           <div>
-            <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">
-              {log.topic}
-            </p>
+            <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">ไพ่ของคุณ</p>
             <p className="text-xs text-white/30 font-['Sarabun'] mt-0.5">
               {date}
             </p>

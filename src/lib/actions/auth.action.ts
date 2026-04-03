@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { authService } from "../api/auth/auth.service";
-import { signIn, signOut } from "../auth/auth";
+import { auth, signIn, signOut } from "../auth/auth";
 import { LoginInput, RegisterInput } from "../schemas/auth.schema";
 import { ActionResult } from "./action.type";
 
@@ -12,9 +12,13 @@ export const login = async (input: LoginInput): Promise<ActionResult> => {
   } catch {
     return { success: false, code: "INVALID_CREDENTIALS" };
   }
+
+  const session = await auth();
+  if (session?.user?.role === "ADMIN") {
+    redirect("/admin/dashboard");
+  }
   redirect("/");
 };
-
 export const register = async (input: RegisterInput): Promise<ActionResult> => {
   try {
     console.log("input from action", input);

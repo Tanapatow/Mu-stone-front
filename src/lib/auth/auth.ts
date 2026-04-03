@@ -24,6 +24,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         token.firstName = user.firstName;
         token.lastName = user.lastName;
         token.accessToken = user.accessToken;
+        token.role = user.role;
         token.accessTokenExpiresAt = user.expiresIn
           ? Date.now() + (user.expiresIn - 3) * 1000
           : Date.now() + 3600 * 1000; // default 1 ชั่วโมง
@@ -47,7 +48,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
       session.user.firstName = token.firstName;
       session.user.lastName = token.lastName;
       session.user.id = token.sub;
-
+      session.user.role = token.role;
       return session;
     },
   },
