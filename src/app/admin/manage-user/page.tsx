@@ -1,15 +1,16 @@
-import ProductCreate from '@/components/features/admin/product-management/product-create';
-import ProductList from '@/components/features/admin/product-management/product-list';
-import { adminService, ProductFilter } from '@/lib/api/admin/admin.service';
+import UserTable from '@/components/features/admin/manage-user';
+import { adminService, UserFilter } from '@/lib/api/admin/admin.service';
 import Link from 'next/link';
-
-type ShopPageProps = {
-  searchParams: Promise<ProductFilter>;
+type ManageUserPageProps = {
+  searchParams: Promise<UserFilter>;
 };
 
-export default async function ProductPage({ searchParams }: ShopPageProps) {
+export default async function ManageUserPage({
+  searchParams,
+}: ManageUserPageProps) {
   const filter = await searchParams;
-  const { data: products, meta } = await adminService.getAllProduct(filter);
+
+  const { data: users, meta } = await adminService.getAllUsers(filter);
 
   const buildPageUrl = (page: number) => {
     const params = new URLSearchParams(
@@ -23,22 +24,16 @@ export default async function ProductPage({ searchParams }: ShopPageProps) {
   };
 
   return (
-    <>
-      <div className="flex justify-between gap-8 px-8">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
-            สินค้า
-          </h1>
-          <p className="text-base text-neutral-700 md:text-lg">
-            จัดการสินค้าคงคลัง
-          </p>
-        </div>
-        <ProductCreate />
-      </div>
-      <ProductList products={products} />
+    <div className="flex flex-col px-8 gap-8">
+      <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
+        จัดการผู้ใช้งาน
+      </h1>
+
+      <UserTable users={users} />
+
       {/* Pagination */}
       {meta.totalPages > 1 && (
-        <div className="flex justify-center items-center gap-2 mt-10">
+        <div className="flex justify-center items-center gap-2">
           {meta.hasPreviousPage && (
             <Link
               href={buildPageUrl(meta.currentPage - 1)}
@@ -75,6 +70,6 @@ export default async function ProductPage({ searchParams }: ShopPageProps) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
