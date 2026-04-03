@@ -1,6 +1,8 @@
 export type Address = {
   id: string;
   userId: string;
+  title: string;
+  isDefault: boolean;
   receiverName: string;
   phone: string;
   addressLine1: string;
@@ -8,4 +10,6 @@ export type Address = {
   district: string;
   province: string;
   postalCode: string;
+  createdAt: string;
+  updatedAt: string;
 };

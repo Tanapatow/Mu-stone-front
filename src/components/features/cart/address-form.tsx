@@ -2,8 +2,9 @@
 
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, Pencil, MapPin } from "lucide-react";
+import { Loader, MapPin, Pencil } from "lucide-react";
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Field,
@@ -13,17 +14,16 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { addressSchema, type AddressInput } from "@/lib/schemas/address.schema";
-import { upsertAddress } from "@/lib/actions/address.action";
-import { Address } from "@/lib/api/user/address/address.type";
-import { useRouter } from "next/navigation";
+import { createAddress, updateAddress } from "@/lib/actions/address.action";
+import type { Address } from "@/lib/api/user/address/address.type";
 
 type AddressFormProps = {
   address: Address | null;
 };
 
 const inputClass = `
-  px-3 py-2.5 rounded-xl text-lg w-full
-  bg-white/5 text-[#f5f0e8]
+  px-3 py-2.5 rounded-xl text-sm w-full
+  bg-white/5 text-cream
   border border-[rgba(201,162,39,0.2)]
   placeholder:text-white/20 font-['Sarabun']
   transition-all duration-200
@@ -37,7 +37,7 @@ const labelClass =
 export default function AddressForm({ address }: AddressFormProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [isEditing, setIsEditing] = useState(!address); // ถ้าไม่มีที่อยู่ → เปิด form เลย
+  const [isEditing, setIsEditing] = useState(!address);
 
   const {
     handleSubmit,
@@ -46,6 +46,7 @@ export default function AddressForm({ address }: AddressFormProps) {
     formState: { errors },
   } = useForm<AddressInput>({
     defaultValues: {
+      title: address?.title ?? "บ้าน",
       receiverName: address?.receiverName ?? "",
       phone: address?.phone ?? "",
       addressLine1: address?.addressLine1 ?? "",
@@ -59,7 +60,10 @@ export default function AddressForm({ address }: AddressFormProps) {
 
   const onSubmit = (data: AddressInput) => {
     startTransition(async () => {
-      const res = await upsertAddress(data);
+      const res = address
+        ? await updateAddress(address.id, data)
+        : await createAddress(data);
+
       if (!res.success) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
       } else {
@@ -69,19 +73,16 @@ export default function AddressForm({ address }: AddressFormProps) {
     });
   };
 
-  // มีที่อยู่แล้ว และไม่ได้กำลังแก้ไข → แสดงที่อยู่
   if (address && !isEditing) {
     return (
-      <div className="flex flex-col gap-4 ">
-        {/* Address card */}
+      <div className="flex flex-col gap-4">
         <div
-          className="relative flex items-start gap-4 p-5 rounded-xl cursor-pointer transition-all duration-200"
+          className="relative flex items-start gap-4 p-5 rounded-xl"
           style={{
             background: "rgba(201,162,39,0.05)",
             border: "2px solid rgba(201,162,39,0.4)",
           }}
         >
-          {/* Selected indicator */}
           <div
             className="w-5 h-5 rounded-full shrink-0 mt-0.5 flex items-center justify-center"
             style={{
@@ -91,15 +92,13 @@ export default function AddressForm({ address }: AddressFormProps) {
           >
             <div className="w-2 h-2 rounded-full bg-navy" />
           </div>
-
-          {/* Info */}
           <div className="flex-1 flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <p className="text-lg font-semibold font-['Sarabun'] text-cream">
+              <p className="text-sm font-semibold font-['Sarabun'] text-cream">
                 {address.receiverName}
               </p>
               <span className="text-white/30 text-xs">·</span>
-              <p className="text-lg font-['Sarabun'] text-white/60">
+              <p className="text-sm font-['Sarabun'] text-white/60">
                 {address.phone}
               </p>
             </div>
@@ -111,8 +110,6 @@ export default function AddressForm({ address }: AddressFormProps) {
               {address.postalCode}
             </p>
           </div>
-
-          {/* Edit button */}
           <button
             onClick={() => setIsEditing(true)}
             className="flex items-center gap-1.5 text-xs text-gold hover:text-cream transition-colors shrink-0"
@@ -122,12 +119,11 @@ export default function AddressForm({ address }: AddressFormProps) {
           </button>
         </div>
 
-        {/*  placeholder */}
         <button
           className="flex items-center justify-center gap-2 p-4 rounded-xl text-xs font-['Sarabun'] text-white/30 hover:text-white/60 transition-all duration-200"
           style={{ border: "1px dashed rgba(255,255,255,0.1)" }}
           disabled
-          title="รองรับหลายที่อยู่ในอนาคต"
+          title="จัดการที่อยู่ทั้งหมดได้ที่หน้าบัญชีของฉัน"
         >
           <MapPin size={13} />+ เพิ่มที่อยู่ใหม่
         </button>
@@ -135,7 +131,6 @@ export default function AddressForm({ address }: AddressFormProps) {
     );
   }
 
-  // ไม่มีที่อยู่ หรือกำลังแก้ไข → แสดง form
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && (
@@ -143,8 +138,35 @@ export default function AddressForm({ address }: AddressFormProps) {
           {errors.root.message}
         </p>
       )}
-
       <FieldGroup className="flex flex-col gap-3">
+        {/* Title */}
+        <Controller
+          control={control}
+          name="title"
+          render={({ field, fieldState }) => (
+            <Field
+              data-invalid={fieldState.invalid}
+              className="flex flex-col gap-1.5"
+            >
+              <FieldLabel htmlFor={field.name} className={labelClass}>
+                ชื่อที่อยู่
+              </FieldLabel>
+              <Input
+                {...field}
+                id={field.name}
+                placeholder="เช่น บ้าน, ที่ทำงาน"
+                className={inputClass}
+              />
+              {fieldState.invalid && (
+                <FieldError
+                  errors={[fieldState.error]}
+                  className="text-xs text-red-400 font-['Sarabun']"
+                />
+              )}
+            </Field>
+          )}
+        />
+
         <div className="flex gap-3">
           <Controller
             control={control}
@@ -342,14 +364,14 @@ export default function AddressForm({ address }: AddressFormProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="flex-1 py-2.5 rounded-xl text-lg font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
+              className="flex-1 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
             >
               ยกเลิก
             </button>
           )}
           <Button
             disabled={isPending}
-            className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40"
             style={{
               background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
               boxShadow: isPending

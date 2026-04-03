@@ -286,7 +286,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                   }}
                   className="py-3 px-3 rounded-xl text-lg w-full text-cream border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
                 >
-                  <option value="" disabled hidden>
+                  <option value="" hidden>
                     เลือกเพศ
                   </option>
                   <option value="MALE">ชาย</option>

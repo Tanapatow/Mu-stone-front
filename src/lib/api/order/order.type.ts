@@ -22,6 +22,13 @@ export type OrderItem = {
     imageUrl: string | null;
   };
 };
+export type OrderUser = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 export type Order = {
   id: string;
   userId: string;
@@ -32,4 +39,5 @@ export type Order = {
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;
+  user?: OrderUser;
 };

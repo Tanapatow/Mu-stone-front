@@ -1,9 +1,23 @@
 import { api } from "../../client";
-import { Address } from "./address.type";
+import type { Address } from "./address.type";
 
-const getAddress = () => api.get<Address | null>("user/address");
+const getAddresses = () => api.get<Address[]>("user/addresses");
+const createAddress = (
+  data: Omit<Address, "id" | "userId" | "createdAt" | "updatedAt">,
+) => api.post<Address>("user/address", data);
+const updateAddress = (
+  addressId: string,
+  data: Partial<Omit<Address, "id" | "userId" | "createdAt" | "updatedAt">>,
+) => api.patch<Address>(`user/address/${addressId}`, data);
+const setDefault = (addressId: string) =>
+  api.patch<Address>(`user/address/${addressId}/default`, {});
+const deleteAddress = (addressId: string) =>
+  api.delete<void>(`user/address/${addressId}`);
 
-const upsertAddress = (data: Omit<Address, "id" | "userId">) =>
-  api.put<Address>("user/address", data);
-
-export const addressService = { getAddress, upsertAddress };
+export const addressService = {
+  getAddresses,
+  createAddress,
+  updateAddress,
+  setDefault,
+  deleteAddress,
+};
