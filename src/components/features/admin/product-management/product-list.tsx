@@ -1,23 +1,11 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useRef, useState, type ChangeEvent } from 'react';
+import { useRef } from 'react';
 import ProductCard from './product-card';
-import { Product } from '@/lib/api/admin/admin.type';
+import { ProductResponse } from '@/lib/api/admin/admin.type';
 import { deleteProduct } from '@/lib/actions/admin.action';
 import SearchBar from './searchbar';
 
-type ProductProps = {
-  data: Product[];
-  meta: {
-    totalItems: number;
-    itemCount: number;
-    itemsPerPage: number;
-    totalPages: number;
-    currentPage: number;
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
-  };
-};
+type ProductProps = ProductResponse;
 
 export default function ProductList({ data: productList, meta }: ProductProps) {
   const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
@@ -26,9 +14,9 @@ export default function ProductList({ data: productList, meta }: ProductProps) {
     await deleteProduct(id);
   };
 
-  const handleUploadClick = (id: string) => {
-    fileInputRefs.current[id]?.click();
-  };
+  // const handleUploadClick = (id: string) => {
+  //   fileInputRefs.current[id]?.click();
+  // };
 
   const registerInputRef = (id: string, element: HTMLInputElement | null) => {
     fileInputRefs.current[id] = element;

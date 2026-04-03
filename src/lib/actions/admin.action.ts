@@ -23,3 +23,13 @@ export const createProduct = async (createProductDto: CreateProductDto) => {
     return { success: false, code: 'CREATE_PRODUCT_FAILED' };
   }
 };
+
+export const banUser = async (userId: string, isActive: boolean) => {
+  try {
+    await adminService.banUser(userId, isActive);
+    revalidatePath('/admin/manage-user');
+    return { success: true };
+  } catch {
+    return { success: false, code: 'BAN_USER_FAILED' };
+  }
+};

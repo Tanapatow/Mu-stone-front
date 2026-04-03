@@ -52,3 +52,38 @@ export type UpdateProductDto = {
   stoneType: string;
   benefit: string;
 };
+
+enum Gender {
+  'MALE',
+  'FEMALE',
+  'OTHER',
+}
+
+enum Role {
+  'USER',
+  'ADMIN',
+}
+
+export type User = {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  dob: string;
+  gender: Gender;
+  isActive: boolean;
+  role: Role;
+};
+
+export type GetAllUserResponse = {
+  users: User[];
+  meta: {
+    totalItems: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
+};

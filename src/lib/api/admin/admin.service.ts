@@ -1,9 +1,43 @@
 import { api } from '../client';
 import {
   CreateProductDto,
+  GetAllUserResponse,
   ProductResponse,
   UpdateProductDto,
 } from './admin.type';
+
+type GetAllUsersParams = {
+  search?: string;
+  page?: number;
+  limit?: number;
+};
+
+const getAllUsers = async (params?: GetAllUsersParams) => {
+  const query = new URLSearchParams();
+
+  if (params?.search) {
+    query.append('search', params.search);
+  }
+
+  if (params?.page) {
+    query.append('page', params.page.toString());
+  }
+
+  if (params?.limit) {
+    query.append('limit', params.limit.toString());
+  }
+
+  const path = `user${query.toString() ? `?${query.toString()}` : ''}`;
+
+  const res = await api.get<GetAllUserResponse>(path);
+  return {
+    data: res.users,
+    meta: res.meta,
+  };
+};
+
+const banUser = async (userId: string, isActive: boolean) =>
+  api.patch(`user/${userId}/status`, { isActive });
 
 const getAllProduct = (search: string | string[] | undefined) => {
   let path = 'products';
@@ -41,4 +75,6 @@ export const adminService = {
   createProduct,
   updateProduct,
   deleteProductById,
+  getAllUsers,
+  banUser,
 };
