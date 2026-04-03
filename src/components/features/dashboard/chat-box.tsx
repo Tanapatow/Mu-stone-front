@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { Send, Loader } from "lucide-react";
-import type { ChatMessage } from "@/lib/api/chat/chat.type";
-import { getChatSocket, disconnectChatSocket } from "@/lib/socket/chat-socket";
-import type { Socket } from "socket.io-client";
+import { useEffect, useRef, useState } from 'react';
+import { Send } from 'lucide-react';
+import type { ChatMessage } from '@/lib/api/chat/chat.type';
+import { getChatSocket, disconnectChatSocket } from '@/lib/socket/chat-socket';
+import type { Socket } from 'socket.io-client';
 
 type ChatBoxProps = {
   token: string;
@@ -14,7 +14,7 @@ type ChatBoxProps = {
 
 export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [roomId, setRoomId] = useState<string | null>(null);
   const [connected, setConnected] = useState(false);
   const socketRef = useRef<Socket | null>(null);
@@ -24,22 +24,22 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
     const socket = getChatSocket(token);
     socketRef.current = socket;
 
-    socket.on("connect", () => {
+    socket.on('connect', () => {
       setConnected(true);
-      socket.emit("join_chat", {});
+      socket.emit('join_chat', {});
     });
 
-    socket.on("disconnect", () => setConnected(false));
+    socket.on('disconnect', () => setConnected(false));
 
-    socket.on("joined_room", ({ roomId }: { roomId: string }) => {
+    socket.on('joined_room', ({ roomId }: { roomId: string }) => {
       setRoomId(roomId);
     });
 
-    socket.on("chat_history", (history: ChatMessage[]) => {
+    socket.on('chat_history', (history: ChatMessage[]) => {
       setMessages(history);
     });
 
-    socket.on("receive_message", (message: ChatMessage) => {
+    socket.on('receive_message', (message: ChatMessage) => {
       setMessages((prev) => [...prev, message]);
     });
 
@@ -49,17 +49,17 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
   }, [token]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSend = () => {
     if (!input.trim() || !roomId || !socketRef.current) return;
-    socketRef.current.emit("send_message", { roomId, content: input.trim() });
-    setInput("");
+    socketRef.current.emit('send_message', { roomId, content: input.trim() });
+    setInput('');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
@@ -74,7 +74,7 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
             {firstName[0]}
           </div>
           <div
-            className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[#0b082a] ${connected ? "bg-green-400" : "bg-white/20"}`}
+            className={`absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full border-2 border-[#0b082a] ${connected ? 'bg-green-400' : 'bg-white/20'}`}
           />
         </div>
         <div>
@@ -82,7 +82,7 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
             แชทกับ Admin
           </p>
           <p className="text-xs text-white/40 font-['Sarabun']">
-            {connected ? "ออนไลน์" : "กำลังเชื่อมต่อ..."}
+            {connected ? 'ออนไลน์' : 'กำลังเชื่อมต่อ...'}
           </p>
         </div>
       </div>
@@ -101,15 +101,15 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
         )}
         {messages.map((msg) => {
           const isMe = msg.senderId === userId;
-          const time = new Date(msg.createdAt).toLocaleTimeString("th-TH", {
-            hour: "2-digit",
-            minute: "2-digit",
+          const time = new Date(msg.createdAt).toLocaleTimeString('th-TH', {
+            hour: '2-digit',
+            minute: '2-digit',
           });
 
           return (
             <div
               key={msg.id}
-              className={`flex gap-2 ${isMe ? "flex-row-reverse" : "flex-row"}`}
+              className={`flex gap-2 ${isMe ? 'flex-row-reverse' : 'flex-row'}`}
             >
               {/* Avatar */}
               {!isMe && (
@@ -120,23 +120,23 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
 
               {/* Bubble */}
               <div
-                className={`flex flex-col gap-1 max-w-[70%] ${isMe ? "items-end" : "items-start"}`}
+                className={`flex flex-col gap-1 max-w-[70%] ${isMe ? 'items-end' : 'items-start'}`}
               >
                 <div
                   className={`px-4 py-2.5 rounded-2xl text-sm font-['Sarabun'] leading-relaxed ${
                     isMe
-                      ? "rounded-tr-sm text-navy"
-                      : "rounded-tl-sm text-cream bg-white/8"
+                      ? 'rounded-tr-sm text-navy'
+                      : 'rounded-tl-sm text-cream bg-white/8'
                   }`}
                   style={
                     isMe
                       ? {
                           background:
-                            "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
+                            'linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)',
                         }
                       : {
-                          background: "rgba(255,255,255,0.06)",
-                          border: "1px solid rgba(255,255,255,0.08)",
+                          background: 'rgba(255,255,255,0.06)',
+                          border: '1px solid rgba(255,255,255,0.08)',
                         }
                   }
                 >
@@ -167,7 +167,7 @@ export default function ChatBox({ token, userId, firstName }: ChatBoxProps) {
           disabled={!input.trim() || !roomId}
           className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
           style={{
-            background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
+            background: 'linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)',
           }}
         >
           <Send size={15} className="text-navy" />
