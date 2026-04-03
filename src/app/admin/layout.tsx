@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth/auth';
 import { redirect } from 'next/navigation';
-import AdminSidebar from '@/components/layouts/admin/admin-navbar';
+import AdminSidebar1 from '@/components/layouts/admin/admin-navbar1';
 
 export default async function AdminLayout({
   children,
@@ -12,11 +12,18 @@ export default async function AdminLayout({
   if (session.user.role !== 'ADMIN') redirect('/');
 
   return (
-    <div className="flex min-h-screen">
-      <AdminNavbar />
-      <main className="flex-1 overflow-x-auto">
-        <div className="pt-8 bg-[#ececec]">{children}</div>
-      </main>
+    <div
+      className="min-h-screen flex"
+      style={{
+        backgroundImage: "url('/admin-bg.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <AdminSidebar1 />
+      <main className="flex-1 overflow-y-auto ml-67.5">{children}</main>
     </div>
   );
 }

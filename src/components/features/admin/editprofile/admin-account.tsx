@@ -2,16 +2,7 @@
 
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader } from 'lucide-react';
 import { useTransition } from 'react';
-import { Button } from '@/components/ui/button';
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
 import {
   updateProfileSchema,
   type UpdateProfileInput,
@@ -22,19 +13,6 @@ import type { User } from '@/lib/api/user/user.type';
 type AccountFormProps = {
   user: User;
 };
-
-const inputClass = `
-  px-3 py-2.5 rounded-xl text-lg w-full
-  bg-white/5 text-[#f5f0e8]
-  border border-[rgba(201,162,39,0.2)]
-  placeholder:text-white/20 font-['Sarabun']
-  transition-all duration-200
-  focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-  focus-visible:border-[rgba(201,162,39,0.55)]
-`;
-
-const labelClass =
-  "text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide";
 
 export default function AdminAccount({ user }: AccountFormProps) {
   const [isPending, startTransition] = useTransition();
