@@ -1,6 +1,6 @@
 'use client';
 
-import { Pencil, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,28 +14,20 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Product } from '@/lib/api/admin/admin.type';
+import ProductEdit from './product-edit';
 
 type ProductCardProps = {
   product: Product;
   onDelete: (id: string) => void;
-  // onUploadClick: (id: string) => void;
-  // onImageUpload: (id: string, event: ChangeEvent<HTMLInputElement>) => void;
-  registerInputRef: (id: string, element: HTMLInputElement | null) => void;
 };
 
 const formatPrice = (price: number) => {
-  return `฿${price.toFixed(2)}`;
+  return `฿ ${price.toFixed(2)}`;
 };
 
-export default function ProductCard({
-  product,
-  onDelete,
-  // onUploadClick,
-  // onImageUpload,
-  registerInputRef,
-}: ProductCardProps) {
+export default function ProductCard({ product, onDelete }: ProductCardProps) {
   return (
-    <div className="w-full max-w-150 rounded-lg bg-white shadow-[0_4px_12px_rgba(0,0,0,0.18)]">
+    <div className="w-full max-w-150 rounded-lg bg-white">
       <div className="relative h-60 w-full overflow-hidden rounded-lg bg-black">
         <Image
           src={product.images[0].url}
@@ -43,14 +35,6 @@ export default function ProductCard({
           fill
           className="object-cover"
           unoptimized
-        />
-
-        <input
-          ref={(element) => registerInputRef(product.id, element)}
-          type="file"
-          accept="image/*"
-          className="hidden"
-          // onChange={(event) => onImageUpload(product.id, event)}
         />
       </div>
 
@@ -68,24 +52,19 @@ export default function ProductCard({
           </p>
         </div>
 
-        <div className="mt-4 flex items-center gap-3">
-          {/* Edit Button */}
-          <button
-            type="button"
-            className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl border border-blue-400 text-xl font-medium text-blue-500 transition hover:bg-blue-50"
-          >
-            <Pencil className="h-3.5 w-3.5" />
-            แก้ไข
-          </button>
+        <div className="mt-4 flex items-center gap-3 w-full">
+          {/* Edit Dialog */}
+          <ProductEdit product={product} />
 
           {/* Delete Dialog */}
           <Dialog>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="flex h-9 w-9 items-center justify-center rounded-xl border border-red-400 text-red-500 transition hover:bg-red-50"
+                className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl border border-red-400 text-xl text-red-500 transition hover:bg-red-50 hover:cursor-pointer"
               >
                 <Trash2 className="h-4 w-4" />
+                ลบ
               </button>
             </DialogTrigger>
 

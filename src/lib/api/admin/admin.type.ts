@@ -44,13 +44,13 @@ export type CreateProductDto = {
 };
 
 export type UpdateProductDto = {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  stock: number;
-  stoneType: string;
-  benefit: string;
+  name?: string;
+  description?: string;
+  price?: string;
+  stock?: number;
+  stoneType?: string;
+  benefit?: string;
+  images?: File[];
 };
 
 enum Gender {

@@ -43,7 +43,7 @@ export default function SearchBar({
   }, [searchParams]);
 
   return (
-    <div className="mb-12 rounded-[20px] bg-white px-5 py-4 shadow-[0_3px_10px_rgba(0,0,0,0.12)]">
+    <div className="mb-4 rounded-[20px] bg-white px-5 py-4">
       <div className="relative">
         <Search className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-neutral-500" />
         <input

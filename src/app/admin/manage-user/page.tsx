@@ -17,14 +17,14 @@ export default async function ManageUserPage({
     page: getNumber(page),
     limit: getNumber(limit),
   };
-  const { data, meta } = await adminService.getAllUsers(params);
+  const { data: users, meta } = await adminService.getAllUsers(params);
 
   return (
     <div className="flex flex-col px-8 gap-8">
       <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
         จัดการผู้ใช้งาน
       </h1>
-      <UserTable users={data} meta={meta} />
+      <UserTable users={users} meta={meta} />
     </div>
   );
 }

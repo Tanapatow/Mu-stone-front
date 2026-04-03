@@ -39,12 +39,27 @@ const getAllUsers = async (params?: GetAllUsersParams) => {
 const banUser = async (userId: string, isActive: boolean) =>
   api.patch(`user/${userId}/status`, { isActive });
 
-const getAllProduct = (search: string | string[] | undefined) => {
-  let path = 'products';
-  if (typeof search === 'string') {
-    path += `?search=${encodeURIComponent(search)}`;
-  }
-  return api.get<ProductResponse>(path);
+export type ProductFilter = {
+  page?: number;
+  limit?: number;
+  search?: string;
+  stoneType?: string;
+  sortBy?: 'price' | 'createdAt' | 'stock';
+  order?: 'asc' | 'desc';
+};
+
+const buildQuery = (filter: ProductFilter) => {
+  const params = new URLSearchParams();
+  Object.entries(filter).forEach(([key, value]) => {
+    if (value !== undefined && value !== '') {
+      params.set(key, String(value));
+    }
+  });
+  return params.toString();
+};
+
+const getAllProduct = (filter: ProductFilter = {}) => {
+  return api.get<ProductResponse>(`products?${buildQuery(filter)}`);
 };
 
 const createProduct = (data: CreateProductDto) => {
@@ -65,8 +80,22 @@ const createProduct = (data: CreateProductDto) => {
   return api.post('products', formData);
 };
 
-const updateProduct = (updateProductDto: UpdateProductDto) =>
-  api.patch(`products/${updateProductDto.id}`);
+const updateProduct = (product: UpdateProductDto, productId: string) => {
+  const formData = new FormData();
+
+  Object.entries(product).forEach(([key, value]) => {
+    if (value !== undefined && key !== 'images') {
+      formData.append(key, value.toString());
+    }
+  });
+
+  if (product.images) {
+    Array.from(product.images).forEach((file) => {
+      formData.append('images', file);
+    });
+  }
+  return api.patch(`products/${productId}`, formData);
+};
 
 const deleteProductById = (id: string) => api.delete(`products/${id}`);
 

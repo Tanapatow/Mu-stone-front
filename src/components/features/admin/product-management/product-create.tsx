@@ -26,7 +26,7 @@ export default function ProductCreate() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<CreateProductDTO>();
   const [open, setOpen] = useState(false);
   const onSubmit = async (data: CreateProductDTO) => {
@@ -41,7 +41,7 @@ export default function ProductCreate() {
     }
   };
   return (
-    <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+    <div>
       <Dialog open={open} onOpenChange={setOpen}>
         {/* ✅ Trigger */}
         <DialogTrigger asChild onClick={() => setOpen(!open)}>
@@ -116,9 +116,11 @@ export default function ProductCreate() {
             <div className="flex justify-end gap-2 pt-4">
               <button
                 type="submit"
-                className="rounded-lg bg-primary px-4 py-2 text-white"
+                disabled={isSubmitting}
+                className="rounded-lg bg-primary px-4 py-2 text-white hover:cursor-pointer disabled:cursor-not-allowed 
+             disabled:opacity-50 "
               >
-                บันทึก
+                {isSubmitting ? 'กำลังเพิ่มสินค้า...' : 'บันทึก'}
               </button>
             </div>
           </form>
