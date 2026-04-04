@@ -1,85 +1,64 @@
-export default function DashboardPage() {
-  const stats = [
-    { title: 'ยอดขายรวม', value: '45,231 บาท' },
-    { title: 'สินค้าทั้งหมด', value: '156' },
-    { title: 'จำนวนการสั่งซื้อ', value: '89' },
-    { title: 'จำนวนลูกค้า', value: '1,245' },
-  ];
+import Chart from '@/components/features/admin/dashboard/chart';
+import StatCard from '@/components/features/admin/dashboard/stat-card';
+import { TopProductsCard } from '@/components/features/admin/dashboard/top-product-card';
+import { dashboardService } from '@/lib/api/admin/dashboard/dashboard.service';
+import { AlertTriangle, Banknote, Eye } from 'lucide-react';
 
-  const activities = [
-    { title: 'มีออเดอร์ใหม่เข้ามา', time: '5 นาทีที่แล้ว' },
-    { title: 'อัปเดตคลังสินค้าแล้ว', time: '1 ชั่วโมงที่แล้ว' },
-    { title: 'มีลูกค้าใหม่สมัครสมาชิก', time: '2 ชั่วโมงที่แล้ว' },
-    { title: 'ออเดอร์เสร็จสมบูรณ์', time: '3 ชั่วโมงที่แล้ว' },
-  ];
+export default async function DashboardPage() {
+  const statsOverview = await dashboardService.getOverView();
+
+  const daily = await dashboardService.getSalesDay();
+  const weekly = await dashboardService.getWeeklySalesTrend();
+
+  const topSales = await dashboardService.getTopSellers();
 
   return (
-    <section className="space-y-4 px-8">
-      <div className="mx-auto w-full max-w-310 space-y-6">
-        <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
+    <div className="min-h-screen flex flex-col px-10 pt-10">
+      <div className="mb-8 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10">
+        <h1
+          className="font-['Sarabun'] text-2xl text-gold mb-1"
+          style={{ textShadow: '0 0 24px rgba(201,162,39,0.35)' }}
+        >
           ภาพรวมแดชบอร์ด
         </h1>
-        <p className="text-base text-neutral-700 md:text-lg">
+        <p className="text-sm text-white/70 font-['Sarabun']">
           ยินดีต้อนรับกลับ นี่คือภาพรวมของระบบวันนี้
         </p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {stats.map((stat) => (
-          <div
-            key={stat.title}
-            className="p-5 rounded-2xl flex flex-col gap-2"
-            style={{
-              background:
-                'linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)',
-              border: '1px solid rgba(201,162,39,0.15)',
-            }}
-          >
-            <p className="text-xs text-white/40 font-['Sarabun']">
-              {stat.title}
-            </p>
-            <p className="text-2xl font-bold text-gold font-['Sarabun']">
-              {stat.value}
-            </p>
-          </div>
-        ))}
+        <StatCard
+          title="รายได้วันนี้"
+          content={`฿ ${statsOverview.revenueToday}`}
+          icon={Banknote}
+        />
+        <StatCard
+          title="จำนวนผู้เข้าชม"
+          content={String(statsOverview.fortuneTrafficToday)}
+          icon={Eye}
+          detail="ผู้ใช้ดูดวงวันนี้"
+        />
+        <StatCard
+          title="จำนวนออเดอร์วันนี้"
+          content={`${statsOverview.totalPurchases} รายการ`}
+          icon={AlertTriangle}
+        />
+        <StatCard
+          title="รายการแจ้งเตือน"
+          content={`${statsOverview.outOfStockCount} รายการ`}
+          icon={AlertTriangle}
+          detail="สินค้าหมด โปรดดำเนินการ"
+        />
       </div>
 
-      {/* Recent activities */}
-      <div
-        className="w-full p-6 rounded-2xl"
-        style={{
-          background:
-            'linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)',
-          border: '1px solid rgba(201,162,39,0.15)',
-        }}
-      >
-        <p className="text-sm font-semibold text-cream font-['Sarabun'] mb-4">
-          กิจกรรมล่าสุด
-        </p>
-        <div className="flex flex-col gap-4">
-          {activities.map((activity, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-between py-3"
-              style={{
-                borderBottom:
-                  i < activities.length - 1
-                    ? '1px solid rgba(255,255,255,0.05)'
-                    : 'none',
-              }}
-            >
-              <p className="text-sm text-white/70 font-['Sarabun']">
-                {activity.title}
-              </p>
-              <p className="text-xs text-white/30 font-['Sarabun'] shrink-0 ml-4">
-                {activity.time}
-              </p>
-            </div>
-          ))}
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-2">
+          <Chart dailyData={daily} weeklyData={weekly} />
+        </div>
+        <div className="lg:col-span-1">
+          <TopProductsCard data={topSales} />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
