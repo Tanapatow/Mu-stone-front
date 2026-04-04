@@ -12,20 +12,15 @@ export default async function ChatPage() {
 
   return (
     <div className="min-h-screen flex flex-col px-10 pt-10">
-      {/* Header */}
-      <div className="mb-8 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10">
-        <h1
-          className="font-['Sarabun'] text-2xl text-gold mb-1"
-          style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
-        >
-          Chat
-        </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
-          ติดต่อสอบถามกับทีมงานของเรา
-        </p>
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Chat</h1>
+
+        <p className="dashboard-subtitle">ติดต่อสอบถามกับทีมงานของเรา</p>
       </div>
 
-      <ChatBox token={token} userId={userId} firstName={firstName} />
+      <div className="flex-1">
+        <ChatBox token={token} userId={userId} firstName={firstName} />
+      </div>
     </div>
   );
 }
