@@ -34,28 +34,34 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
     socket.on('disconnect', () => setConnected(false));
 
     socket.on('receive_message', (message: ChatMessage) => {
-      if (message.roomId === currentRoomIdRef.current) {
-        // กรณีที่ 1: แอดมินกำลังเปิดห้องนี้อยู่ -> อัปเดตแชทโชว์บนจอ
+      const isFromAdmin = String(message.senderId) === String(adminId);
+      const isCurrentRoom = message.roomId === currentRoomIdRef.current;
+
+      if (isCurrentRoom) {
         setMessages((prev) => [...prev, message]);
 
-        // ถ้าลูกค้าเป็นคนส่งมาตอนเราเปิดจออยู่ ก็บอกหลังบ้านเลยว่าเราอ่านแล้ว
-        if (message.senderId !== adminId) {
+        if (!isFromAdmin) {
           socket.emit('mark_read', { roomId: message.roomId });
         }
-      } else {
-        // 🌟 [แก้ใหม่ 2] กรณีที่ 2: แอดมินไม่ได้เปิดห้องนี้อยู่ -> เพิ่มตัวเลขแจ้งเตือน (Unread) + อัปเดตข้อความล่าสุด
-        setLocalRooms((prevRooms) =>
-          prevRooms.map((r) =>
-            r.id === message.roomId
-              ? {
-                  ...r,
-                  _count: { messages: (r._count?.messages || 0) + 1 },
-                  messages: [message], // อัปเดตพรีวิวข้อความล่าสุดด้านซ้ายมือ
-                }
-              : r,
-          ),
-        );
       }
+
+      setLocalRooms((prevRooms) =>
+        prevRooms.map((r) => {
+          if (r.id === message.roomId) {
+            return {
+              ...r,
+              _count: {
+                messages:
+                  isFromAdmin || isCurrentRoom
+                    ? r._count?.messages || 0
+                    : (r._count?.messages || 0) + 1,
+              },
+              messages: [message], // ดึงข้อความล่าสุดมาทำพรีวิว
+            };
+          }
+          return r;
+        }),
+      );
     });
 
     return () => disconnectChatSocket();
@@ -117,7 +123,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
   };
 
   return (
-    <div className="flex gap-4 h-[600px]">
+    <div className="flex gap-4 h-150">
       {/* Room list */}
       <div
         className="w-64 shrink-0 flex flex-col rounded-2xl overflow-hidden"
