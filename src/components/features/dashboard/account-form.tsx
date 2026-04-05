@@ -4,7 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { useTransition } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldError,
@@ -23,18 +22,10 @@ type AccountFormProps = {
   user: User;
 };
 
-const inputClass = `
-  px-3 py-2.5 rounded-xl text-lg w-full
-  bg-white/5 text-[#f5f0e8]
-  border border-[rgba(201,162,39,0.2)]
-  placeholder:text-white/20 font-['Sarabun']
-  transition-all duration-200
-  focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-  focus-visible:border-[rgba(201,162,39,0.55)]
-`;
+const inputClass =
+  "px-3 py-2.5 rounded-xl text-sm w-full bg-white/5 text-cream border border-gold/20 placeholder:text-white/20 font-sarabun transition-all duration-200 focus-visible:ring-0 focus-visible:border-gold/55 [color-scheme:dark]";
 
-const labelClass =
-  "text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide";
+const labelClass = "text-xs text-cream/55 font-sarabun tracking-wide";
 
 export default function AccountForm({ user }: AccountFormProps) {
   const [isPending, startTransition] = useTransition();
@@ -56,7 +47,6 @@ export default function AccountForm({ user }: AccountFormProps) {
 
   const onSubmit = (data: UpdateProfileInput) => {
     startTransition(async () => {
-      console.log("data", data);
       const res = await updateProfile(data);
       if (!res.success) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
@@ -67,13 +57,13 @@ export default function AccountForm({ user }: AccountFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && (
-        <p className="mb-3 text-xs text-red-400 font-['Sarabun']">
+        <p className="mb-3 text-xs text-red-400 font-sarabun">
           {errors.root.message}
         </p>
       )}
 
       <FieldGroup className="flex flex-col gap-4">
-        {/* Email — readonly */}
+        {/* Email */}
         <Field className="flex flex-col gap-1.5">
           <label className={labelClass}>อีเมล</label>
           <input
@@ -83,7 +73,7 @@ export default function AccountForm({ user }: AccountFormProps) {
           />
         </Field>
 
-        {/* firstName + lastName */}
+        {/* ชื่อ + นามสกุล */}
         <div className="flex gap-3">
           <Controller
             control={control}
@@ -105,7 +95,7 @@ export default function AccountForm({ user }: AccountFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -131,7 +121,7 @@ export default function AccountForm({ user }: AccountFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -139,7 +129,7 @@ export default function AccountForm({ user }: AccountFormProps) {
           />
         </div>
 
-        {/* DOB + Gender */}
+        {/* วันเกิด + เพศ */}
         <div className="flex gap-3">
           <Controller
             control={control}
@@ -157,18 +147,16 @@ export default function AccountForm({ user }: AccountFormProps) {
                   id={field.name}
                   type="date"
                   className={inputClass}
-                  style={{ colorScheme: "dark" }}
                 />
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
             )}
           />
-
           <Controller
             control={control}
             name="gender"
@@ -180,12 +168,7 @@ export default function AccountForm({ user }: AccountFormProps) {
                 <FieldLabel htmlFor={field.name} className={labelClass}>
                   เพศ
                 </FieldLabel>
-                <select
-                  {...field}
-                  id={field.name}
-                  className="px-3 py-2.5 rounded-xl text-lg w-full bg-[rgba(11,8,42,0.95)] text-[#f5f0e8] border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
-                  style={{ colorScheme: "dark" }}
-                >
+                <select {...field} id={field.name} className={inputClass}>
                   <option value="MALE">ชาย</option>
                   <option value="FEMALE">หญิง</option>
                   <option value="OTHER">อื่นๆ</option>
@@ -193,7 +176,7 @@ export default function AccountForm({ user }: AccountFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -201,13 +184,10 @@ export default function AccountForm({ user }: AccountFormProps) {
           />
         </div>
 
-        <Button
+        <button
+          type="submit"
           disabled={isPending}
-          className="w-full py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed mt-2"
-          style={{
-            background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
-            boxShadow: isPending ? "none" : "0 4px 20px rgba(201,162,39,0.35)",
-          }}
+          className="w-full py-2.5 rounded-xl font-sarabun font-semibold text-sm text-navy bg-gradient-to-br from-gold to-gold-dark shadow-[0_4px_20px_rgba(201,162,39,0.35)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 mt-2"
         >
           {isPending ? (
             <span className="flex items-center justify-center gap-2">
@@ -217,7 +197,7 @@ export default function AccountForm({ user }: AccountFormProps) {
           ) : (
             "อัปเดตข้อมูล"
           )}
-        </Button>
+        </button>
       </FieldGroup>
     </form>
   );

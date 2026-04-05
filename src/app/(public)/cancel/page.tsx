@@ -8,7 +8,7 @@ export default function CancelPage() {
         <XCircle size={56} className="text-red-400/70" />
 
         <div>
-          <h1 className="font-sarabun text-xl text-[--color-cream] mb-2">
+          <h1 className="font-sarabun text-xl text-cream mb-2">
             ยกเลิกการชำระเงิน
           </h1>
 
@@ -20,7 +20,7 @@ export default function CancelPage() {
         <div className="flex flex-col gap-2 w-full">
           <Link
             href="/cart"
-            className="w-full py-3 rounded-xl text-lg font-sarabun font-semibold text-[--color-navy] text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] bg-[linear-gradient(135deg,#c9a227_0%,#7a5c0a_100%)] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
+            className="w-full py-3 rounded-xl text-lg font-sarabun font-semibold text-navy text-center transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] bg-[linear-gradient(135deg,#c9a227_0%,#7a5c0a_100%)] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
           >
             กลับไปที่ตะกร้า
           </Link>

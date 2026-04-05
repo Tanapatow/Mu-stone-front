@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { Send } from 'lucide-react';
-import type { ChatRoom, ChatMessage } from '@/lib/api/chat/chat.type';
-import { getChatHistory } from '@/lib/actions/chat.action';
-import { getChatSocket, disconnectChatSocket } from '@/lib/socket/chat-socket';
-import type { Socket } from 'socket.io-client';
+import { useEffect, useRef, useState } from "react";
+import { Send } from "lucide-react";
+import type { ChatRoom, ChatMessage } from "@/lib/api/chat/chat.type";
+import { getChatHistory } from "@/lib/actions/chat.action";
+import { getChatSocket, disconnectChatSocket } from "@/lib/socket/chat-socket";
+import type { Socket } from "socket.io-client";
 
 type AdminChatProps = {
   rooms: ChatRoom[];
@@ -19,7 +19,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
 
   const [selectedRoom, setSelectedRoom] = useState<ChatRoom | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [connected, setConnected] = useState(false);
   const socketRef = useRef<Socket | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -30,10 +30,10 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
     const socket = getChatSocket(token);
     socketRef.current = socket;
 
-    socket.on('connect', () => setConnected(true));
-    socket.on('disconnect', () => setConnected(false));
+    socket.on("connect", () => setConnected(true));
+    socket.on("disconnect", () => setConnected(false));
 
-    socket.on('receive_message', (message: ChatMessage) => {
+    socket.on("receive_message", (message: ChatMessage) => {
       const isFromAdmin = String(message.senderId) === String(adminId);
       const isCurrentRoom = message.roomId === currentRoomIdRef.current;
 
@@ -41,7 +41,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
         setMessages((prev) => [...prev, message]);
 
         if (!isFromAdmin) {
-          socket.emit('mark_read', { roomId: message.roomId });
+          socket.emit("mark_read", { roomId: message.roomId });
         }
       }
 
@@ -68,7 +68,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
   }, [token, adminId]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSelectRoom = async (room: ChatRoom) => {
@@ -86,14 +86,14 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
     setMessages(history);
 
     if (socketRef.current) {
-      socketRef.current.emit('join_chat', { userId: room.userId });
-      socketRef.current.emit('mark_read', { roomId: room.id });
+      socketRef.current.emit("join_chat", { userId: room.userId });
+      socketRef.current.emit("mark_read", { roomId: room.id });
     }
   };
 
   const handleSend = () => {
     if (!input.trim() || !selectedRoom || !socketRef.current) return;
-    socketRef.current.emit('send_message', {
+    socketRef.current.emit("send_message", {
       roomId: selectedRoom.id,
       content: input.trim(),
     });
@@ -112,11 +112,11 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
       ),
     );
 
-    setInput('');
+    setInput("");
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
@@ -129,18 +129,16 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
         className="w-64 shrink-0 flex flex-col rounded-2xl overflow-hidden"
         style={{
           background:
-            'linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)',
-          border: '1px solid rgba(201,162,39,0.15)',
+            "linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)",
+          border: "1px solid rgba(201,162,39,0.15)",
         }}
       >
         <div className="px-4 py-3 border-b border-white/10">
-          <p className="text-xs text-white/40 font-['Sarabun']">
-            ห้องแชททั้งหมด
-          </p>
+          <p className="text-xs text-white/40 font-sarabun">ห้องแชททั้งหมด</p>
         </div>
         <div className="flex-1 overflow-y-auto">
           {localRooms.length === 0 && (
-            <p className="text-xs text-white/20 font-['Sarabun'] text-center py-6">
+            <p className="text-xs text-white/20 font-sarabun text-center py-6">
               ยังไม่มีห้องแชท
             </p>
           )}
@@ -155,19 +153,19 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
                 className="w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 border-b border-white/5"
                 style={{
                   background: isSelected
-                    ? 'rgba(201,162,39,0.1)'
-                    : 'transparent',
+                    ? "rgba(201,162,39,0.1)"
+                    : "transparent",
                 }}
               >
                 <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center text-xs text-gold font-semibold shrink-0">
                   {room.user.firstName[0]}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-cream font-['Sarabun'] truncate">
+                  <p className="text-sm text-cream font-sarabun truncate">
                     {room.user.firstName} {room.user.lastName}
                   </p>
-                  <p className="text-xs text-white/30 font-['Sarabun'] truncate">
-                    {room.messages[0]?.content ?? 'ยังไม่มีข้อความ'}
+                  <p className="text-xs text-white/30 font-sarabun truncate">
+                    {room.messages[0]?.content ?? "ยังไม่มีข้อความ"}
                   </p>
                 </div>
                 {unread > 0 && (
@@ -186,13 +184,13 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
         className="flex-1 flex flex-col rounded-2xl overflow-hidden"
         style={{
           background:
-            'linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)',
-          border: '1px solid rgba(201,162,39,0.15)',
+            "linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)",
+          border: "1px solid rgba(201,162,39,0.15)",
         }}
       >
         {!selectedRoom ? (
           <div className="flex-1 flex items-center justify-center">
-            <p className="text-white/20 font-['Sarabun'] text-sm">
+            <p className="text-white/20 font-sarabun text-sm">
               เลือกห้องแชทเพื่อเริ่มสนทนา
             </p>
           </div>
@@ -204,15 +202,15 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
                 {selectedRoom.user.firstName[0]}
               </div>
               <div>
-                <p className="text-sm font-semibold text-cream font-['Sarabun']">
+                <p className="text-sm font-semibold text-cream font-sarabun">
                   {selectedRoom.user.firstName} {selectedRoom.user.lastName}
                 </p>
-                <p className="text-xs text-white/40 font-['Sarabun']">
+                <p className="text-xs text-white/40 font-sarabun">
                   {selectedRoom.user.email}
                 </p>
               </div>
               <div
-                className={`ml-auto w-2 h-2 rounded-full ${connected ? 'bg-green-400' : 'bg-white/20'}`}
+                className={`ml-auto w-2 h-2 rounded-full ${connected ? "bg-green-400" : "bg-white/20"}`}
               />
             </div>
 
@@ -221,41 +219,41 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
               {messages.map((msg) => {
                 const isAdmin = msg.senderId === adminId;
                 const time = new Date(msg.createdAt).toLocaleTimeString(
-                  'th-TH',
+                  "th-TH",
                   {
-                    hour: '2-digit',
-                    minute: '2-digit',
+                    hour: "2-digit",
+                    minute: "2-digit",
                   },
                 );
                 return (
                   <div
                     key={msg.id}
-                    className={`flex gap-2 ${isAdmin ? 'flex-row-reverse' : 'flex-row'}`}
+                    className={`flex gap-2 ${isAdmin ? "flex-row-reverse" : "flex-row"}`}
                   >
                     <div
-                      className={`flex flex-col gap-1 max-w-[70%] ${isAdmin ? 'items-end' : 'items-start'}`}
+                      className={`flex flex-col gap-1 max-w-[70%] ${isAdmin ? "items-end" : "items-start"}`}
                     >
                       <div
-                        className="px-4 py-2.5 rounded-2xl text-sm font-['Sarabun'] leading-relaxed"
+                        className="px-4 py-2.5 rounded-2xl text-sm font-sarabun leading-relaxed"
                         style={
                           isAdmin
                             ? {
                                 background:
-                                  'linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)',
-                                color: '#0b0e2a',
-                                borderRadius: '16px 16px 4px 16px',
+                                  "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
+                                color: "#0b0e2a",
+                                borderRadius: "16px 16px 4px 16px",
                               }
                             : {
-                                background: 'rgba(255,255,255,0.06)',
-                                border: '1px solid rgba(255,255,255,0.08)',
-                                color: '#f5f0e8',
-                                borderRadius: '16px 16px 16px 4px',
+                                background: "rgba(255,255,255,0.06)",
+                                border: "1px solid rgba(255,255,255,0.08)",
+                                color: "#f5f0e8",
+                                borderRadius: "16px 16px 16px 4px",
                               }
                         }
                       >
                         {msg.content}
                       </div>
-                      <p className="text-[10px] text-white/25 font-['Sarabun']">
+                      <p className="text-[10px] text-white/25 font-sarabun">
                         {time}
                       </p>
                     </div>
@@ -273,7 +271,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
                 onKeyDown={handleKeyDown}
                 placeholder="พิมพ์ข้อความ..."
                 rows={1}
-                className="flex-1 resize-none bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-cream font-['Sarabun'] placeholder:text-white/20 focus:outline-none focus:border-gold/40 transition-colors"
+                className="flex-1 resize-none bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-cream font-sarabun placeholder:text-white/20 focus:outline-none focus:border-gold/40 transition-colors"
               />
               <button
                 onClick={handleSend}
@@ -281,7 +279,7 @@ export default function AdminChat({ rooms, token, adminId }: AdminChatProps) {
                 className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
                 style={{
                   background:
-                    'linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)',
+                    "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
                 }}
               >
                 <Send size={15} className="text-navy" />

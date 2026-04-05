@@ -45,13 +45,11 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
         className="px-5 py-4"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
       >
-        <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">
-          ยอดที่ต้องชำระ
-        </p>
-        <p className="text-2xl font-bold font-['Sarabun'] text-[#c9a227] mt-1">
+        <p className="font-sarabun text-lg text-[#f5f0e8]">ยอดที่ต้องชำระ</p>
+        <p className="text-2xl font-bold font-sarabun text-[#c9a227] mt-1">
           ฿{Number(cart?.totalPrice ?? 0).toLocaleString()}
         </p>
-        <p className="text-xs text-white/30 font-['Sarabun'] mt-0.5">
+        <p className="text-xs text-white/30 font-sarabun mt-0.5">
           ยืนยันคำสั่งซื้อ
         </p>
       </div>
@@ -64,27 +62,25 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-1.5">
             <MapPin size={13} className="text-[#c9a227]" />
-            <p className="text-xs text-white/40 font-['Sarabun']">
-              ที่อยู่จัดส่ง
-            </p>
+            <p className="text-xs text-white/40 font-sarabun">ที่อยู่จัดส่ง</p>
           </div>
         </div>
 
         {address ? (
           <div className="flex flex-col gap-0.5">
-            <p className="text-lg font-semibold font-['Sarabun'] text-[#f5f0e8]">
+            <p className="text-lg font-semibold font-sarabun text-[#f5f0e8]">
               {address.receiverName} · {address.phone}
             </p>
-            <p className="text-xs text-white/50 font-['Sarabun']">
+            <p className="text-xs text-white/50 font-sarabun">
               {address.addressLine1}
             </p>
-            <p className="text-xs text-white/50 font-['Sarabun']">
+            <p className="text-xs text-white/50 font-sarabun">
               {address.subDistrict} {address.district} {address.province}{" "}
               {address.postalCode}
             </p>
           </div>
         ) : (
-          <p className="text-xs text-white/30 font-['Sarabun']">
+          <p className="text-xs text-white/30 font-sarabun">
             ยังไม่มีที่อยู่จัดส่ง กรุณากรอกด้านซ้าย
           </p>
         )}
@@ -97,7 +93,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
       >
         <div className="flex items-center gap-1.5 mb-2">
           <CreditCard size={13} className="text-[#c9a227]" />
-          <p className="text-xs text-white/40 font-['Sarabun']">วิธีชำระเงิน</p>
+          <p className="text-xs text-white/40 font-sarabun">วิธีชำระเงิน</p>
         </div>
         <div
           className="flex items-center gap-3 p-3 rounded-lg"
@@ -109,7 +105,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
           <div className="w-8 h-5 bg-white rounded flex items-center justify-center shrink-0">
             <span className="text-[#635bff] font-bold text-[9px]">X</span>
           </div>
-          <p className="text-xs text-white/60 font-['Sarabun']">
+          <p className="text-xs text-white/60 font-sarabun">
             บัตรเครดิต / เดบิต / PromptPay
           </p>
         </div>
@@ -125,7 +121,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
             {cart.items.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between text-xs font-['Sarabun'] text-white/40"
+                className="flex justify-between text-xs font-sarabun text-white/40"
               >
                 <span className="truncate flex-1 mr-2">
                   {item.product.name} x{item.quantity}
@@ -141,7 +137,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
           </div>
 
           <div
-            className="flex justify-between text-lg font-['Sarabun'] mt-3 pt-3"
+            className="flex justify-between text-lg font-sarabun mt-3 pt-3"
             style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
           >
             <span className="text-white/50">ยอดรวม</span>
@@ -155,14 +151,14 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
       {/* Checkout button */}
       <div className="px-5 py-4 flex flex-col gap-2">
         {error && (
-          <p className="text-xs text-red-400 font-['Sarabun'] text-center">
+          <p className="text-xs text-red-400 font-sarabun text-center">
             {error}
           </p>
         )}
         <Button
           onClick={handleCheckout}
           disabled={!address || !hasItems || isPending}
-          className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-3 rounded-xl border-0 font-sarabun font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
           style={{
             background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
             boxShadow:
@@ -173,7 +169,7 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
         </Button>
 
         {!address && (
-          <p className="text-xs text-white/30 font-['Sarabun'] text-center">
+          <p className="text-xs text-white/30 font-sarabun text-center">
             กรุณากรอกที่อยู่จัดส่งก่อนชำระเงิน
           </p>
         )}

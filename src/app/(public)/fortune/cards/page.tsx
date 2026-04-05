@@ -20,16 +20,10 @@ export default function CardPage() {
       />
 
       <div className="mb-8 p-8 text-center bg-black/40">
-        <h1
-          className="font-cinzel-d font-bold leading-[1.1] text-[clamp(2.2rem,4.5vw,3.6rem)] mb-[1.4rem] opacity-0 animate-fade-slide-in drop-shadow-[0_0_40px_rgba(201,162,39,0.5)] [animation-delay:0.4s]"
-          style={{
-            color: "var(--color-gold)",
-            textShadow: "0 0 28px rgba(201, 162, 39, 0.45)",
-          }}
-        >
+        <h1 className="font-cinzel-d font-bold leading-[1.1] text-[clamp(2.2rem,4.5vw,3.6rem)] mb-[1.4rem] opacity-0 animate-fade-slide-in drop-shadow-[0_0_40px_rgba(201,162,39,0.5)] [animation-delay:0.4s] text-gold [text-shadow:0_0_28px_rgba(201,162,39,0.45)]">
           The Celestial Spread
         </h1>
-        <h2 className="text-gray-300/80 font-semibold mt-4 font-sarabun">
+        <h2 className="text-cream/80 font-semibold mt-4 font-sarabun">
           จดจ่อพลังของคุณไปที่คำถามของคุณ จากกระจกสะท้อนวิญญาณทั้ง 78 ใบ
           จงเลือกไพ่ที่เรียกหาคุณ
         </h2>

@@ -16,8 +16,9 @@ type AccountFormProps = {
 };
 
 const inputClass =
-  "px-3 py-2.5 rounded-xl text-sm w-full bg-white/5 text-cream border border-gold/20 placeholder:text-white/20 font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-gold/55 colorScheme-dark";
-const labelClass = "text-xs text-white/55 font-['Sarabun'] tracking-wide";
+  "px-3 py-2.5 rounded-xl text-sm w-full bg-white/5 text-cream border border-gold/20 placeholder:text-white/20 font-sarabun transition-all duration-200 focus:outline-none focus:border-gold/55 [color-scheme:dark]";
+
+const labelClass = "text-xs text-white/55 font-sarabun tracking-wide";
 
 export default function AdminAccount({ user }: AccountFormProps) {
   const [isPending, startTransition] = useTransition();
@@ -49,7 +50,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       {errors.root && (
-        <p className="text-xs text-red-400 font-['Sarabun']">
+        <p className="text-xs text-red-400 font-sarabun">
           {errors.root.message}
         </p>
       )}
@@ -64,7 +65,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
         />
       </div>
 
-      {/* firstName + lastName */}
+      {/* ชื่อ + นามสกุล */}
       <div className="flex gap-3">
         <Controller
           control={control}
@@ -74,7 +75,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
               <label className={labelClass}>ชื่อ</label>
               <input {...field} placeholder="ชื่อ" className={inputClass} />
               {fieldState.invalid && (
-                <p className="text-xs text-red-400 font-['Sarabun']">
+                <p className="text-xs text-red-400 font-sarabun">
                   {fieldState.error?.message}
                 </p>
               )}
@@ -89,7 +90,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
               <label className={labelClass}>นามสกุล</label>
               <input {...field} placeholder="นามสกุล" className={inputClass} />
               {fieldState.invalid && (
-                <p className="text-xs text-red-400 font-['Sarabun']">
+                <p className="text-xs text-red-400 font-sarabun">
                   {fieldState.error?.message}
                 </p>
               )}
@@ -98,7 +99,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
         />
       </div>
 
-      {/* DOB + Gender */}
+      {/* วันเกิด + เพศ */}
       <div className="flex gap-3">
         <Controller
           control={control}
@@ -106,13 +107,9 @@ export default function AdminAccount({ user }: AccountFormProps) {
           render={({ field, fieldState }) => (
             <div className="flex flex-col gap-1.5 flex-1">
               <label className={labelClass}>วันเกิด</label>
-              <input
-                {...field}
-                type="date"
-                className={`${inputClass} [color-scheme:dark]`}
-              />
+              <input {...field} type="date" className={inputClass} />
               {fieldState.invalid && (
-                <p className="text-xs text-red-400 font-['Sarabun']">
+                <p className="text-xs text-red-400 font-sarabun">
                   {fieldState.error?.message}
                 </p>
               )}
@@ -125,16 +122,13 @@ export default function AdminAccount({ user }: AccountFormProps) {
           render={({ field, fieldState }) => (
             <div className="flex flex-col gap-1.5 flex-1">
               <label className={labelClass}>เพศ</label>
-              <select
-                {...field}
-                className={`${inputClass} [color-scheme:dark]`}
-              >
+              <select {...field} className={inputClass}>
                 <option value="MALE">ชาย</option>
                 <option value="FEMALE">หญิง</option>
                 <option value="OTHER">อื่นๆ</option>
               </select>
               {fieldState.invalid && (
-                <p className="text-xs text-red-400 font-['Sarabun']">
+                <p className="text-xs text-red-400 font-sarabun">
                   {fieldState.error?.message}
                 </p>
               )}
@@ -146,7 +140,7 @@ export default function AdminAccount({ user }: AccountFormProps) {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full py-2.5 rounded-xl font-['Sarabun'] font-semibold text-sm text-navy bg-gradient-to-br from-gold to-[#7a5c0a] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 mt-2"
+        className="w-full py-2.5 rounded-xl font-sarabun font-semibold text-sm text-navy bg-gradient-to-br from-gold to-gold-dark hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 mt-2"
       >
         {isPending ? (
           <span className="flex items-center justify-center gap-2">

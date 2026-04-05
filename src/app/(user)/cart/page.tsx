@@ -23,7 +23,7 @@ export default async function CartPage() {
         <ShoppingBag size={64} className="text-white/10" />
 
         <div className="text-center">
-          <p className="font-sarabun text-xl text-[--color-cream]/50 mb-2">
+          <p className="font-sarabun text-xl text-cream/50 mb-2">
             ตะกร้าว่างเปล่า
           </p>
 
@@ -34,7 +34,7 @@ export default async function CartPage() {
 
         <Link
           href="/shop"
-          className="px-6 py-2.5 rounded-xl text-lg font-sarabun font-semibold text-[--color-navy] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] bg-[linear-gradient(135deg,#c9a227_0%,#7a5c0a_100%)] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
+          className="px-6 py-2.5 rounded-xl text-lg font-sarabun font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] bg-[linear-gradient(135deg,#c9a227_0%,#7a5c0a_100%)] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
         >
           เลือกซื้อสินค้า
         </Link>
@@ -58,7 +58,7 @@ export default async function CartPage() {
           <CartList cart={cart} />
 
           <div className="card-glass p-5">
-            <p className="font-sarabun text-lg text-[--color-cream] mb-4">
+            <p className="font-sarabun text-lg text-cream mb-4">
               {address ? "ที่อยู่จัดส่ง" : "เพิ่มที่อยู่จัดส่ง"}
             </p>
 

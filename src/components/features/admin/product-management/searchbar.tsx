@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Search } from 'lucide-react';
-import { useDebounce } from 'use-debounce';
+import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
+import { useDebounce } from "use-debounce";
+import { useEffect } from "react";
 
 type Props = {
   placeholder?: string;
@@ -11,49 +12,34 @@ type Props = {
 };
 
 export default function SearchBar({
-  placeholder = 'ค้นหา...',
+  placeholder = "ค้นหาสินค้า...",
   delay = 500,
 }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // state จาก URL
-  const [search, setSearch] = useState(searchParams.get('search') || '');
-
-  // 🔥 ใช้ lib debounce
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [debouncedSearch] = useDebounce(search, delay);
 
-  // 👉 update URL
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString());
-
     if (debouncedSearch) {
-      params.set('search', debouncedSearch);
+      params.set("search", debouncedSearch);
     } else {
-      params.delete('search');
+      params.delete("search");
     }
-
     router.replace(`?${params.toString()}`);
   }, [debouncedSearch]);
 
-  // 👉 sync back/forward
-  useEffect(() => {
-    const urlSearch = searchParams.get('search') || '';
-    setSearch(urlSearch);
-  }, [searchParams]);
-
   return (
-    <div className="mb-4 rounded-[20px] bg-white px-5 py-4">
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-5 top-1/2 h-6 w-6 -translate-y-1/2 text-neutral-500" />
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder={placeholder}
-          className="h-14 w-full rounded-[12px] border border-neutral-500 bg-[#f5f5f5] pl-14 pr-4 text-[17px] text-neutral-800 outline-none placeholder:text-neutral-400"
-        />
-      </div>
+    <div className="relative">
+      <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder={placeholder}
+        className="h-11 w-full rounded-xl bg-white/5 border border-gold/20 pl-10 pr-4 text-sm text-cream font-sarabun placeholder:text-white/20 outline-none focus:border-gold/55 transition-all duration-200"
+      />
     </div>
   );
 }

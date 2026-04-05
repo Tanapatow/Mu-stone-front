@@ -223,18 +223,6 @@
 }
 /* ต่อท้าย globals.css เดิม — ห้ามเพิ่ม @import */
 
-:root {
-  --gold: #c9a227;
-  --gold-light: #e8c96a;
-  --gold-dark: #7a5c0a;
-  --navy: #0b0e2a;
-  --teal: #0fcfcf;
-  --purple: #4a1a6e;
-  --cream: #f5f0e8;
-}
-:root {
-  --color-gold: #c9a227;
-}
 @layer components {
   .dashboard-header {
     @apply mb-8 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10;

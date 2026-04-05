@@ -14,17 +14,14 @@ export const login = async (input: LoginInput): Promise<ActionResult> => {
   }
 
   const session = await auth();
-  if (session?.user?.role === "ADMIN") {
-    redirect("/admin/dashboard");
-  }
+  if (session?.user?.role === "ADMIN") redirect("/admin/dashboard");
   redirect("/");
 };
+
 export const register = async (input: RegisterInput): Promise<ActionResult> => {
   try {
-    console.log("input from action", input);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...payload } = input;
-    console.log("payload from action", payload);
+    void confirmPassword;
     await authService.register(payload);
   } catch (error) {
     console.error("register error", error);
@@ -34,14 +31,17 @@ export const register = async (input: RegisterInput): Promise<ActionResult> => {
 };
 
 export const logout = async () => {
-  "use server"; // มีอยู่แล้วที่ top ของไฟล์ ไม่ต้องเพิ่ม
   await signOut({ redirectTo: "/" });
 };
+
 export const forgotPassword = async (email: string): Promise<ActionResult> => {
+  console.log("forgotPassword action called with email:", email);
   try {
-    await authService.forgotPassword(email);
+    const result = await authService.forgotPassword(email);
+    console.log("forgotPassword result:", result);
     return { success: true };
-  } catch {
+  } catch (e) {
+    console.log("forgotPassword error:", e);
     return { success: false, code: "FORGOT_PASSWORD_FAILED" };
   }
 };

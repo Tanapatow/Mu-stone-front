@@ -1,8 +1,9 @@
-'use client';
-import ProductCard from './product-card';
-import { Product } from '@/lib/api/admin/admin.type';
-import { deleteProduct } from '@/lib/actions/admin.action';
-import SearchBar from './searchbar';
+"use client";
+
+import ProductCard from "./product-card";
+import { Product } from "@/lib/api/admin/admin.type";
+import { deleteProduct } from "@/lib/actions/admin.action";
+import SearchBar from "./searchbar";
 
 type ProductProps = {
   products: Product[];
@@ -14,13 +15,10 @@ export default function ProductList({ products }: ProductProps) {
   };
 
   return (
-    <section className="py-4 px-8">
-      <div className="rounded-4xl bg-white">
-        <SearchBar />
-      </div>
-
+    <div className="flex flex-col gap-4">
+      <SearchBar />
       {products.length === 0 ? (
-        <div className="rounded-[20px] bg-white py-16 text-center text-neutral-500">
+        <div className="card-glass py-16 text-center text-white/40 font-sarabun">
           ไม่พบสินค้า
         </div>
       ) : (
@@ -34,6 +32,6 @@ export default function ProductList({ products }: ProductProps) {
           ))}
         </div>
       )}
-    </section>
+    </div>
   );
 }

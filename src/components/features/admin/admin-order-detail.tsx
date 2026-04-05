@@ -72,16 +72,14 @@ export default function AdminOrderDetail({
           }}
         >
           <div>
-            <p className="font-['Cinzel_Decorative'] text-sm text-cream">
+            <p className="font-cinzel-d text-sm text-cream">
               #{order.id.slice(0, 8).toUpperCase()}
             </p>
-            <p className="text-xs text-white/30 font-['Sarabun'] mt-0.5">
-              {date}
-            </p>
+            <p className="text-xs text-white/30 font-sarabun mt-0.5">{date}</p>
           </div>
           <div className="flex items-center gap-3">
             <span
-              className="px-3 py-1 rounded-full text-xs font-['Sarabun'] font-semibold"
+              className="px-3 py-1 rounded-full text-xs font-sarabun font-semibold"
               style={{
                 background: statusConfig.bg,
                 color: statusConfig.color,
@@ -101,7 +99,7 @@ export default function AdminOrderDetail({
 
         <div className="p-5 flex flex-col gap-5">
           {error && (
-            <p className="text-xs text-red-400 font-['Sarabun']">{error}</p>
+            <p className="text-xs text-red-400 font-sarabun">{error}</p>
           )}
 
           {/* Status update */}
@@ -112,7 +110,7 @@ export default function AdminOrderDetail({
               border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-3">
+            <p className="text-xs text-white/40 font-sarabun mb-3">
               อัปเดตสถานะ
             </p>
             <div className="flex gap-2 flex-wrap mb-3">
@@ -124,7 +122,7 @@ export default function AdminOrderDetail({
                     key={status}
                     onClick={() => setPendingStatus(status)}
                     disabled={currentStatus === "CANCELLED"}
-                    className="px-3 py-1.5 rounded-lg text-xs font-['Sarabun'] font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="px-3 py-1.5 rounded-lg text-xs font-sarabun font-semibold transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                     style={{
                       background: isSelected
                         ? config.bg
@@ -146,7 +144,7 @@ export default function AdminOrderDetail({
               <button
                 onClick={() => handleStatusChange(pendingStatus)}
                 disabled={isPending}
-                className="w-full py-2 rounded-xl text-sm font-['Sarabun'] font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40"
+                className="w-full py-2 rounded-xl text-sm font-sarabun font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-40"
                 style={{
                   background:
                     "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
@@ -165,13 +163,13 @@ export default function AdminOrderDetail({
               border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-2">
+            <p className="text-xs text-white/40 font-sarabun mb-2">
               ข้อมูลลูกค้า
             </p>
-            <p className="text-sm font-semibold text-cream font-['Sarabun']">
+            <p className="text-sm font-semibold text-cream font-sarabun">
               {order.user?.firstName} {order.user?.lastName}
             </p>
-            <p className="text-xs text-white/40 font-['Sarabun']">
+            <p className="text-xs text-white/40 font-sarabun">
               {order.user?.email}
             </p>
           </div>
@@ -184,11 +182,11 @@ export default function AdminOrderDetail({
               border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-2">
+            <p className="text-xs text-white/40 font-sarabun mb-2">
               ที่อยู่จัดส่ง
             </p>
             {order.shippingAddressSnapshot.split("\n").map((line, i) => (
-              <p key={i} className="text-xs text-white/60 font-['Sarabun']">
+              <p key={i} className="text-xs text-white/60 font-sarabun">
                 {line}
               </p>
             ))}
@@ -196,7 +194,7 @@ export default function AdminOrderDetail({
 
           {/* Items */}
           <div>
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-3">
+            <p className="text-xs text-white/40 font-sarabun mb-3">
               รายการสินค้า ({order.items.length} รายการ)
             </p>
             <div className="flex flex-col gap-2">
@@ -224,14 +222,14 @@ export default function AdminOrderDetail({
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-cream font-['Sarabun'] truncate">
+                    <p className="text-sm text-cream font-sarabun truncate">
                       {item.product.name}
                     </p>
-                    <p className="text-xs text-white/40 font-['Sarabun']">
+                    <p className="text-xs text-white/40 font-sarabun">
                       ฿{Number(item.price).toLocaleString()} x {item.quantity}
                     </p>
                   </div>
-                  <p className="text-sm font-semibold text-gold font-['Sarabun'] shrink-0">
+                  <p className="text-sm font-semibold text-gold font-sarabun shrink-0">
                     ฿{(Number(item.price) * item.quantity).toLocaleString()}
                   </p>
                 </div>
@@ -247,10 +245,8 @@ export default function AdminOrderDetail({
               border: "1px solid rgba(201,162,39,0.15)",
             }}
           >
-            <p className="text-sm text-white/50 font-['Sarabun']">
-              ยอดรวมทั้งหมด
-            </p>
-            <p className="text-lg font-bold text-gold font-['Sarabun']">
+            <p className="text-sm text-white/50 font-sarabun">ยอดรวมทั้งหมด</p>
+            <p className="text-lg font-bold text-gold font-sarabun">
               ฿{Number(order.totalAmount).toLocaleString()}
             </p>
           </div>

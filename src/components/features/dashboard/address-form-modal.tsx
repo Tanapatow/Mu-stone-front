@@ -4,7 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, X } from "lucide-react";
 import { useTransition } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldError,
@@ -21,18 +20,10 @@ type AddressFormModalProps = {
   onClose: () => void;
 };
 
-const inputClass = `
-  px-3 py-2.5 rounded-xl text-sm w-full
-  bg-white/5 text-cream
-  border border-[rgba(201,162,39,0.2)]
-  placeholder:text-white/20 font-['Sarabun']
-  transition-all duration-200
-  focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-  focus-visible:border-[rgba(201,162,39,0.55)]
-`;
+const inputClass =
+  "px-3 py-2.5 rounded-xl text-sm w-full bg-white/5 text-cream border border-gold/20 placeholder:text-white/20 font-sarabun transition-all duration-200 focus-visible:ring-0 focus-visible:border-gold/55";
 
-const labelClass =
-  "text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide";
+const labelClass = "text-xs text-cream/55 font-sarabun tracking-wide";
 
 export default function AddressFormModal({
   address,
@@ -75,21 +66,12 @@ export default function AddressFormModal({
   return (
     <>
       <div
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-lg rounded-2xl overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(160deg, rgba(26,20,74,0.98) 0%, rgba(11,8,42,0.99) 100%)",
-          border: "1px solid rgba(201,162,39,0.2)",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.7)",
-        }}
-      >
-        {/* Header */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[101] w-full max-w-lg rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.7)] bg-gradient-to-br from-[#1a144a]/98 to-[#0b082a]/99 border border-gold/20">
         <div className="flex items-center justify-between p-5 border-b border-white/10">
-          <p className="font-['Sarabun'] text-sm font-semibold text-cream">
+          <p className="font-sarabun text-sm font-semibold text-cream">
             {address ? "แก้ไขที่อยู่" : "เพิ่มที่อยู่ใหม่"}
           </p>
           <button
@@ -100,11 +82,10 @@ export default function AddressFormModal({
           </button>
         </div>
 
-        {/* Form */}
-        <div className="p-5">
+        <div className="p-5 max-h-[70vh] overflow-y-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
             {errors.root && (
-              <p className="mb-3 text-xs text-red-400 font-['Sarabun']">
+              <p className="mb-3 text-xs text-red-400 font-sarabun">
                 {errors.root.message}
               </p>
             )}
@@ -129,7 +110,7 @@ export default function AddressFormModal({
                     {fieldState.invalid && (
                       <FieldError
                         errors={[fieldState.error]}
-                        className="text-xs text-red-400 font-['Sarabun']"
+                        className="text-xs text-red-400 font-sarabun"
                       />
                     )}
                   </Field>
@@ -157,7 +138,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -183,7 +164,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -211,7 +192,7 @@ export default function AddressFormModal({
                     {fieldState.invalid && (
                       <FieldError
                         errors={[fieldState.error]}
-                        className="text-xs text-red-400 font-['Sarabun']"
+                        className="text-xs text-red-400 font-sarabun"
                       />
                     )}
                   </Field>
@@ -239,7 +220,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -265,7 +246,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -294,7 +275,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -320,7 +301,7 @@ export default function AddressFormModal({
                       {fieldState.invalid && (
                         <FieldError
                           errors={[fieldState.error]}
-                          className="text-xs text-red-400 font-['Sarabun']"
+                          className="text-xs text-red-400 font-sarabun"
                         />
                       )}
                     </Field>
@@ -332,17 +313,14 @@ export default function AddressFormModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="flex-1 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 transition-all"
+                  className="flex-1 py-2.5 rounded-xl text-sm font-sarabun text-white/40 border border-white/10 hover:text-white/70 transition-all"
                 >
                   ยกเลิก
                 </button>
-                <Button
+                <button
+                  type="submit"
                   disabled={isPending}
-                  className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all hover:-translate-y-0.5 disabled:opacity-40"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
-                  }}
+                  className="flex-1 py-2.5 rounded-xl font-sarabun font-semibold text-sm text-navy bg-gradient-to-br from-gold to-gold-dark hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   {isPending ? (
                     <span className="flex items-center justify-center gap-2">
@@ -352,7 +330,7 @@ export default function AddressFormModal({
                   ) : (
                     "บันทึกที่อยู่"
                   )}
-                </Button>
+                </button>
               </div>
             </FieldGroup>
           </form>

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { logout } from '@/lib/actions/auth.action';
+import { logout } from "@/lib/actions/auth.action";
 import {
   Archive,
   ArrowLeft,
@@ -9,34 +9,34 @@ import {
   LogOut,
   Package,
   UserPen,
-} from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   {
-    label: 'แดชบอร์ด',
-    href: '/admin/dashboard',
+    label: "แดชบอร์ด",
+    href: "/admin/dashboard",
     icon: LayoutDashboard,
   },
   {
-    label: 'แก้ไขโปรไฟล์',
-    href: '/admin/editprofile',
+    label: "แก้ไขโปรไฟล์",
+    href: "/admin/editprofile",
     icon: UserPen,
   },
   {
-    label: 'ประวัติ',
-    href: '/admin/history',
+    label: "ประวัติการสั้งซื้อ",
+    href: "/admin/history",
     icon: History,
   },
   {
-    label: 'สินค้า',
-    href: '/admin/product',
+    label: "สินค้า",
+    href: "/admin/product",
     icon: Package,
   },
   {
-    label: 'การจัดการผู้ใช้งาน',
-    href: '/admin/manage-user',
+    label: "การจัดการผู้ใช้งาน",
+    href: "/admin/manage-user",
     icon: Archive,
   },
 ];
@@ -58,11 +58,11 @@ export default function AdminSidebar() {
       <div
         className="px-3 py-2 rounded-xl mb-6 text-center"
         style={{
-          background: 'rgba(201,162,39,0.08)',
-          border: '1px solid rgba(201,162,39,0.2)',
+          background: "rgba(201,162,39,0.08)",
+          border: "1px solid rgba(201,162,39,0.2)",
         }}
       >
-        <p className="text-xs text-gold font-['Sarabun'] font-semibold">
+        <p className="text-xs text-gold font-sarabun font-semibold">
           Admin Panel
         </p>
       </div>
@@ -75,13 +75,13 @@ export default function AdminSidebar() {
             <Link
               key={href}
               href={href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-['Sarabun'] transition-all duration-200"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-sarabun transition-all duration-200"
               style={{
-                background: isActive ? 'rgba(201,162,39,0.1)' : 'transparent',
-                color: isActive ? '#c9a227' : 'rgba(245,240,232,0.45)',
+                background: isActive ? "rgba(201,162,39,0.1)" : "transparent",
+                color: isActive ? "#c9a227" : "rgba(245,240,232,0.45)",
                 borderLeft: isActive
-                  ? '2px solid #c9a227'
-                  : '2px solid transparent',
+                  ? "2px solid #c9a227"
+                  : "2px solid transparent",
               }}
             >
               <Icon size={15} />
@@ -96,7 +96,7 @@ export default function AdminSidebar() {
         <form action={logout}>
           <button
             type="submit"
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/30 hover:text-red-400 hover:bg-red-400/5 transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-sarabun text-white/30 hover:text-red-400 hover:bg-red-400/5 transition-all duration-200"
           >
             <LogOut size={15} />
             ออกจากระบบ
