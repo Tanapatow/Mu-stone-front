@@ -47,9 +47,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
 
   const onSubmit = (data: RegisterInput) => {
     startTransition(async () => {
-      console.log("data", data);
       const res = await register(data);
-      console.log("res", res);
       if (!res?.success) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
       } else {
@@ -61,7 +59,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && (
-        <p className="mb-3 text-xs text-red-400 font-['Sarabun'] text-center">
+        <p className="mb-3 text-xs text-red-400 font-sarabun text-center">
           {errors.root.message}
         </p>
       )}
@@ -94,7 +92,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -125,7 +123,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -159,7 +157,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
+                  className="text-xs text-red-400 font-sarabun"
                 />
               )}
             </Field>
@@ -192,7 +190,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
+                  className="text-xs text-red-400 font-sarabun"
                 />
               )}
             </Field>
@@ -225,7 +223,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
+                  className="text-xs text-red-400 font-sarabun"
                 />
               )}
             </Field>
@@ -259,7 +257,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -284,7 +282,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                     colorScheme: "dark",
                     background: "rgba(255,255,255,0.05)",
                   }}
-                  className="py-3 px-3 rounded-xl text-lg w-full text-cream border border-[rgba(201,162,39,0.2)] font-['Sarabun'] transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
+                  className="py-3 px-3 rounded-xl text-lg w-full text-cream border border-[rgba(201,162,39,0.2)] font-sarabun transition-all duration-200 focus:outline-none focus:border-[rgba(201,162,39,0.55)]"
                 >
                   <option value="" hidden>
                     เลือกเพศ
@@ -296,7 +294,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -310,7 +308,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
             disabled={isPending}
             className="
               w-full py-3 rounded-xl border-0
-              font-['Sarabun'] font-semibold text-lg tracking-wide
+              font-sarabun font-semibold text-lg tracking-wide
               text-navy transition-all duration-200
               hover:-translate-y-0.5 active:scale-[0.98]
               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:translate-y-0

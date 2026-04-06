@@ -40,15 +40,14 @@ const apiFetch = async <T>(
 
   if (!res.ok) {
     const error = await res.json();
-
     if (res.status === 401 && UNAUTHORIZED_CODE.includes(error.code)) {
       redirect("/api/proxy/clear-session");
     }
-
     throw new ApiError(error.message, error.code, error.details);
   }
 
-  return (await res.json()).data;
+  const json = await res.json();
+  return json.data;
 };
 
 const get = <T>(url: string) => apiFetch<T>(url);

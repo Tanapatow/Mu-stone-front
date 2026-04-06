@@ -47,16 +47,14 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
           }}
         >
           <div>
-            <p className="font-['Sarabun'] text-lg text-[#f5f0e8]">
+            <p className="font-sarabun text-lg text-[#f5f0e8]">
               #{order.id.slice(0, 8).toUpperCase()}
             </p>
-            <p className="text-xs text-white/30 font-['Sarabun'] mt-0.5">
-              {date}
-            </p>
+            <p className="text-xs text-white/30 font-sarabun mt-0.5">{date}</p>
           </div>
           <div className="flex items-center gap-3">
             <span
-              className="px-3 py-1 rounded-full text-xs font-['Sarabun'] font-semibold"
+              className="px-3 py-1 rounded-full text-xs font-sarabun font-semibold"
               style={{
                 background: status.bg,
                 color: status.color,
@@ -77,7 +75,7 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
         <div className="p-5 flex flex-col gap-5">
           {/* Items */}
           <div>
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-3">
+            <p className="text-xs text-white/40 font-sarabun mb-3">
               รายการสินค้า ({order.items.length} รายการ)
             </p>
             <div className="flex flex-col gap-3">
@@ -101,14 +99,14 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-lg font-['Sarabun'] text-[#f5f0e8] truncate">
+                      <p className="text-lg font-sarabun text-[#f5f0e8] truncate">
                         {item.product.name}
                       </p>
-                      <p className="text-xs text-white/40 font-['Sarabun']">
+                      <p className="text-xs text-white/40 font-sarabun">
                         ฿{Number(item.price).toLocaleString()} x {item.quantity}
                       </p>
                     </div>
-                    <p className="text-lg font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
+                    <p className="text-lg font-semibold font-sarabun text-[#c9a227] shrink-0">
                       ฿{(Number(item.price) * item.quantity).toLocaleString()}
                     </p>
                   </div>
@@ -125,11 +123,11 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
               border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            <p className="text-xs text-white/40 font-['Sarabun'] mb-2">
+            <p className="text-xs text-white/40 font-sarabun mb-2">
               ที่อยู่จัดส่ง
             </p>
             {order.shippingAddressSnapshot.split("\n").map((line, i) => (
-              <p key={i} className="text-xs text-white/60 font-['Sarabun']">
+              <p key={i} className="text-xs text-white/60 font-sarabun">
                 {line}
               </p>
             ))}
@@ -143,10 +141,8 @@ export default function OrderDetail({ order, onClose }: OrderDetailProps) {
               border: "1px solid rgba(201,162,39,0.15)",
             }}
           >
-            <p className="text-lg text-white/50 font-['Sarabun']">
-              ยอดรวมทั้งหมด
-            </p>
-            <p className="text-lg font-bold font-['Sarabun'] text-[#c9a227]">
+            <p className="text-lg text-white/50 font-sarabun">ยอดรวมทั้งหมด</p>
+            <p className="text-lg font-bold font-sarabun text-[#c9a227]">
               ฿{Number(order.totalAmount).toLocaleString()}
             </p>
           </div>

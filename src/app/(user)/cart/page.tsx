@@ -21,21 +21,20 @@ export default async function CartPage() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center gap-5">
         <ShoppingBag size={64} className="text-white/10" />
+
         <div className="text-center">
-          <p className="font-['Sarabun'] text-xl text-[#f5f0e8]/50 mb-2">
+          <p className="font-sarabun text-xl text-cream/50 mb-2">
             ตะกร้าว่างเปล่า
           </p>
-          <p className="text-lg text-white/30 font-['Sarabun']">
+
+          <p className="text-lg text-white/30 font-sarabun">
             ยังไม่มีสินค้าในตะกร้าของคุณ
           </p>
         </div>
+
         <Link
           href="/shop"
-          className="px-6 py-2.5 rounded-xl text-lg font-['Sarabun'] font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
-          style={{
-            background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
-            boxShadow: "0 4px 20px rgba(201,162,39,0.35)",
-          }}
+          className="px-6 py-2.5 rounded-xl text-lg font-sarabun font-semibold text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] bg-[linear-gradient(135deg,#c9a227_0%,#7a5c0a_100%)] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
         >
           เลือกซื้อสินค้า
         </Link>
@@ -45,30 +44,24 @@ export default async function CartPage() {
 
   return (
     <main className="min-h-screen px-6 py-10 pt-24 max-w-6xl mx-auto">
-      <h1
-        className="font-['Sarabun'] text-2xl text-gold mb-1"
-        style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
-      >
-        Cart
-      </h1>
-      <p className="text-xs text-white/35 font-['Sarabun'] mb-8">
-        {cart.items.length} รายการ
-      </p>
+      {/* Header */}
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Cart</h1>
+
+        <p className="dashboard-subtitle text-sm mb-8">
+          {cart.items.length} รายการ
+        </p>
+      </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1 flex flex-col gap-8">
           <CartList cart={cart} />
-          <div
-            className="p-5 rounded-xl"
-            style={{
-              background:
-                "linear-gradient(160deg, rgba(26,20,74,0.7) 0%, rgba(11,8,42,0.8) 100%)",
-              border: "1px solid rgba(201,162,39,0.15)",
-            }}
-          >
-            <p className="font-['Sarabun'] text-lg text-[#f5f0e8] mb-4">
+
+          <div className="card-glass p-5">
+            <p className="font-sarabun text-lg text-cream mb-4">
               {address ? "ที่อยู่จัดส่ง" : "เพิ่มที่อยู่จัดส่ง"}
             </p>
+
             <AddressForm address={address} />
           </div>
         </div>

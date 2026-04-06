@@ -25,4 +25,6 @@ const getAll = (filter: ProductFilter = {}) =>
 
 const getById = (id: string) => api.get<{ data: Product }>(`products/${id}`);
 
-export const productService = { getAll, getById };
+const getStoneTypes = () => api.get<string[]>("products/stone-types");
+
+export const productService = { getAll, getById, getStoneTypes };

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Trash2 } from 'lucide-react';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -12,23 +12,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Product } from '@/lib/api/admin/admin.type';
-import ProductEdit from './product-edit';
+} from "@/components/ui/dialog";
+import { Product } from "@/lib/api/admin/admin.type";
+import ProductEdit from "./product-edit";
 
 type ProductCardProps = {
   product: Product;
   onDelete: (id: string) => void;
 };
 
-const formatPrice = (price: number) => {
-  return `฿ ${price.toFixed(2)}`;
-};
+const formatPrice = (price: number) => `฿ ${price.toFixed(2)}`;
 
 export default function ProductCard({ product, onDelete }: ProductCardProps) {
   return (
-    <div className="w-full max-w-150 rounded-lg bg-white">
-      <div className="relative h-60 w-full overflow-hidden rounded-lg bg-black">
+    <div className="card-glass flex flex-col gap-4 p-0 overflow-hidden">
+      <div className="relative h-52 w-full overflow-hidden">
         <Image
           src={product.images[0].url}
           alt={product.name}
@@ -38,51 +36,55 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
         />
       </div>
 
-      <div className="px-4 pb-4 pt-3">
-        <h2 className="truncate text-lg font-medium text-neutral-600 underline underline-offset-2">
+      <div className="flex flex-col gap-3 px-4 pb-4">
+        <h2 className="truncate text-base font-semibold text-cream font-sarabun">
           {product.name}
         </h2>
 
-        <div className="mt-2 flex items-center justify-between">
-          <p className="text-xl font-bold text-[#d8a62b]">
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-bold text-gold font-sarabun">
             {formatPrice(Number(product.price))}
           </p>
-          <p className="text-sm text-neutral-400">
+          <p className="text-xs text-white/40 font-sarabun">
             คงเหลือ {product.stock} ชิ้น
           </p>
         </div>
 
-        <div className="mt-4 flex items-center gap-3 w-full">
-          {/* Edit Dialog */}
+        <div className="flex items-center gap-2 w-full">
           <ProductEdit product={product} />
 
-          {/* Delete Dialog */}
           <Dialog>
             <DialogTrigger asChild>
               <button
                 type="button"
-                className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl border border-red-400 text-xl text-red-500 transition hover:bg-red-50 hover:cursor-pointer"
+                className="flex h-9 flex-1 items-center justify-center gap-2 rounded-xl text-sm font-sarabun font-medium text-red-400 border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 transition-all duration-200 cursor-pointer"
               >
                 <Trash2 className="h-4 w-4" />
                 ลบ
               </button>
             </DialogTrigger>
-
-            <DialogContent className="sm:max-w-sm">
+            <DialogContent className="bg-gradient-to-br from-[#1a144a] to-[#0b082a] border border-gold/15 text-cream">
               <DialogHeader>
-                <DialogTitle>ยืนยันการลบสินค้า</DialogTitle>
-                <DialogDescription>
-                  คุณต้องการลบสินค้า {product.name} ใช่หรือไม่
+                <DialogTitle className="font-sarabun text-gold">
+                  ยืนยันการลบสินค้า
+                </DialogTitle>
+                <DialogDescription className="font-sarabun text-white/50">
+                  คุณต้องการลบสินค้า {product.name} ใช่หรือไม่?
                 </DialogDescription>
               </DialogHeader>
-
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <DialogClose asChild>
-                  <Button variant="outline">ยกเลิก</Button>
+                  <Button
+                    variant="outline"
+                    className="font-sarabun border-white/20 text-white/70 hover:bg-white/10"
+                  >
+                    ยกเลิก
+                  </Button>
                 </DialogClose>
                 <Button
                   onClick={() => onDelete(product.id)}
                   variant="destructive"
+                  className="font-sarabun"
                 >
                   ยืนยัน
                 </Button>
@@ -90,8 +92,6 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
             </DialogContent>
           </Dialog>
         </div>
-
-        <p className="sr-only">{product.description}</p>
       </div>
     </div>
   );

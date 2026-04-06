@@ -1,6 +1,6 @@
-import { redirect } from 'next/navigation';
-import { auth } from './auth';
-import z from 'zod';
+import { redirect } from "next/navigation";
+import { auth } from "./auth";
+import z from "zod";
 
 const currentUserschema = z.object({
   id: z.string(),
@@ -13,12 +13,11 @@ const currentUserschema = z.object({
 
 export const getCurrentUser = async () => {
   const session = await auth();
-  if (!session) redirect('/login');
+  if (!session) redirect("/login");
 
   const { success, data, error } = currentUserschema.safeParse(session.user);
   if (!success) {
-    console.log('Session user is invalid: \n', z.prettifyError(error));
-    redirect('/login');
+    redirect("/login");
   }
 
   return data;

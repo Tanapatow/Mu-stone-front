@@ -28,7 +28,7 @@ export default function OrderList({ orders }: OrderListProps) {
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className="px-4 py-2.5 text-xs font-['Sarabun'] whitespace-nowrap transition-all duration-200 border-b-2"
+            className="px-4 py-2.5 text-xs font-sarabun whitespace-nowrap transition-all duration-200 border-b-2"
             style={{
               color: activeTab === key ? "#c9a227" : "rgba(245,240,232,0.4)",
               borderBottomColor: activeTab === key ? "#c9a227" : "transparent",
@@ -42,9 +42,7 @@ export default function OrderList({ orders }: OrderListProps) {
       {/* Orders */}
       {filtered.length === 0 ? (
         <div className="flex items-center justify-center py-16">
-          <p className="text-white/30 font-['Sarabun'] text-lg">
-            ไม่มีคำสั่งซื้อ
-          </p>
+          <p className="text-white/30 font-sarabun text-lg">ไม่มีคำสั่งซื้อ</p>
         </div>
       ) : (
         <div className="flex flex-col gap-4">
@@ -68,15 +66,13 @@ export default function OrderList({ orders }: OrderListProps) {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-white/50 font-['Sarabun']">
+                    <p className="text-xs text-white/50 font-sarabun">
                       ORDER ID: #{order.id.slice(0, 8).toUpperCase()}
                     </p>
-                    <p className="text-xs text-white/30 font-['Sarabun']">
-                      {date}
-                    </p>
+                    <p className="text-xs text-white/30 font-sarabun">{date}</p>
                   </div>
                   <span
-                    className="px-3 py-1 rounded-full text-xs font-['Sarabun'] font-semibold"
+                    className="px-3 py-1 rounded-full text-xs font-sarabun font-semibold"
                     style={{
                       background: status.bg,
                       color: status.color,
@@ -102,14 +98,14 @@ export default function OrderList({ orders }: OrderListProps) {
                           />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-lg font-['Sarabun'] text-[#f5f0e8] truncate">
+                          <p className="text-lg font-sarabun text-[#f5f0e8] truncate">
                             {item.product.name}
                           </p>
-                          <p className="text-xs text-white/40 font-['Sarabun']">
+                          <p className="text-xs text-white/40 font-sarabun">
                             จำนวน {item.quantity} ชิ้น
                           </p>
                         </div>
-                        <p className="text-lg font-semibold font-['Sarabun'] text-[#c9a227] shrink-0">
+                        <p className="text-lg font-semibold font-sarabun text-[#c9a227] shrink-0">
                           ฿
                           {(
                             Number(item.price) * item.quantity
@@ -125,16 +121,16 @@ export default function OrderList({ orders }: OrderListProps) {
                   className="flex items-center justify-between pt-3"
                   style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
                 >
-                  <p className="text-xs text-white/30 font-['Sarabun'] truncate flex-1 mr-4">
+                  <p className="text-xs text-white/30 font-sarabun truncate flex-1 mr-4">
                     {order.shippingAddressSnapshot.split("\n")[0]}
                   </p>
                   <div className="flex items-center gap-3 shrink-0">
-                    <p className="text-lg font-semibold font-['Sarabun'] text-[#f5f0e8]">
+                    <p className="text-lg font-semibold font-sarabun text-[#f5f0e8]">
                       ฿{Number(order.totalAmount).toLocaleString()}
                     </p>
                     <button
                       onClick={() => setSelectedOrder(order)}
-                      className="text-xs font-['Sarabun'] text-[#c9a227] hover:text-[#f5f0e8] transition-colors"
+                      className="text-xs font-sarabun text-[#c9a227] hover:text-[#f5f0e8] transition-colors"
                     >
                       ดูรายละเอียด
                     </button>

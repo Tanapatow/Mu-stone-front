@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Dialog,
@@ -6,10 +6,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { createProduct } from '@/lib/actions/admin.action';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+} from "@/components/ui/dialog";
+import { createProduct } from "@/lib/actions/admin.action";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Loader, Plus } from "lucide-react";
 
 type CreateProductDTO = {
   name: string;
@@ -21,6 +22,10 @@ type CreateProductDTO = {
   images: File[];
 };
 
+const inputClass =
+  "px-3 py-2.5 rounded-xl text-sm w-full bg-white/5 text-cream border border-gold/20 placeholder:text-white/20 font-sarabun transition-all duration-200 focus:outline-none focus:border-gold/55 [color-scheme:dark]";
+const labelClass = "text-xs text-white/55 font-sarabun tracking-wide";
+
 export default function ProductCreate() {
   const {
     register,
@@ -29,103 +34,128 @@ export default function ProductCreate() {
     formState: { errors, isSubmitting },
   } = useForm<CreateProductDTO>();
   const [open, setOpen] = useState(false);
+
   const onSubmit = async (data: CreateProductDTO) => {
     try {
       await createProduct(data);
       setOpen(false);
-
       reset();
-      console.log('สร้างสินค้าสำเร็จ');
     } catch (error) {
-      console.log('สร้างสินค้าไม่สำเร็จ', error);
+      console.error("สร้างสินค้าไม่สำเร็จ", error);
     }
   };
+
   return (
-    <div>
-      <Dialog open={open} onOpenChange={setOpen}>
-        {/* ✅ Trigger */}
-        <DialogTrigger asChild onClick={() => setOpen(!open)}>
-          <button className="h-14 rounded-2xl bg-primary px-7 text-[18px] font-medium text-white transition hover:bg-primary/80 hover:cursor-pointer">
-            + เพิ่มสินค้า
-          </button>
-        </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-sarabun font-semibold text-navy bg-gradient-to-br from-gold to-gold-dark hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 cursor-pointer">
+          <Plus size={15} />
+          เพิ่มสินค้า
+        </button>
+      </DialogTrigger>
 
-        {/* ✅ Content */}
-        <DialogContent
-          className="max-w-lg"
-          onInteractOutside={(e) => e.preventDefault()}
-        >
-          <DialogHeader>
-            <DialogTitle>สร้างสินค้า</DialogTitle>
-          </DialogHeader>
+      <DialogContent
+        className="max-w-lg bg-gradient-to-br from-[#1a144a] to-[#0b082a] border border-gold/15 text-cream"
+        onInteractOutside={(e) => e.preventDefault()}
+      >
+        <DialogHeader>
+          <DialogTitle className="font-sarabun text-gold">
+            สร้างสินค้า
+          </DialogTitle>
+        </DialogHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>ชื่อสินค้า</label>
             <input
-              {...register('name', { required: true })}
+              {...register("name", { required: true })}
               placeholder="ชื่อสินค้า"
-              className="w-full rounded-lg border px-3 py-2"
+              className={inputClass}
             />
             {errors.name && (
-              <p className="text-white bg-red-500 p-2 rounded-lg text-xs">
+              <p className="text-xs text-red-400 font-sarabun">
                 กรอกชื่อสินค้า
               </p>
             )}
+          </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>รายละเอียด</label>
             <textarea
-              {...register('description')}
+              {...register("description")}
               placeholder="รายละเอียด"
-              className="w-full rounded-lg border px-3 py-2"
+              rows={3}
+              className={inputClass}
             />
+          </div>
 
-            <input
-              type="number"
-              {...register('price', {
-                required: true,
-              })}
-              placeholder="ราคา"
-              className="w-full rounded-lg border px-3 py-2"
-            />
+          <div className="flex gap-3">
+            <div className="flex flex-col gap-1.5 flex-1">
+              <label className={labelClass}>ราคา</label>
+              <input
+                type="number"
+                {...register("price", { required: true })}
+                placeholder="ราคา"
+                className={inputClass}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5 flex-1">
+              <label className={labelClass}>จำนวน</label>
+              <input
+                type="number"
+                {...register("stock", { valueAsNumber: true })}
+                placeholder="จำนวน"
+                className={inputClass}
+              />
+            </div>
+          </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>ประเภทหิน</label>
             <input
-              type="number"
-              {...register('stock', { valueAsNumber: true })}
-              placeholder="จำนวน"
-              className="w-full rounded-lg border px-3 py-2"
-            />
-
-            <input
-              {...register('stoneType')}
+              {...register("stoneType")}
               placeholder="ประเภทหิน"
-              className="w-full rounded-lg border px-3 py-2"
+              className={inputClass}
             />
+          </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>ประโยชน์</label>
             <textarea
-              {...register('benefit')}
+              {...register("benefit")}
               placeholder="ประโยชน์"
-              className="w-full rounded-lg border px-3 py-2"
+              rows={2}
+              className={inputClass}
             />
+          </div>
 
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>รูปภาพสินค้า</label>
             <input
               type="file"
               multiple
               accept="image/*"
-              {...register('images')}
-              className="w-full rounded-lg border px-3 py-2"
+              {...register("images")}
+              className={inputClass}
             />
+          </div>
 
-            <div className="flex justify-end gap-2 pt-4">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="rounded-lg bg-primary px-4 py-2 text-white hover:cursor-pointer disabled:cursor-not-allowed 
-             disabled:opacity-50 "
-              >
-                {isSubmitting ? 'กำลังเพิ่มสินค้า...' : 'บันทึก'}
-              </button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-2.5 rounded-xl font-sarabun font-semibold text-sm text-navy bg-gradient-to-br from-gold to-gold-dark hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 mt-2"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-2">
+                <Loader size={14} className="animate-spin" />
+                กำลังเพิ่มสินค้า...
+              </span>
+            ) : (
+              "บันทึก"
+            )}
+          </button>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

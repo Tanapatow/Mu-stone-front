@@ -14,6 +14,7 @@ export type RecommendProduct = {
 };
 
 export type FortunePredictResponse = {
+  id: string; //4/5/2026
   predictionText: string;
   cards: Card[];
   recommendedProducts: RecommendProduct[];

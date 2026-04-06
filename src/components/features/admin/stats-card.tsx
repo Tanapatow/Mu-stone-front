@@ -5,12 +5,9 @@ type StatsProp = {
 
 export default function StatsCard({ title, value }: StatsProp) {
   return (
-    <div className="flex h-full w-full flex-col justify-between rounded-2xl bg-white px-5 py-5 shadow-[0_4px_10px_rgba(0,0,0,0.10)] ">
-      <p className="text-lg font-medium text-neutral-800 md:text-[18px]">
-        {title}
-      </p>
-
-      <p className="mt-2 text-[24px] font-bold leading-none text-black md:text-[28px]">
+    <div className="card-glass flex flex-col gap-2">
+      <p className="text-sm font-sarabun text-white/50">{title}</p>
+      <p className="text-3xl font-bold font-sarabun text-gold leading-none">
         {value}
       </p>
     </div>

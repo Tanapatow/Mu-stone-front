@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Mail } from "lucide-react";
 import { useTransition, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldError,
@@ -20,13 +19,13 @@ import {
 import { forgotPassword } from "@/lib/actions/auth.action";
 
 const inputClass = `
-  pl-10 py-3 rounded-xl text-lg w-full
-  bg-white/5 text-[#f5f0e8]
-  border border-[rgba(201,162,39,0.2)]
-  placeholder:text-white/20 font-['Sarabun']
+  pl-10 py-3 rounded-xl text-sm w-full
+  bg-white/5 text-cream
+  border border-gold/20
+  placeholder:text-white/20 font-sarabun
   transition-all duration-200
-  focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
-  focus-visible:border-[rgba(201,162,39,0.55)]
+  focus-visible:ring-2 focus-visible:ring-gold/15
+  focus-visible:border-gold/55
 `;
 
 export default function ForgotPasswordPage() {
@@ -55,41 +54,25 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <div
-        className="w-full max-w-md p-8 rounded-2xl flex flex-col gap-6"
-        style={{
-          background:
-            "linear-gradient(160deg, rgba(26,20,74,0.97) 0%, rgba(11,8,42,0.97) 100%)",
-          border: "1px solid rgba(201,162,39,0.2)",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.5)",
-        }}
-      >
+    <main className="min-h-screen flex items-center justify-center px-4 bg-[url('/hero-bg.png')] bg-cover bg-center">
+      <div className="card-glass w-full max-w-md flex flex-col gap-6">
         <div>
-          <h1 className="font-['Sarabun'] text-xl text-cream mb-1">
-            ลืมรหัสผ่าน
-          </h1>
-          <p className="text-xs text-white/35 font-['Sarabun']">
+          <h1 className="dashboard-title">ลืมรหัสผ่าน</h1>
+          <p className="dashboard-subtitle">
             กรอกอีเมลของคุณ เราจะส่งลิงก์รีเซ็ตรหัสผ่านไปให้
           </p>
         </div>
 
         {sent ? (
-          <div
-            className="p-4 rounded-xl text-center"
-            style={{
-              background: "rgba(34,197,94,0.1)",
-              border: "1px solid rgba(34,197,94,0.3)",
-            }}
-          >
-            <p className="text-lg text-green-400 font-['Sarabun']">
+          <div className="p-4 rounded-xl text-center bg-green-500/10 border border-green-500/30">
+            <p className="text-sm text-green-400 font-sarabun">
               ส่งลิงก์รีเซ็ตรหัสผ่านไปที่อีเมลของคุณแล้วครับ กรุณาตรวจสอบ inbox
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)}>
             {errors.root && (
-              <p className="mb-3 text-xs text-red-400 font-['Sarabun']">
+              <p className="mb-3 text-xs text-red-400 font-sarabun">
                 {errors.root.message}
               </p>
             )}
@@ -104,14 +87,14 @@ export default function ForgotPasswordPage() {
                   >
                     <FieldLabel
                       htmlFor={field.name}
-                      className="text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide"
+                      className="text-xs text-cream/55 font-sarabun tracking-wide"
                     >
                       อีเมล
                     </FieldLabel>
                     <div className="relative flex items-center">
                       <Mail
                         size={15}
-                        className="absolute left-3.5 text-[rgba(201,162,39,0.5)] pointer-events-none z-10"
+                        className="absolute left-3.5 text-gold/50 pointer-events-none z-10"
                       />
                       <Input
                         {...field}
@@ -125,23 +108,17 @@ export default function ForgotPasswordPage() {
                     {fieldState.invalid && (
                       <FieldError
                         errors={[fieldState.error]}
-                        className="text-xs text-red-400 font-['Sarabun']"
+                        className="text-xs text-red-400 font-sarabun"
                       />
                     )}
                   </Field>
                 )}
               />
 
-              <Button
+              <button
+                type="submit"
                 disabled={isPending}
-                className="w-full py-3 rounded-xl border-0 font-['Sarabun'] font-semibold text-lg text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
-                  boxShadow: isPending
-                    ? "none"
-                    : "0 4px 20px rgba(201,162,39,0.35)",
-                }}
+                className="w-full py-2.5 rounded-xl font-sarabun font-semibold text-sm text-navy bg-gradient-to-br from-gold to-gold-dark shadow-[0_4px_20px_rgba(201,162,39,0.35)] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {isPending ? (
                   <span className="flex items-center justify-center gap-2">
@@ -151,16 +128,16 @@ export default function ForgotPasswordPage() {
                 ) : (
                   "ส่งลิงก์รีเซ็ตรหัสผ่าน"
                 )}
-              </Button>
+              </button>
             </FieldGroup>
           </form>
         )}
 
-        <p className="text-center text-xs text-white/30 font-['Sarabun']">
+        <p className="text-center text-xs text-white/30 font-sarabun">
           จำรหัสผ่านได้แล้ว?{" "}
           <Link
             href="/"
-            className="font-['Sarabun']  text-gold hover:text-gold-light transition-colors"
+            className="text-gold hover:text-gold-light transition-colors"
           >
             เข้าสู่ระบบ
           </Link>

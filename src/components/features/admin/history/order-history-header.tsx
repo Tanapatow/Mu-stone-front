@@ -1,11 +1,9 @@
 export default function OrderHistoryHeader() {
   return (
-    <div className="mx-auto w-full max-w-310 space-y-6">
-      <h1 className="text-4xl font-bold tracking-tight text-black md:text-4xl">
-        ประวัติการสั่งซื้อ
-      </h1>
-      <p className="text-base text-neutral-700 md:text-lg">
-        จัดการคำสั่งซื้อของ user
+    <div className="dashboard-header">
+      <h1 className="dashboard-title">จัดการคำสั่งซื้อ</h1>
+      <p className="dashboard-subtitle">
+        ดูและจัดการคำสั่งซื้อทั้งหมดของลูกค้า
       </p>
     </div>
   );

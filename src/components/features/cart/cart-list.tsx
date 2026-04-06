@@ -29,12 +29,12 @@ export default function CartList({ cart }: CartListProps) {
   if (!cart || cart.items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <p className="text-white/30 font-['Sarabun'] text-lg">
+        <p className="text-white/30 font-sarabun text-lg">
           ตะกร้าสินค้าว่างเปล่า
         </p>
         <Link
           href="/shop"
-          className="text-xs text-gold font-['Sarabun'] hover:text-cream transition-colors"
+          className="text-xs text-gold font-sarabun hover:text-cream transition-colors"
         >
           เลือกซื้อสินค้า →
         </Link>
@@ -72,11 +72,11 @@ export default function CartList({ cart }: CartListProps) {
 
             <div className="flex-1 min-w-0">
               <Link href={`/shop/${item.productId}`}>
-                <p className="text-lg font-['Sarabun'] text-[#f5f0e8] truncate hover:text-[#c9a227] transition-colors">
+                <p className="text-lg font-sarabun text-[#f5f0e8] truncate hover:text-[#c9a227] transition-colors">
                   {item.product.name}
                 </p>
               </Link>
-              <p className="text-xs text-[#c9a227] font-['Sarabun'] mt-0.5">
+              <p className="text-xs text-[#c9a227] font-sarabun mt-0.5">
                 ฿{Number(item.product.price).toLocaleString()}
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function CartList({ cart }: CartListProps) {
               >
                 −
               </button>
-              <span className="w-8 text-center text-lg font-['Sarabun'] text-[#f5f0e8]">
+              <span className="w-8 text-center text-lg font-sarabun text-[#f5f0e8]">
                 {item.quantity}
               </span>
               <button
@@ -108,7 +108,7 @@ export default function CartList({ cart }: CartListProps) {
               </button>
             </div>
 
-            <p className="text-lg font-semibold font-['Sarabun'] text-[#f5f0e8] w-20 text-right shrink-0">
+            <p className="text-lg font-semibold font-sarabun text-[#f5f0e8] w-20 text-right shrink-0">
               ฿{(Number(item.product.price) * item.quantity).toLocaleString()}
             </p>
 

@@ -25,14 +25,14 @@ const inputClass = `
   px-3 py-2.5 rounded-xl text-sm w-full
   bg-white/5 text-cream
   border border-[rgba(201,162,39,0.2)]
-  placeholder:text-white/20 font-['Sarabun']
+  placeholder:text-white/20 font-sarabun
   transition-all duration-200
   focus-visible:ring-2 focus-visible:ring-[rgba(201,162,39,0.15)]
   focus-visible:border-[rgba(201,162,39,0.55)]
 `;
 
 const labelClass =
-  "text-xs text-[rgba(245,240,232,0.55)] font-['Sarabun'] tracking-wide";
+  "text-xs text-[rgba(245,240,232,0.55)] font-sarabun tracking-wide";
 
 export default function AddressForm({ address }: AddressFormProps) {
   const router = useRouter();
@@ -94,18 +94,18 @@ export default function AddressForm({ address }: AddressFormProps) {
           </div>
           <div className="flex-1 flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <p className="text-sm font-semibold font-['Sarabun'] text-cream">
+              <p className="text-sm font-semibold font-sarabun text-cream">
                 {address.receiverName}
               </p>
               <span className="text-white/30 text-xs">·</span>
-              <p className="text-sm font-['Sarabun'] text-white/60">
+              <p className="text-sm font-sarabun text-white/60">
                 {address.phone}
               </p>
             </div>
-            <p className="text-xs text-white/50 font-['Sarabun']">
+            <p className="text-xs text-white/50 font-sarabun">
               {address.addressLine1}
             </p>
-            <p className="text-xs text-white/50 font-['Sarabun']">
+            <p className="text-xs text-white/50 font-sarabun">
               {address.subDistrict} {address.district} {address.province}{" "}
               {address.postalCode}
             </p>
@@ -120,7 +120,7 @@ export default function AddressForm({ address }: AddressFormProps) {
         </div>
 
         <button
-          className="flex items-center justify-center gap-2 p-4 rounded-xl text-xs font-['Sarabun'] text-white/30 hover:text-white/60 transition-all duration-200"
+          className="flex items-center justify-center gap-2 p-4 rounded-xl text-xs font-sarabun text-white/30 hover:text-white/60 transition-all duration-200"
           style={{ border: "1px dashed rgba(255,255,255,0.1)" }}
           disabled
           title="จัดการที่อยู่ทั้งหมดได้ที่หน้าบัญชีของฉัน"
@@ -134,7 +134,7 @@ export default function AddressForm({ address }: AddressFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && (
-        <p className="mb-3 text-xs text-red-400 font-['Sarabun']">
+        <p className="mb-3 text-xs text-red-400 font-sarabun">
           {errors.root.message}
         </p>
       )}
@@ -160,7 +160,7 @@ export default function AddressForm({ address }: AddressFormProps) {
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
+                  className="text-xs text-red-400 font-sarabun"
                 />
               )}
             </Field>
@@ -188,7 +188,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -214,7 +214,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -242,7 +242,7 @@ export default function AddressForm({ address }: AddressFormProps) {
               {fieldState.invalid && (
                 <FieldError
                   errors={[fieldState.error]}
-                  className="text-xs text-red-400 font-['Sarabun']"
+                  className="text-xs text-red-400 font-sarabun"
                 />
               )}
             </Field>
@@ -270,7 +270,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -296,7 +296,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -325,7 +325,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -351,7 +351,7 @@ export default function AddressForm({ address }: AddressFormProps) {
                 {fieldState.invalid && (
                   <FieldError
                     errors={[fieldState.error]}
-                    className="text-xs text-red-400 font-['Sarabun']"
+                    className="text-xs text-red-400 font-sarabun"
                   />
                 )}
               </Field>
@@ -364,14 +364,14 @@ export default function AddressForm({ address }: AddressFormProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="flex-1 py-2.5 rounded-xl text-sm font-['Sarabun'] text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
+              className="flex-1 py-2.5 rounded-xl text-sm font-sarabun text-white/40 border border-white/10 hover:text-white/70 hover:border-white/20 transition-all"
             >
               ยกเลิก
             </button>
           )}
           <Button
             disabled={isPending}
-            className="flex-1 py-2.5 rounded-xl border-0 font-['Sarabun'] font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40"
+            className="flex-1 py-2.5 rounded-xl border-0 font-sarabun font-semibold text-sm text-navy transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-40"
             style={{
               background: "linear-gradient(135deg, #c9a227 0%, #7a5c0a 100%)",
               boxShadow: isPending

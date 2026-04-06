@@ -14,7 +14,6 @@ export default function ProductGrid({
   products,
   isLoggedIn,
 }: ProductGridProps) {
-  console.log("products", products);
   const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = (product: Product) => {
@@ -26,7 +25,7 @@ export default function ProductGrid({
   if (products.length === 0) {
     return (
       <div className="flex-1 flex items-center justify-center py-20">
-        <p className="text-white/30 font-['Sarabun'] text-lg">ไม่พบสินค้า</p>
+        <p className="text-white/30 font-sarabun text-lg">ไม่พบสินค้า</p>
       </div>
     );
   }

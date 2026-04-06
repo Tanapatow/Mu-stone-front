@@ -223,67 +223,28 @@
 }
 /* ต่อท้าย globals.css เดิม — ห้ามเพิ่ม @import */
 
-:root {
-  --gold: #c9a227;
-  --gold-light: #e8c96a;
-  --gold-dark: #7a5c0a;
-  --navy: #0b0e2a;
-  --teal: #0fcfcf;
-  --purple: #4a1a6e;
-  --cream: #f5f0e8;
-}
+@layer components {
+  .dashboard-header {
+    @apply mb-8 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10;
+  }
 
-@keyframes nebulaPulse {
-  from {
-    opacity: 0.7;
-    transform: scale(1);
+  .dashboard-title {
+    @apply text-2xl md:text-3xl font-sarabun font-semibold mb-1 leading-tight;
+    color: var(--color-gold);
+    text-shadow: 0 0 28px rgba(201, 162, 39, 0.45);
   }
-  to {
-    opacity: 1;
-    transform: scale(1.04);
+
+  .dashboard-subtitle {
+    @apply font-sarabun text-white/70 leading-snug text-base;
   }
-}
-@keyframes twinkle {
-  from {
-    opacity: var(--min-op, 0.2);
-  }
-  to {
-    opacity: var(--max-op, 1);
-  }
-}
-@keyframes spiralSpin {
-  from {
-    transform: translateY(-50%) rotate(0deg);
-  }
-  to {
-    transform: translateY(-50%) rotate(360deg);
-  }
-}
-@keyframes glyphFloat {
-  from {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0.1;
-  }
-  to {
-    transform: translateY(-12px) rotate(10deg);
-    opacity: 0.25;
-  }
-}
-@keyframes cardsFloat {
-  from {
-    transform: translateY(-52%);
-  }
-  to {
-    transform: translateY(-48%);
-  }
-}
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .card-glass {
+    @apply w-full rounded-2xl border p-6 backdrop-blur-sm;
+    background: linear-gradient(
+      160deg,
+      rgba(26, 20, 74, 0.7) 0%,
+      rgba(11, 8, 42, 0.8) 100%
+    );
+    border-color: rgba(201, 162, 39, 0.15);
   }
 }

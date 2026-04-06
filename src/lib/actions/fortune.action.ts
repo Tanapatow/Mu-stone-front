@@ -16,8 +16,19 @@ export const getMyFortuneLogs = async (): Promise<FortuneLog[]> => {
 
 export const drawFortune = async (): Promise<FortunePredictResponse | null> => {
   try {
-    return await fortuneService.draw();
-  } catch {
+    const result = await fortuneService.draw();
+    return result;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const getFortuneLogById = async (id: string) => {
+  try {
+    const result = await fortuneService.getLogById(id);
+    return result;
+  } catch (e) {
+    console.log("getFortuneLogById error:", e);
     return null;
   }
 };

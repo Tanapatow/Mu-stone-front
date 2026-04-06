@@ -70,7 +70,7 @@ export default function AdminOrderList({
               onClick={() =>
                 handleTabChange(key === "ALL" ? "ALL" : (key as OrderStatus))
               }
-              className="px-4 py-2.5 text-xs font-['Sarabun'] whitespace-nowrap transition-all duration-200 border-b-2"
+              className="px-4 py-2.5 text-xs font-sarabun whitespace-nowrap transition-all duration-200 border-b-2"
               style={{
                 color: activeTab === key ? "#c9a227" : "rgba(245,240,232,0.4)",
                 borderBottomColor:
@@ -86,7 +86,7 @@ export default function AdminOrderList({
         <div className="grid grid-cols-[1fr_1.5fr_0.8fr_0.8fr_1fr_auto] gap-4 px-4 py-2">
           {["Order ID", "ลูกค้า", "จำนวน", "ยอดรวม", "สถานะ", ""].map(
             (h, i) => (
-              <p key={i} className="text-xs text-white/30 font-['Sarabun']">
+              <p key={i} className="text-xs text-white/30 font-sarabun">
                 {h}
               </p>
             ),
@@ -99,7 +99,7 @@ export default function AdminOrderList({
         >
           {orders.length === 0 ? (
             <div className="flex items-center justify-center py-16">
-              <p className="text-white/30 font-['Sarabun'] text-sm">
+              <p className="text-white/30 font-sarabun text-sm">
                 ไม่มีคำสั่งซื้อ
               </p>
             </div>
@@ -126,37 +126,35 @@ export default function AdminOrderList({
                 >
                   {/* Order ID */}
                   <div>
-                    <p className="text-xs text-cream font-['Sarabun']">
+                    <p className="text-xs text-cream font-sarabun">
                       #{order.id.slice(0, 8).toUpperCase()}
                     </p>
-                    <p className="text-xs text-white/30 font-['Sarabun']">
-                      {date}
-                    </p>
+                    <p className="text-xs text-white/30 font-sarabun">{date}</p>
                   </div>
 
                   {/* Customer */}
                   <div className="min-w-0">
-                    <p className="text-sm text-cream font-['Sarabun'] truncate">
+                    <p className="text-sm text-cream font-sarabun truncate">
                       {order.user.firstName} {order.user.lastName}
                     </p>
-                    <p className="text-xs text-white/30 font-['Sarabun'] truncate">
+                    <p className="text-xs text-white/30 font-sarabun truncate">
                       {order.user.email}
                     </p>
                   </div>
 
                   {/* Items count */}
-                  <p className="text-xs text-white/50 font-['Sarabun']">
+                  <p className="text-xs text-white/50 font-sarabun">
                     {order._count.items} รายการ
                   </p>
 
                   {/* Total */}
-                  <p className="text-sm font-semibold text-gold font-['Sarabun']">
+                  <p className="text-sm font-semibold text-gold font-sarabun">
                     ฿{Number(order.totalAmount).toLocaleString()}
                   </p>
 
                   {/* Status */}
                   <span
-                    className="px-2.5 py-1 rounded-full text-xs font-['Sarabun'] font-semibold w-fit"
+                    className="px-2.5 py-1 rounded-full text-xs font-sarabun font-semibold w-fit"
                     style={{
                       background: status.bg,
                       color: status.color,
@@ -169,7 +167,7 @@ export default function AdminOrderList({
                   {/* View */}
                   <button
                     onClick={() => handleView(order.id)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-['Sarabun'] text-white/50 hover:text-cream transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sarabun text-white/50 hover:text-cream transition-all"
                     style={{ border: "1px solid rgba(255,255,255,0.1)" }}
                   >
                     <Eye size={12} />
@@ -184,7 +182,7 @@ export default function AdminOrderList({
         {/* Pagination */}
         {meta.totalPages > 1 && (
           <div className="flex items-center justify-between pt-4 border-t border-white/5">
-            <p className="text-xs text-white/30 font-['Sarabun']">
+            <p className="text-xs text-white/30 font-sarabun">
               แสดง {meta.itemCount} จาก {meta.totalItems} รายการ
             </p>
             <div className="flex items-center gap-2">
@@ -202,7 +200,7 @@ export default function AdminOrderList({
                     key={page}
                     onClick={() => handlePageChange(page)}
                     disabled={isPending}
-                    className="w-8 h-8 rounded-lg text-xs font-['Sarabun'] transition-all"
+                    className="w-8 h-8 rounded-lg text-xs font-sarabun transition-all"
                     style={{
                       background:
                         meta.currentPage === page

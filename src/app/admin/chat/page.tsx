@@ -13,19 +13,15 @@ export default async function AdminChatPage() {
 
   return (
     <div className="min-h-screen flex flex-col px-10 pt-10">
-      <div className="mb-8 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10">
-        <h1
-          className="font-['Sarabun'] text-2xl text-gold mb-1"
-          style={{ textShadow: "0 0 24px rgba(201,162,39,0.35)" }}
-        >
-          แชท
-        </h1>
-        <p className="text-sm text-white/70 font-['Sarabun']">
-          {rooms.length} ห้องแชท
-        </p>
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">แชท</h1>
+
+        <p className="dashboard-subtitle">{rooms.length} ห้องแชท</p>
       </div>
 
-      <AdminChat rooms={rooms} token={token} adminId={adminId} />
+      <div className="flex-1">
+        <AdminChat rooms={rooms} token={token} adminId={adminId} />
+      </div>
     </div>
   );
 }
