@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google";
-import { authService } from "../api/auth/auth.service";
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import Google from 'next-auth/providers/google';
+import { authService } from '../api/auth/auth.service';
 
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   providers: [
@@ -10,9 +10,9 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
         },
       },
     }),
@@ -31,23 +31,25 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider === "google") {
+      if (account?.provider === 'google') {
         try {
           const idToken = account.id_token;
           if (!idToken) {
-            console.log("no idToken");
+            console.log('no idToken');
             return false;
           }
 
           const result = await authService.googleLogin(idToken);
-          console.log("googleLogin result:", result);
+          console.log('googleLogin result:', result);
+          user.id = result.user.id;
+          user.role = result.user.role;
           user.accessToken = result.accessToken;
           user.firstName = result.user.firstName;
           user.lastName = result.user.lastName;
           user.email = result.user.email;
           user.expiresIn = result.expiresIn;
         } catch (e) {
-          console.log("googleLogin error:", e);
+          console.log('googleLogin error:', e);
           return false;
         }
       }
@@ -55,6 +57,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
     },
     jwt({ token, user }) {
       if (user) {
+        token.sub = user.id as string;
         token.firstName = user.firstName;
         token.lastName = user.lastName;
         token.accessToken = user.accessToken;
@@ -85,6 +88,6 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
     },
   },
   pages: {
-    signIn: "/",
+    signIn: '/',
   },
 });
