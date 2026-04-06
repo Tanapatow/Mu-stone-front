@@ -1,7 +1,6 @@
 import { getFortuneLogById } from "@/lib/actions/fortune.action";
 import PredictPageClient from "@/components/features/fortune/predict-page-client";
 import { notFound } from "next/navigation";
-
 type PredictPageProps = {
   searchParams: Promise<{ id?: string }>;
 };

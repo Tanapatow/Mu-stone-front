@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
-
 type SuccessPageProps = {
   searchParams: Promise<{ session_id?: string }>;
 };

@@ -32,7 +32,6 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
-        console.log("account:", JSON.stringify(account, null, 2));
         try {
           const idToken = account.id_token;
           if (!idToken) {

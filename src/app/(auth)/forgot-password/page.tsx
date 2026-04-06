@@ -43,11 +43,8 @@ export default function ForgotPasswordPage() {
   });
 
   const onSubmit = (data: ForgotPasswordInput) => {
-    console.log("onSubmit called", data);
     startTransition(async () => {
-      console.log("startTransition called");
       const res = await forgotPassword(data.email);
-      console.log("res:", res);
       if (res.success) {
         setSent(true);
       } else {

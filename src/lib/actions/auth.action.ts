@@ -35,7 +35,6 @@ export const logout = async () => {
 };
 
 export const forgotPassword = async (email: string): Promise<ActionResult> => {
-  console.log("forgotPassword action called with email:", email);
   try {
     const result = await authService.forgotPassword(email);
     console.log("forgotPassword result:", result);

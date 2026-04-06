@@ -19,16 +19,13 @@ export const drawFortune = async (): Promise<FortunePredictResponse | null> => {
     const result = await fortuneService.draw();
     return result;
   } catch (e) {
-    console.log("=== drawFortune error:", e);
     return null;
   }
 };
 
 export const getFortuneLogById = async (id: string) => {
-  console.log("getFortuneLogById called with id:", id);
   try {
     const result = await fortuneService.getLogById(id);
-    console.log("getFortuneLogById result:", result);
     return result;
   } catch (e) {
     console.log("getFortuneLogById error:", e);

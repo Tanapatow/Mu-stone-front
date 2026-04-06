@@ -18,7 +18,7 @@ export default function Navbar({ session }: NavbarProps) {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-8 md:px-12 h-16 bg-navy/85 backdrop-blur-md border-b border-gold/15">
+      <nav className="fixed top-0 left-0 right-0 z-1 flex items-center justify-between px-8 md:px-12 h-16 bg-navy/85 backdrop-blur-md border-b border-gold/15">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 no-underline">
           <Image

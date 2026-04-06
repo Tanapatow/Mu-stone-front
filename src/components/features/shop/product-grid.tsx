@@ -14,7 +14,6 @@ export default function ProductGrid({
   products,
   isLoggedIn,
 }: ProductGridProps) {
-  console.log("products", products);
   const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = (product: Product) => {

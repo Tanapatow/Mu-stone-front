@@ -47,9 +47,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
 
   const onSubmit = (data: RegisterInput) => {
     startTransition(async () => {
-      console.log("data", data);
       const res = await register(data);
-      console.log("res", res);
       if (!res?.success) {
         setError("root", { message: "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง" });
       } else {

@@ -5,7 +5,6 @@ let socket: Socket | null = null;
 export const getChatSocket = (token: string): Socket => {
   if (!socket || !socket.connected) {
     const url = process.env.NEXT_PUBLIC_BACKEND_URL!;
-    console.log("Connecting to:", url);
     socket = io(`${url}/chat`, {
       auth: { token },
       transports: ["websocket"],

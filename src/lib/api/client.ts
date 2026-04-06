@@ -47,7 +47,6 @@ const apiFetch = async <T>(
   }
 
   const json = await res.json();
-  console.log(`[${method}] ${url}:`, JSON.stringify(json).slice(0, 300));
   return json.data;
 };
 

@@ -17,11 +17,8 @@ export default function CartSummary({ cart, address }: CartSummaryProps) {
   const [error, setError] = useState<string | null>(null);
 
   const handleCheckout = () => {
-    console.log("handleCheckout called", { address, hasItems });
     startTransition(async () => {
-      console.log("startTransition running");
       const res = await checkout();
-      console.log("checkout result:", res);
       if (res.success && res.paymentUrl) {
         window.location.href = res.paymentUrl;
       } else {
