@@ -29,7 +29,7 @@ const inputClass = `
   focus-visible:border-gold/55
 `;
 
-export default function ResetPasswordPage() {
+export default function ResetPassword() {
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
   const searchParams = useSearchParams();
